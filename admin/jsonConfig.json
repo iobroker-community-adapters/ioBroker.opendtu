@@ -2,15 +2,15 @@
 	"i18n": true,
 	"type": "panel",
 	"items": {
-		"option1": {
-			"type": "checkbox",
-			"label": "option1",
+		"externalMqttServerIP": {
+			"type": "text",
+			"label": "External MQTT-Server IP-Address",
 			"newLine": true
 		},
-		"option2": {
-			"type": "text",
-			"label": "option2",
-			"newLine": true
+		"externalMqttServerPort": {
+			"type": "number",
+			"label": "External MQTT-Server Port",
+			"newLine": false
 		}
 	}
 }

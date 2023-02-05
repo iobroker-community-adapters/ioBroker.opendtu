@@ -1,170 +1,201 @@
 'use strict';
-
-/*
- * Created with @iobroker/create-adapter v2.3.0
- */
-
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+const mqtt = require('mqtt');
+const stateDefinition = require('./lib/stateDefinition').stateDefinition;
 
-// Load your modules here, e.g.:
-// const fs = require("fs");
+let mqttClient;
+const deviceCache = [];
 
 class Opendtu extends utils.Adapter {
+    constructor(options) {
+        super({
+            ...options,
+            name: 'opendtu',
+        });
+        this.on('ready', this.onReady.bind(this));
+        this.on('stateChange', this.onStateChange.bind(this));
+        // this.on('objectChange', this.onObjectChange.bind(this));
+        // this.on('message', this.onMessage.bind(this));
+        this.on('unload', this.onUnload.bind(this));
+    }
 
-	/**
-	 * @param {Partial<utils.AdapterOptions>} [options={}]
-	 */
-	constructor(options) {
-		super({
-			...options,
-			name: 'opendtu',
-		});
-		this.on('ready', this.onReady.bind(this));
-		this.on('stateChange', this.onStateChange.bind(this));
-		// this.on('objectChange', this.onObjectChange.bind(this));
-		// this.on('message', this.onMessage.bind(this));
-		this.on('unload', this.onUnload.bind(this));
-	}
+    async onReady() {
+        this.setState('info.connection', false, true);
 
-	/**
-	 * Is called when databases are connected and adapter received configuration.
-	 */
-	async onReady() {
-		// Initialize your adapter here
+        // External MQTT-Server
+        if (this.config.externalMqttServerIP == '') {
+            this.log.warn('Please configure the External MQTT-Server connection!');
+            return;
+        }
+        mqttClient = mqtt.connect(`mqtt://${this.config.externalMqttServerIP}:${this.config.externalMqttServerPort}`, { clientId: `ioBroker.zigbee2mqtt_${Math.random().toString(16).slice(2, 8)}`, clean: true, reconnectPeriod: 500 });
 
-		// Reset the connection indicator during startup
-		this.setState('info.connection', false, true);
+        // MQTT Client
+        mqttClient.on('connect', () => {
+            this.log.info(`Connect to OpenDTU over external mqtt connection.`);
+            this.setState('info.connection', true, true);
+        });
 
-		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
-		this.log.info('config option1: ' + this.config.option1);
-		this.log.info('config option2: ' + this.config.option2);
+        mqttClient.subscribe(`${this.config.mqttTopic}/#`);
 
-		/*
-		For every state in the system there has to be also an object of type state
-		Here a simple template for a boolean variable named "testVariable"
-		Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-		*/
-		await this.setObjectNotExistsAsync('testVariable', {
-			type: 'state',
-			common: {
-				name: 'testVariable',
-				type: 'boolean',
-				role: 'indicator',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
+        mqttClient.on('message', (topic, payload) => {
+            this.messageParse(topic, payload);
+        });
+    }
 
-		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-		this.subscribeStates('testVariable');
-		// You can also add a subscription for multiple states. The following line watches all states starting with "lights."
-		// this.subscribeStates('lights.*');
-		// Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
-		// this.subscribeStates('*');
+    // @ts-ignore
+    async messageParse(topic, payload) {
+        const topicSplit = topic.split('/');
+        let deviceID = topicSplit[1];
+        const subChannel = topicSplit[2];
+        let stateID;
+        let stateType;
 
-		/*
-			setState examples
-			you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-		*/
-		// the variable testVariable is set to true as command (ack=false)
-		await this.setStateAsync('testVariable', true);
+        switch (deviceID) {
+            case 'dtu':
+                stateType = 'dtu';
+                stateID = topicSplit[2];
+                break;
+            default:
+                // eslint-disable-next-line no-case-declarations
+                const subChannel = topicSplit[2];
+                switch (subChannel) {
+                    case '0':
+                        stateType = 'inverter';
+                        deviceID = `${deviceID}`;
+                        stateID = topicSplit[3];
+                        break;
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                        stateType = 'dc_channel';
+                        deviceID = `${deviceID}.dc_channel_${subChannel}`;
+                        stateID = topicSplit[3];
+                        break;
+                    case 'device':
+                    case 'status':
+                        stateType = 'info';
+                        deviceID = `${deviceID}.info`;
+                        stateID = topicSplit[3];
+                        break;
+                    default:
+                        // Weil der Name ein Objekt höher über mqtt kommt
+                        stateType = 'info';
+                        deviceID = `${deviceID}.info`;
+                        stateID = topicSplit[2];
+                        break;
+                }
 
-		// same thing, but the value is flagged "ack"
-		// ack should be always set to true if the value is received from or acknowledged from the target system
-		await this.setStateAsync('testVariable', { val: true, ack: true });
 
-		// same thing, but the state is deleted after 30s (getState will return null afterwards)
-		await this.setStateAsync('testVariable', { val: true, ack: true, expire: 30 });
+        }
 
-		// examples for the checkPassword/checkGroup functions
-		let result = await this.checkPasswordAsync('admin', 'iobroker');
-		this.log.info('check user admin pw iobroker: ' + result);
+        payload = payload.toString();
 
-		result = await this.checkGroupAsync('admin', 'admin');
-		this.log.info('check group user admin group admin: ' + result);
-	}
+        // Muss das Device erstellt werden?
+        if (!deviceCache.find(x => x.id == deviceID)) {
+            const newDevice = {
+                id: deviceID,
+                states: stateDefinition.find(x => x.type == stateType)?.states
+            };
 
-	/**
-	 * Is called when adapter shuts down - callback has to be called under any circumstances!
-	 * @param {() => void} callback
-	 */
-	onUnload(callback) {
-		try {
-			// Here you must clear all timeouts or intervals that may still be active
-			// clearTimeout(timeout1);
-			// clearTimeout(timeout2);
-			// ...
-			// clearInterval(interval1);
+            const deviceObj = {
+                type: 'device',
+                common: {
+                    name: stateDefinition.find(x => x.type == stateType)?.name.replace('%INPUTNUMBER%', subChannel),
+                    desc: stateDefinition.find(x => x.type == stateType)?.desc.replace('%INPUTNUMBER%', subChannel),
+                    statusStates: {}
+                },
+                native: {}
+            };
 
-			callback();
-		} catch (e) {
-			callback();
-		}
-	}
+            if (stateType == 'inverter') {
+                deviceObj.common.statusStates.onlineId = `${this.name}.${this.instance}.${deviceID}.info.available`;
+            }
 
-	// If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
-	// You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
-	// /**
-	//  * Is called if a subscribed object changes
-	//  * @param {string} id
-	//  * @param {ioBroker.Object | null | undefined} obj
-	//  */
-	// onObjectChange(id, obj) {
-	// 	if (obj) {
-	// 		// The object was changed
-	// 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-	// 	} else {
-	// 		// The object was deleted
-	// 		this.log.info(`object ${id} deleted`);
-	// 	}
-	// }
+            if (stateType == 'dtu') {
+                deviceObj.common.statusStates.onlineId = `${this.name}.${this.instance}.${deviceID}.available`;
+            }
 
-	/**
-	 * Is called if a subscribed state changes
-	 * @param {string} id
-	 * @param {ioBroker.State | null | undefined} state
-	 */
-	onStateChange(id, state) {
-		if (state) {
-			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-		} else {
-			// The state was deleted
-			this.log.info(`state ${id} deleted`);
-		}
-	}
+            if (!newDevice.states) {
+                return;
+            }
 
-	// If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
-	// /**
-	//  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-	//  * Using this method requires "common.messagebox" property to be set to true in io-package.json
-	//  * @param {ioBroker.Message} obj
-	//  */
-	// onMessage(obj) {
-	// 	if (typeof obj === 'object' && obj.message) {
-	// 		if (obj.command === 'send') {
-	// 			// e.g. send email or pushover or whatever
-	// 			this.log.info('send command');
+            // @ts-ignore
+            await this.extendObjectAsync(deviceID, deviceObj);
 
-	// 			// Send response in callback if required
-	// 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-	// 		}
-	// 	}
-	// }
+            for (const state of newDevice.states) {
+                const iobState = {
+                    type: 'state',
+                    common: await this.copyAndCleanStateObj(state),
+                    native: {},
+                };
+
+                // @ts-ignore
+                await this.extendObjectAsync(`${newDevice.id}.${state.id}`, iobState);
+            }
+
+            deviceCache.push(newDevice);
+        }
+
+        const device = deviceCache.find(x => x.id == deviceID);
+        let state;
+        try {
+
+            if (device) {
+                state = device.states.find(x => x.prob == stateID);
+                const stateName = `${device.id}.${state.id}`;
+
+                if (state.getter) {
+                    this.setStateChangedAsync(stateName, state.getter(payload), true);
+                } else {
+                    this.setStateChangedAsync(stateName, payload, true);
+                }
+            }
+        } catch {
+            //console.log('bäääääm');
+        }
+    }
+
+
+    async copyAndCleanStateObj(state) {
+        const iobState = { ...state };
+        const blacklistedKeys = [
+            'prop'
+        ];
+        for (const blacklistedKey of blacklistedKeys) {
+            delete iobState[blacklistedKey];
+        }
+        return iobState;
+    }
+
+    onUnload(callback) {
+        try {
+
+            callback();
+        } catch (e) {
+            callback();
+        }
+    }
+
+    onStateChange(id, state) {
+        if (state) {
+            // The state was changed
+            this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+        } else {
+            // The state was deleted
+            this.log.info(`state ${id} deleted`);
+        }
+    }
 
 }
 
 if (require.main !== module) {
-	// Export the constructor in compact mode
-	/**
-	 * @param {Partial<utils.AdapterOptions>} [options={}]
-	 */
-	module.exports = (options) => new Opendtu(options);
+    // Export the constructor in compact mode
+    /**
+     * @param {Partial<utils.AdapterOptions>} [options={}]
+     */
+    module.exports = (options) => new Opendtu(options);
 } else {
-	// otherwise start the instance directly
-	new Opendtu();
+    // otherwise start the instance directly
+    new Opendtu();
 }
