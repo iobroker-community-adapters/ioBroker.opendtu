@@ -99,7 +99,7 @@ class Opendtu extends utils.Adapter {
             };
 
             const deviceObj = {
-                type: 'device',
+                type: 'channel',
                 common: {
                     name: stateDefinition.find(x => x.type == stateType)?.name.replace('%INPUTNUMBER%', subChannel),
                     desc: stateDefinition.find(x => x.type == stateType)?.desc.replace('%INPUTNUMBER%', subChannel),
@@ -110,10 +110,12 @@ class Opendtu extends utils.Adapter {
 
             if (stateType == 'inverter') {
                 deviceObj.common.statusStates.onlineId = `${this.name}.${this.instance}.${deviceID}.info.available`;
+                deviceObj.type = 'device';
             }
 
             if (stateType == 'dtu') {
                 deviceObj.common.statusStates.onlineId = `${this.name}.${this.instance}.${deviceID}.available`;
+                deviceObj.type = 'device';
             }
 
             if (!newDevice.states) {
