@@ -99,7 +99,7 @@
     "native": {
         "externalMqttServerIP": "",
         "externalMqttServerPort": "",
-        "mqttTopic": "OpenDTU"
+        "mqttTopic": "solar"
     },
     "objects": [],
     "instanceObjects": [

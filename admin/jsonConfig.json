@@ -11,6 +11,11 @@
 			"type": "number",
 			"label": "External MQTT-Server Port",
 			"newLine": false
+		},
+		"mqttTopic": {
+			"type": "text",
+			"label": "MQTT-Topic from OpenDTU",
+			"newLine": true
 		}
 	}
 }

@@ -1,5 +1,6 @@
 {
     "opendtu adapter settings": "Configuración del adaptador para opendtu",
     "External MQTT-Server IP-Address": "Dirección IP del servidor MQTT externo",
-    "External MQTT-Server Port": "Puerto de servidor MQTT externo"
+    "External MQTT-Server Port": "Puerto de servidor MQTT externo",
+    "MQTT-Topic from OpenDTU": "Tema MQTT de OpenDTU"
 }
