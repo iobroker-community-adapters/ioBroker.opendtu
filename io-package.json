@@ -1,0 +1,124 @@
+{
+	"common": {
+		"name": "opendtu",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "OpenDTU",
+		"titleLang": {
+			"en": "OpenDTU",
+			"de": "OpenDTU",
+			"ru": "OpenDTU",
+			"pt": "OpenDTU",
+			"nl": "OpenDTU",
+			"fr": "OpenDTU",
+			"it": "OpenDTU",
+			"es": "OpenDTU",
+			"pl": "OpenDTU",
+			"zh-cn": "OpenDTU"
+		},
+		"desc": {
+			"en": "Adapter for the OpenDTU project",
+			"de": "Adapter for the OpenDTU project",
+			"ru": "Adapter for the OpenDTU project",
+			"pt": "Adapter for the OpenDTU project",
+			"nl": "Adapter for the OpenDTU project",
+			"fr": "Adapter for the OpenDTU project",
+			"it": "Adapter for the OpenDTU project",
+			"es": "Adapter for the OpenDTU project",
+			"pl": "Adapter for the OpenDTU project",
+			"zh-cn": "Adapter for the OpenDTU project"
+		},
+		"authors": [
+			"Dennis Rathjen <dennis.rathjen@outlook.de>"
+		],
+		"keywords": [
+			"OpenDTU",
+			"Solar"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "opendtu.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/o0shojo0o/ioBroker.opendtu/main/admin/opendtu.png",
+		"readme": "https://github.com/o0shojo0o/ioBroker.opendtu/blob/main/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "energy",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "push",
+		"adminUI": {
+			"config": "json",
+			"tab": "materialize"
+		},
+		"adminTab": {
+			"singleton": true,
+			"name": {
+				"en": "OpenDTU",
+				"de": "OpenDTU",
+				"ru": "OpenDTU",
+				"pt": "OpenDTU",
+				"nl": "OpenDTU",
+				"fr": "OpenDTU",
+				"it": "OpenDTU",
+				"es": "OpenDTU",
+				"pl": "OpenDTU",
+				"zh-cn": "OpenDTU"
+			},
+			"link": "",
+			"fa-icon": "info"
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=3.3.22"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": ">=5.1.13"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": [
+		{
+			"_id": "info",
+			"type": "channel",
+			"common": {
+				"name": "Information"
+			},
+			"native": {}
+		},
+		{
+			"_id": "info.connection",
+			"type": "state",
+			"common": {
+				"role": "indicator.connected",
+				"name": "Device or service connected",
+				"type": "boolean",
+				"read": true,
+				"write": false,
+				"def": false
+			},
+			"native": {}
+		}
+	]
+}

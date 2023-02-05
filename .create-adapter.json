@@ -1,0 +1,54 @@
+{
+	"expert": "yes",
+	"cli": false,
+	"adapterName": "opendtu",
+	"title": "OpenDTU",
+	"description": "Adapter for the OpenDTU project",
+	"keywords": [
+		"OpenDTU",
+		"Solar"
+	],
+	"authorName": "Dennis Rathjen",
+	"authorGithub": "o0shojo0o",
+	"authorEmail": "dennis.rathjen@outlook.de",
+	"features": [
+		"adapter"
+	],
+	"adminFeatures": [
+		"tab"
+	],
+	"type": "energy",
+	"startMode": "daemon",
+	"connectionType": "local",
+	"dataSource": "push",
+	"connectionIndicator": "yes",
+	"adapterSettings": [
+		{
+			"key": "option1",
+			"defaultValue": true,
+			"inputType": "checkbox"
+		},
+		{
+			"key": "option2",
+			"defaultValue": "42",
+			"inputType": "text"
+		}
+	],
+	"language": "JavaScript",
+	"nodeVersion": "14",
+	"adminUi": "json",
+	"tabReact": "no",
+	"releaseScript": "yes",
+	"indentation": "Tab",
+	"quotes": "single",
+	"es6class": "yes",
+	"tools": [
+		"ESLint",
+		"type checking"
+	],
+	"gitRemoteProtocol": "HTTPS",
+	"license": "MIT License",
+	"dependabot": "yes",
+	"target": "github",
+	"creatorVersion": "2.3.0"
+}
