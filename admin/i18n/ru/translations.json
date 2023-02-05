@@ -1,5 +1,5 @@
 {
-	"opendtu adapter settings": "Настройки адаптера для opendtu",
-	"option1": "option1",
-	"option2": "option2"
+    "opendtu adapter settings": "Настройки адаптера для opendtu",
+    "External MQTT-Server IP-Address": "IP-адрес внешнего MQTT-сервера",
+    "External MQTT-Server Port": "Порт внешнего MQTT-сервера"
 }
