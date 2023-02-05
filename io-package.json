@@ -97,8 +97,8 @@
         ]
     },
     "native": {
-        "externalMqttServerIP": "192.168.0.210",
-        "externalMqttServerPort": 1883,
+        "externalMqttServerIP": "",
+        "externalMqttServerPort": "",
         "mqttTopic": "OpenDTU"
     },
     "objects": [],
