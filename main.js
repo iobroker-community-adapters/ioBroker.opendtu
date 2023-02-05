@@ -14,8 +14,6 @@ class Opendtu extends utils.Adapter {
         });
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
-        // this.on('objectChange', this.onObjectChange.bind(this));
-        // this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
@@ -27,7 +25,7 @@ class Opendtu extends utils.Adapter {
             this.log.warn('Please configure the External MQTT-Server connection!');
             return;
         }
-        mqttClient = mqtt.connect(`mqtt://${this.config.externalMqttServerIP}:${this.config.externalMqttServerPort}`, { clientId: `ioBroker.zigbee2mqtt_${Math.random().toString(16).slice(2, 8)}`, clean: true, reconnectPeriod: 500 });
+        mqttClient = mqtt.connect(`mqtt://${this.config.externalMqttServerIP}:${this.config.externalMqttServerPort}`, { clientId: `ioBroker.opendtu${Math.random().toString(16).slice(2, 8)}`, clean: true, reconnectPeriod: 500 });
 
         // MQTT Client
         mqttClient.on('connect', () => {
@@ -74,9 +72,16 @@ class Opendtu extends utils.Adapter {
                         break;
                     case 'device':
                     case 'status':
-                        stateType = 'info';
-                        deviceID = `${deviceID}.info`;
                         stateID = topicSplit[3];
+                        if (['limit_relative', 'limit_absolute'].includes(stateID)) {
+                            stateType = 'inverter_limit';
+                            deviceID = `${deviceID}.power_control`;
+                        }
+                        else {
+                            stateType = 'info';
+                            deviceID = `${deviceID}.info`;
+                        }
+
                         break;
                     default:
                         // Weil der Name ein Objekt höher über mqtt kommt
@@ -85,8 +90,6 @@ class Opendtu extends utils.Adapter {
                         stateID = topicSplit[2];
                         break;
                 }
-
-
         }
 
         payload = payload.toString();
@@ -134,6 +137,9 @@ class Opendtu extends utils.Adapter {
 
                 // @ts-ignore
                 await this.extendObjectAsync(`${newDevice.id}.${state.id}`, iobState);
+                if (state.write == true) {
+                    this.subscribeStates(`${newDevice.id}.${state.id}`);
+                }
             }
 
             deviceCache.push(newDevice);
@@ -162,7 +168,10 @@ class Opendtu extends utils.Adapter {
     async copyAndCleanStateObj(state) {
         const iobState = { ...state };
         const blacklistedKeys = [
-            'prop'
+            'prop',
+            'setter',
+            'getter',
+            'setattr'
         ];
         for (const blacklistedKey of blacklistedKeys) {
             delete iobState[blacklistedKey];
@@ -179,13 +188,33 @@ class Opendtu extends utils.Adapter {
         }
     }
 
-    onStateChange(id, state) {
-        if (state) {
-            // The state was changed
-            this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-        } else {
-            // The state was deleted
-            this.log.info(`state ${id} deleted`);
+    async onStateChange(id, state) {
+        if (state && state.ack == false) {
+            // if (id.includes('info.logfilter')) {
+            //     //logCustomizations.logfilter = state.val.split(';').filter(x => x); // filter removes empty strings here
+            //     this.setState(id, state.val, true);
+            // }
+            const serial = id.split('.')[2];
+            const stateID = id.split('.')[3];
+
+            const device = deviceCache.find(x => x.id == serial);
+
+            if (!device) {
+                return;
+            }
+
+            const deviceState = device.states.find(x => x.prob == stateID);
+
+            if (!deviceState) {
+                return;
+            }
+
+            if (deviceState.setter) {
+                mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, deviceState.setter(state.val));
+            } else {
+                mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, state.val);
+            }
+            //mqttClient.publish(`${this.config.mqttTopic}/${serial}`,);
         }
     }
 
