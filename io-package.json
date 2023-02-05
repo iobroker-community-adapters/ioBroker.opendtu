@@ -82,7 +82,7 @@
                 "pl": "OpenDTU",
                 "zh-cn": "OpenDTU"
             },
-            "link": "",
+            "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
             "fa-icon": "info"
         },
         "dependencies": [
@@ -98,8 +98,11 @@
     },
     "native": {
         "externalMqttServerIP": "",
-        "externalMqttServerPort": "",
-        "mqttTopic": "solar"
+        "externalMqttServerPort": 1883,
+        "mqttTopic": "solar",
+        "webUIScheme": "http",
+        "webUIServer": "",
+        "webUIPort": 80
     },
     "objects": [],
     "instanceObjects": [

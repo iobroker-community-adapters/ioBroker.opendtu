@@ -2,20 +2,60 @@
 	"i18n": true,
 	"type": "panel",
 	"items": {
+		"mqttHeader": {
+			"type": "header",
+			"text": "Configure your MQTT connection",
+			"size": 2,
+			"newLine": true
+		},
 		"externalMqttServerIP": {
 			"type": "text",
 			"label": "External MQTT-Server IP-Address",
+			"sm": 4,
 			"newLine": true
 		},
 		"externalMqttServerPort": {
 			"type": "number",
 			"label": "External MQTT-Server Port",
+			"sm": 2,
 			"newLine": false
 		},
 		"mqttTopic": {
 			"type": "text",
 			"label": "MQTT-Topic from OpenDTU",
+			"sm": 4,
 			"newLine": true
+		},
+		"webUIHeader": {
+			"type": "header",
+			"text": "Configure your OpenDTU WebUi connection",
+			"size": 2,
+			"newLine": true
+		},
+		"webUIScheme": {
+			"type": "select",
+			"label": "Scheme",
+			"options": [
+				{
+					"label": "HTTP",
+					"value": "http"
+				},
+				{
+					"label": "HTTPS",
+					"value": "https"
+				}
+			],
+			"newLine": true
+		},
+		"webUIServer": {
+			"type": "text",
+			"label": "WebUi Address",
+			"newLine": false
+		},
+		"webUIPort": {
+			"type": "number",
+			"label": "WebUi Port",
+			"newLine": false
 		}
 	}
 }

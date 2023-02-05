@@ -2,5 +2,10 @@
     "opendtu adapter settings": "Paramètres de l'adaptateur pour opendtu",
     "External MQTT-Server IP-Address": "Adresse IP du serveur MQTT externe",
     "External MQTT-Server Port": "Port serveur MQTT externe",
-    "MQTT-Topic from OpenDTU": "Sujet MQTT d'OpenDTU"
+    "MQTT-Topic from OpenDTU": "Sujet MQTT d'OpenDTU",
+    "Configure your MQTT connection": "Configurez votre connexion MQTT",
+    "WebUi Address": "Adresse de l'interface Web",
+    "WebUi Port": "Port WebUI",
+    "Configure your OpenDTU WebUi connection": "Configurez votre connexion OpenDTU WebUi",
+    "Scheme": "Schème"
 }
