@@ -146,22 +146,23 @@ class Opendtu extends utils.Adapter {
         }
 
         const device = deviceCache.find(x => x.id == deviceID);
-        let state;
-        try {
-
-            if (device) {
-                state = device.states.find(x => x.prob == stateID);
-                const stateName = `${device.id}.${state.id}`;
-
-                if (state.getter) {
-                    this.setStateChangedAsync(stateName, state.getter(payload), true);
-                } else {
-                    this.setStateChangedAsync(stateName, payload, true);
-                }
-            }
-        } catch {
-            //console.log('bäääääm');
+        if (!device) {
+            return;
         }
+
+        const state = device.states.find(x => x.id == stateID);
+        if (!state) {
+            return;
+        }
+
+        const stateName = `${device.id}.${state.id}`;
+
+        if (state.getter) {
+            this.setStateChangedAsync(stateName, state.getter(payload), true);
+        } else {
+            this.setStateChangedAsync(stateName, payload, true);
+        }
+
     }
 
 
@@ -181,11 +182,11 @@ class Opendtu extends utils.Adapter {
 
     onUnload(callback) {
         try {
-
-            callback();
-        } catch (e) {
-            callback();
+            mqttClient.end();
+        } catch (error) {
+            this.log.error(error);
         }
+        callback();
     }
 
     async onStateChange(id, state) {
