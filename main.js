@@ -1,6 +1,7 @@
 'use strict';
 const utils = require('@iobroker/adapter-core');
 const mqtt = require('mqtt');
+const schedule = require('node-schedule');
 const stateDefinition = require('./lib/stateDefinition').stateDefinition;
 
 let mqttClient;
@@ -38,6 +39,22 @@ class Opendtu extends utils.Adapter {
         mqttClient.on('message', (topic, payload) => {
             this.messageParse(topic, payload);
         });
+
+        schedule.scheduleJob('dayEndJob', '1 0 0 * * *', () => this.dayEndJob(this));
+        //schedule.scheduleJob('dayEndJob', '*/3 * * * * *', () => this.dayEndJob(this));
+    }
+
+    async dayEndJob(adapter) {
+        const listYieldDay = deviceCache.filter(x => x.states.map(y => y.prob).includes('yieldday'));
+        for (const yild of listYieldDay) {
+            adapter.setStateAsync(`${yild.id}.yieldday`, 0, true);
+        }
+
+        const listYieldTotal = deviceCache.filter(x => x.states.map(y => y.prob).includes('yieldtotal'));
+        for (const yild of listYieldTotal) {
+            const stateVal = (await adapter.getStateAsync(`${yild.id}.yieldtotal`)).val;
+            adapter.setStateAsync(`${yild.id}.yieldtotal`, stateVal, true);
+        }
     }
 
     // @ts-ignore
@@ -96,6 +113,7 @@ class Opendtu extends utils.Adapter {
 
         // Muss das Device erstellt werden?
         if (!deviceCache.find(x => x.id == deviceID)) {
+
             const newDevice = {
                 id: deviceID,
                 states: stateDefinition.find(x => x.type == stateType)?.states
@@ -138,11 +156,13 @@ class Opendtu extends utils.Adapter {
                 // @ts-ignore
                 await this.extendObjectAsync(`${newDevice.id}.${state.id}`, iobState);
                 if (state.write == true) {
-                    this.subscribeStates(`${newDevice.id}.${state.id}`);
+                    await this.subscribeStatesAsync(`${newDevice.id}.${state.id}`);
                 }
             }
 
-            deviceCache.push(newDevice);
+            if (!deviceCache.find(x => x.id == newDevice.id)) {
+                deviceCache.push(newDevice);
+            }
         }
 
         const device = deviceCache.find(x => x.id == deviceID);
@@ -150,7 +170,7 @@ class Opendtu extends utils.Adapter {
             return;
         }
 
-        const state = device.states.find(x => x.id == stateID);
+        const state = device.states.find(x => x.prob == stateID);
         if (!state) {
             return;
         }
@@ -158,13 +178,11 @@ class Opendtu extends utils.Adapter {
         const stateName = `${device.id}.${state.id}`;
 
         if (state.getter) {
-            this.setStateChangedAsync(stateName, state.getter(payload), true);
+            await this.setStateChangedAsync(stateName, state.getter(payload), true);
         } else {
-            this.setStateChangedAsync(stateName, payload, true);
+            await this.setStateChangedAsync(stateName, payload, true);
         }
-
     }
-
 
     async copyAndCleanStateObj(state) {
         const iobState = { ...state };
@@ -178,15 +196,6 @@ class Opendtu extends utils.Adapter {
             delete iobState[blacklistedKey];
         }
         return iobState;
-    }
-
-    onUnload(callback) {
-        try {
-            mqttClient.end();
-        } catch (error) {
-            this.log.error(error);
-        }
-        callback();
     }
 
     async onStateChange(id, state) {
@@ -214,6 +223,21 @@ class Opendtu extends utils.Adapter {
 
             this.setStateAsync(id, state, true);
         }
+    }
+
+    onUnload(callback) {
+        try {
+            mqttClient.end();
+        } catch (error) {
+            this.log.error(error);
+        }
+
+        try {
+            schedule.cancelJob('dayEndJob');
+        } catch (error) {
+            this.log.error(error);
+        }
+        callback();
     }
 
 }
