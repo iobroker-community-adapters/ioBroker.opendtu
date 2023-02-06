@@ -190,20 +190,16 @@ class Opendtu extends utils.Adapter {
 
     async onStateChange(id, state) {
         if (state && state.ack == false) {
-            // if (id.includes('info.logfilter')) {
-            //     //logCustomizations.logfilter = state.val.split(';').filter(x => x); // filter removes empty strings here
-            //     this.setState(id, state.val, true);
-            // }
             const serial = id.split('.')[2];
-            const stateID = id.split('.')[3];
+            const stateID = id.split('.')[4];
 
-            const device = deviceCache.find(x => x.id == serial);
+            const device = deviceCache.find(x => x.id == `${serial}.power_control`);
 
             if (!device) {
                 return;
             }
 
-            const deviceState = device.states.find(x => x.prob == stateID);
+            const deviceState = device.states.find(x => x.id == stateID);
 
             if (!deviceState) {
                 return;
@@ -214,7 +210,8 @@ class Opendtu extends utils.Adapter {
             } else {
                 mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, state.val);
             }
-            //mqttClient.publish(`${this.config.mqttTopic}/${serial}`,);
+
+            this.setStateAsync(id, state, true);
         }
     }
 
