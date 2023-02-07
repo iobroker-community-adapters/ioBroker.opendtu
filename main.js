@@ -40,8 +40,7 @@ class Opendtu extends utils.Adapter {
             this.messageParse(topic, payload);
         });
 
-        schedule.scheduleJob('dayEndJob', '1 0 0 * * *', () => this.dayEndJob(this));
-        //schedule.scheduleJob('dayEndJob', '*/3 * * * * *', () => this.dayEndJob(this));
+        schedule.scheduleJob('dayEndJob', '0 0 0 * * *', () => this.dayEndJob(this));
     }
 
     async dayEndJob(adapter) {
@@ -54,6 +53,19 @@ class Opendtu extends utils.Adapter {
         for (const yild of listYieldTotal) {
             const stateVal = (await adapter.getStateAsync(`${yild.id}.yieldtotal`)).val;
             adapter.setStateAsync(`${yild.id}.yieldtotal`, stateVal, true);
+        }
+    }
+
+    setStateToZero(rootDeviceID) {
+        const statesToSetZero = ['current', 'irradiation', 'power', 'voltage', 'frequency', 'powerdc', 'reactivepower', 'temperature'];
+        const deviceList = deviceCache.filter(x => x.id.startsWith(rootDeviceID) && x.states.map(y => y.id).some(z => statesToSetZero.includes(z)));
+        for (const device of deviceList) {
+            const states = device.states.filter(x => statesToSetZero.includes(x.id));
+            for (const state of states) {
+                const fullStateID = `${device.id}.${state.id}`;
+                console.log(fullStateID);
+                this.setStateChangedAsync(fullStateID, 0, true);
+            }
         }
     }
 
@@ -175,12 +187,19 @@ class Opendtu extends utils.Adapter {
             return;
         }
 
-        const stateName = `${device.id}.${state.id}`;
+        const fullStateID = `${device.id}.${state.id}`;
 
         if (state.getter) {
-            await this.setStateChangedAsync(stateName, state.getter(payload), true);
+            const val = state.getter(payload);
+            await this.setStateChangedAsync(fullStateID, val, true);
+
+            // if (state.id == 'available' && val == false) {
+            //     const rootDeviceID = device.id.split('.')[0];
+            //     this.setStateToZero(rootDeviceID);
+            // }
+
         } else {
-            await this.setStateChangedAsync(stateName, payload, true);
+            await this.setStateChangedAsync(fullStateID, payload, true);
         }
     }
 
@@ -224,6 +243,8 @@ class Opendtu extends utils.Adapter {
             this.setStateAsync(id, state, true);
         }
     }
+
+
 
     onUnload(callback) {
         try {
