@@ -36,7 +36,7 @@ class Opendtu extends utils.Adapter {
         const wsClient = websocketController.initWsClient();
 
         wsClient.on('open', () => {
-            this.log.info('Connect to Zigbee2MQTT over websocket connection.');
+            this.log.info('Connect to OpenDTU over websocket connection.');
             this.setStateChanged('info.connection', true, true);
         });
 
