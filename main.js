@@ -1,10 +1,10 @@
 'use strict';
 const utils = require('@iobroker/adapter-core');
-const mqtt = require('mqtt');
 const schedule = require('node-schedule');
 const stateDefinition = require('./lib/stateDefinition').stateDefinition;
+const WebsocketController = require('./lib/websocketController').WebsocketController;
 
-let mqttClient;
+let websocketController;
 const deviceCache = [];
 
 class Opendtu extends utils.Adapter {
@@ -21,26 +21,34 @@ class Opendtu extends utils.Adapter {
     async onReady() {
         this.setState('info.connection', false, true);
 
-        // External MQTT-Server
-        if (this.config.externalMqttServerIP == '') {
-            this.log.warn('Please configure the External MQTT-Server connection!');
+        if (this.config.webUIServer == '') {
+            this.log.warn('Please configure the Websoket connection!');
             return;
         }
-        mqttClient = mqtt.connect(`mqtt://${this.config.externalMqttServerIP}:${this.config.externalMqttServerPort}`, { clientId: `ioBroker.opendtu${Math.random().toString(16).slice(2, 8)}`, clean: true, reconnectPeriod: 500 });
 
-        // MQTT Client
-        mqttClient.on('connect', () => {
-            this.log.info(`Connect to OpenDTU over external mqtt connection.`);
-            this.setState('info.connection', true, true);
-        });
-
-        mqttClient.subscribe(`${this.config.mqttTopic}/#`);
-
-        mqttClient.on('message', (topic, payload) => {
-            this.messageParse(topic, payload);
-        });
+        this.startWebsocket();
 
         schedule.scheduleJob('dayEndJob', '0 0 0 * * *', () => this.dayEndJob(this));
+    }
+
+    startWebsocket() {
+        websocketController = new WebsocketController(this);
+        const wsClient = websocketController.initWsClient();
+
+        wsClient.on('open', () => {
+            this.log.info('Connect to Zigbee2MQTT over websocket connection.');
+            this.setStateChanged('info.connection', true, true);
+        });
+
+        wsClient.on('message', (message) => {
+            this.messageParse(message);
+
+        });
+
+        wsClient.on('close', async () => {
+            this.setStateChanged('info.connection', false, true);
+            //await statesController.setAllAvailableToFalse();
+        });
     }
 
     async dayEndJob(adapter) {
@@ -70,137 +78,41 @@ class Opendtu extends utils.Adapter {
     }
 
     // @ts-ignore
-    async messageParse(topic, payload) {
-        const topicSplit = topic.split('/');
-        let deviceID = topicSplit[1];
-        const subChannel = topicSplit[2];
-        let stateID;
-        let stateType;
+    async messageParse(message) {
+        message = JSON.parse(message);
 
-        switch (deviceID) {
-            case 'dtu':
-                stateType = 'dtu';
-                stateID = topicSplit[2];
-                break;
-            default:
-                // eslint-disable-next-line no-case-declarations
-                const subChannel = topicSplit[2];
-                switch (subChannel) {
-                    case '0':
-                        stateType = 'inverter';
-                        deviceID = `${deviceID}`;
-                        stateID = topicSplit[3];
-                        break;
-                    case '1':
-                    case '2':
-                    case '3':
-                    case '4':
-                        stateType = 'dc_channel';
-                        deviceID = `${deviceID}.dc_channel_${subChannel}`;
-                        stateID = topicSplit[3];
-                        break;
-                    case 'device':
-                    case 'status':
-                        stateID = topicSplit[3];
-                        if (['limit_relative', 'limit_absolute'].includes(stateID)) {
-                            stateType = 'inverter_limit';
-                            deviceID = `${deviceID}.power_control`;
-                        }
-                        else {
-                            stateType = 'info';
-                            deviceID = `${deviceID}.info`;
-                        }
-
-                        break;
-                    default:
-                        // Weil der Name ein Objekt höher über mqtt kommt
-                        stateType = 'info';
-                        deviceID = `${deviceID}.info`;
-                        stateID = topicSplit[2];
-                        break;
-                }
+        // Create inverter
+        if (!message.inverters) {
+            return;
         }
-
-        payload = payload.toString();
-
-        // Muss das Device erstellt werden?
-        if (!deviceCache.find(x => x.id == deviceID)) {
-
-            const newDevice = {
-                id: deviceID,
-                states: stateDefinition.find(x => x.type == stateType)?.states
-            };
-
+        for (const inv of message.inverters) {
             const deviceObj = {
-                type: 'channel',
+                type: 'device',
                 common: {
-                    name: stateDefinition.find(x => x.type == stateType)?.name.replace('%INPUTNUMBER%', subChannel),
-                    desc: stateDefinition.find(x => x.type == stateType)?.desc.replace('%INPUTNUMBER%', subChannel),
-                    statusStates: {}
+                    name: inv.name,
+                    desc: 'Inverter',
+                    statusStates: {
+                        onlineId: `${this.name}.${this.instance}.${inv.serial}.reachable`
+                    }
                 },
                 native: {}
             };
-
-            if (stateType == 'inverter') {
-                deviceObj.common.statusStates.onlineId = `${this.name}.${this.instance}.${deviceID}.info.available`;
-                deviceObj.type = 'device';
-            }
-
-            if (stateType == 'dtu') {
-                deviceObj.common.statusStates.onlineId = `${this.name}.${this.instance}.${deviceID}.available`;
-                deviceObj.type = 'device';
-            }
-
-            if (!newDevice.states) {
-                return;
-            }
-
-            // @ts-ignore
-            await this.extendObjectAsync(deviceID, deviceObj);
-
-            for (const state of newDevice.states) {
-                const iobState = {
-                    type: 'state',
-                    common: await this.copyAndCleanStateObj(state),
-                    native: {},
-                };
-
-                // @ts-ignore
-                await this.extendObjectAsync(`${newDevice.id}.${state.id}`, iobState);
-                if (state.write == true) {
-                    await this.subscribeStatesAsync(`${newDevice.id}.${state.id}`);
-                }
-            }
-
-            if (!deviceCache.find(x => x.id == newDevice.id)) {
-                deviceCache.push(newDevice);
-            }
+            await this.extendObjectAsync(inv.serial, deviceObj);
         }
+        // const fullStateID = `${device.id}.${state.id}`;
 
-        const device = deviceCache.find(x => x.id == deviceID);
-        if (!device) {
-            return;
-        }
+        // if (state.getter) {
+        //     const val = state.getter(payload);
+        //     await this.setStateChangedAsync(fullStateID, val, true);
 
-        const state = device.states.find(x => x.prob == stateID);
-        if (!state) {
-            return;
-        }
+        //     // if (state.id == 'available' && val == false) {
+        //     //     const rootDeviceID = device.id.split('.')[0];
+        //     //     this.setStateToZero(rootDeviceID);
+        //     // }
 
-        const fullStateID = `${device.id}.${state.id}`;
-
-        if (state.getter) {
-            const val = state.getter(payload);
-            await this.setStateChangedAsync(fullStateID, val, true);
-
-            // if (state.id == 'available' && val == false) {
-            //     const rootDeviceID = device.id.split('.')[0];
-            //     this.setStateToZero(rootDeviceID);
-            // }
-
-        } else {
-            await this.setStateChangedAsync(fullStateID, payload, true);
-        }
+        // } else {
+        //     await this.setStateChangedAsync(fullStateID, payload, true);
+        // }
     }
 
     async copyAndCleanStateObj(state) {
@@ -246,17 +158,24 @@ class Opendtu extends utils.Adapter {
 
 
 
-    onUnload(callback) {
+    async onUnload(callback) {
+        // Websocket
         try {
-            mqttClient.end();
-        } catch (error) {
-            this.log.error(error);
+            websocketController.closeConnection();
+        } catch (e) {
+            this.log.error(e);
+        }
+        // Clear all websocket timers
+        try {
+            await websocketController.allTimerClear();
+        } catch (e) {
+            this.log.error(e);
         }
 
         try {
             schedule.cancelJob('dayEndJob');
-        } catch (error) {
-            this.log.error(error);
+        } catch (e) {
+            this.log.error(e);
         }
         callback();
     }

@@ -97,9 +97,6 @@
         ]
     },
     "native": {
-        "externalMqttServerIP": "",
-        "externalMqttServerPort": 1883,
-        "mqttTopic": "solar",
         "webUIScheme": "http",
         "webUIServer": "",
         "webUIPort": 80
