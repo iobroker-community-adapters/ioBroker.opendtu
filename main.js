@@ -1,11 +1,13 @@
 'use strict';
 const utils = require('@iobroker/adapter-core');
+// @ts-ignore
 const schedule = require('node-schedule');
+// @ts-ignore
 const stateDefinition = require('./lib/stateDefinition').stateDefinition;
 const WebsocketController = require('./lib/websocketController').WebsocketController;
 
 let websocketController;
-const deviceCache = [];
+const createCache = [];
 
 class Opendtu extends utils.Adapter {
     constructor(options) {
@@ -52,12 +54,12 @@ class Opendtu extends utils.Adapter {
     }
 
     async dayEndJob(adapter) {
-        const listYieldDay = deviceCache.filter(x => x.states.map(y => y.prob).includes('yieldday'));
+        const listYieldDay = createCache.filter(x => x.states.map(y => y.prob).includes('yieldday'));
         for (const yild of listYieldDay) {
             adapter.setStateAsync(`${yild.id}.yieldday`, 0, true);
         }
 
-        const listYieldTotal = deviceCache.filter(x => x.states.map(y => y.prob).includes('yieldtotal'));
+        const listYieldTotal = createCache.filter(x => x.states.map(y => y.prob).includes('yieldtotal'));
         for (const yild of listYieldTotal) {
             const stateVal = (await adapter.getStateAsync(`${yild.id}.yieldtotal`)).val;
             adapter.setStateAsync(`${yild.id}.yieldtotal`, stateVal, true);
@@ -66,7 +68,7 @@ class Opendtu extends utils.Adapter {
 
     setStateToZero(rootDeviceID) {
         const statesToSetZero = ['current', 'irradiation', 'power', 'voltage', 'frequency', 'powerdc', 'reactivepower', 'temperature'];
-        const deviceList = deviceCache.filter(x => x.id.startsWith(rootDeviceID) && x.states.map(y => y.id).some(z => statesToSetZero.includes(z)));
+        const deviceList = createCache.filter(x => x.id.startsWith(rootDeviceID) && x.states.map(y => y.id).some(z => statesToSetZero.includes(z)));
         for (const device of deviceList) {
             const states = device.states.filter(x => statesToSetZero.includes(x.id));
             for (const state of states) {
@@ -81,24 +83,42 @@ class Opendtu extends utils.Adapter {
     async messageParse(message) {
         message = JSON.parse(message);
 
-        // Create inverter
+        // Create inverter rootfolder
         if (!message.inverters) {
             return;
         }
         for (const inv of message.inverters) {
-            const deviceObj = {
-                type: 'device',
-                common: {
-                    name: inv.name,
-                    desc: 'Inverter',
-                    statusStates: {
-                        onlineId: `${this.name}.${this.instance}.${inv.serial}.reachable`
-                    }
-                },
-                native: {}
-            };
-            await this.extendObjectAsync(inv.serial, deviceObj);
+            if (!createCache.includes(inv.serial)) {
+                const deviceObj = {
+                    type: 'device',
+                    common: {
+                        name: inv.name,
+                        desc: 'Inverter',
+                        statusStates: {
+                            onlineId: `${this.name}.${this.instance}.${inv.serial}.available`
+                        }
+                    },
+                    native: {}
+                };
+                // @ts-ignore
+                await this.extendObjectAsync(inv.serial, deviceObj);
+                createCache.push(inv.serial);
+            }
+
+            const forceStatesNameList = ['limit_persistent_relative', 'limit_persistent_absolute', 'limit_nonpersistent_relative', 'limit_nonpersistent_absolute', 'power_switch', 'restart'];
+
+            for (const stateName of forceStatesNameList) {
+                this.setObjectAndState(inv.serial, stateName.toLowerCase());
+            }
+
+            for (const [stateName, val] of Object.entries(inv)) {
+                if (typeof (val) === 'object') {
+                    continue;
+                }
+                this.setObjectAndState(inv.serial, stateName.toLowerCase(), val);
+            }
         }
+
         // const fullStateID = `${device.id}.${state.id}`;
 
         // if (state.getter) {
@@ -115,10 +135,39 @@ class Opendtu extends utils.Adapter {
         // }
     }
 
-    async copyAndCleanStateObj(state) {
+    async setObjectAndState(stateID, stateName, val) {
+
+        const state = stateDefinition[stateName];
+        if (!state) {
+            return;
+        }
+
+        const fullStateID = `${stateID}.${state.id}`;
+
+        if (!createCache.includes(fullStateID)) {
+            await this.extendObjectAsync(fullStateID,
+                {
+                    type: 'state',
+                    common: this.copyAndCleanStateObj(state),
+                    native: {},
+                });
+            createCache.push(fullStateID);
+        }
+
+        if (val !== undefined) {
+            if (state.getter) {
+                await this.setStateChangedAsync(fullStateID, state.getter(val), true);
+            }
+            else {
+                await this.setStateChangedAsync(fullStateID, val, true);
+            }
+        }
+    }
+
+    copyAndCleanStateObj(state) {
         const iobState = { ...state };
         const blacklistedKeys = [
-            'prop',
+            'id',
             'setter',
             'getter',
             'setattr'
@@ -134,7 +183,7 @@ class Opendtu extends utils.Adapter {
             const serial = id.split('.')[2];
             const stateID = id.split('.')[4];
 
-            const device = deviceCache.find(x => x.id == `${serial}.power_control`);
+            const device = createCache.find(x => x.id == `${serial}.power_control`);
 
             if (!device) {
                 return;
@@ -147,8 +196,10 @@ class Opendtu extends utils.Adapter {
             }
 
             if (deviceState.setter) {
+                // @ts-ignore
                 mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, deviceState.setter(state.val));
             } else {
+                // @ts-ignore
                 mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, state.val);
             }
 
