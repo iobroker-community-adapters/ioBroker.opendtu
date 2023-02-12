@@ -105,44 +105,133 @@ class Opendtu extends utils.Adapter {
                 createCache.push(inv.serial);
             }
 
+            // Power control
             const forceStatesNameList = ['limit_persistent_relative', 'limit_persistent_absolute', 'limit_nonpersistent_relative', 'limit_nonpersistent_absolute', 'power_switch', 'restart'];
-
+            if (!createCache.includes(`${inv.serial}.power_control`)) {
+                const deviceObj = {
+                    type: 'channel',
+                    common: {
+                        name: 'Power control',
+                    },
+                    native: {}
+                };
+                // @ts-ignore
+                await this.extendObjectAsync(`${inv.serial}.power_control`, deviceObj);
+                createCache.push(`${inv.serial}.power_control`);
+            }
             for (const stateName of forceStatesNameList) {
                 this.setObjectAndState(inv.serial, stateName.toLowerCase());
             }
 
+            // States
             for (const [stateName, val] of Object.entries(inv)) {
                 if (typeof (val) === 'object') {
+                    // AC
+                    if (stateName == '0') {
+                        if (!createCache.includes(`${inv.serial}.ac`)) {
+                            const deviceObj = {
+                                type: 'channel',
+                                common: {
+                                    name: 'AC',
+                                },
+                                native: {}
+                            };
+                            // @ts-ignore
+                            await this.extendObjectAsync(`${inv.serial}.ac`, deviceObj);
+                            createCache.push(`${inv.serial}.ac`);
+                        }
+
+                        // AC Phase x
+                        let counter = 1;
+                        if (!createCache.includes(`${inv.serial}.ac.phase_${counter}`)) {
+                            const deviceObj = {
+                                type: 'channel',
+                                common: {
+                                    name: `Phase ${counter}`,
+                                },
+                                native: {}
+                            };
+                            // @ts-ignore
+                            await this.extendObjectAsync(`${inv.serial}.ac.phase_${counter}`, deviceObj);
+                            createCache.push(`${inv.serial}.ac.phase_${counter}`);
+                        }
+
+                        for (const [phaseStateName, phaseVal] of Object.entries(val)) {
+                            this.setObjectAndState(inv.serial, `ac_${phaseStateName.toLowerCase()}`, phaseVal, counter);
+                        }
+
+                        counter++;
+                    }
+
+                    // DC
+                    else if (['1', '2', '3', '4'].includes(stateName)) {
+                        if (!createCache.includes(`${inv.serial}.dc`)) {
+                            const deviceObj = {
+                                type: 'channel',
+                                common: {
+                                    name: 'DC',
+                                },
+                                native: {}
+                            };
+                            // @ts-ignore
+                            await this.extendObjectAsync(`${inv.serial}.dc`, deviceObj);
+                            createCache.push(`${inv.serial}.dc`);
+                        }
+
+                        if (!createCache.includes(`${inv.serial}.dc.channel_${stateName}`)) {
+                            const deviceObj = {
+                                type: 'channel',
+                                common: {
+                                    name: `DC Input ${stateName}`,
+                                },
+                                native: {}
+                            };
+                            // @ts-ignore
+                            await this.extendObjectAsync(`${inv.serial}.dc.channel_${stateName}`, deviceObj);
+                            createCache.push(`${inv.serial}.dc.channel_${stateName}`);
+                        }
+
+                        for (const [channelStateName, channelVal] of Object.entries(val)) {
+                            this.setObjectAndState(inv.serial, `dc_${channelStateName.toLowerCase()}`, channelVal, stateName);
+                        }
+                    }
                     continue;
                 }
+
+
                 this.setObjectAndState(inv.serial, stateName.toLowerCase(), val);
             }
         }
 
-        // const fullStateID = `${device.id}.${state.id}`;
-
-        // if (state.getter) {
-        //     const val = state.getter(payload);
-        //     await this.setStateChangedAsync(fullStateID, val, true);
-
-        //     // if (state.id == 'available' && val == false) {
-        //     //     const rootDeviceID = device.id.split('.')[0];
-        //     //     this.setStateToZero(rootDeviceID);
-        //     // }
-
-        // } else {
-        //     await this.setStateChangedAsync(fullStateID, payload, true);
-        // }
+        // Total
+        if (message.total) {
+            if (!createCache.includes('total')) {
+                const deviceObj = {
+                    type: 'channel',
+                    common: {
+                        name: 'Total',
+                        desc: 'Sum over all inverters',
+                    },
+                    native: {}
+                };
+                // @ts-ignore
+                await this.extendObjectAsync('total', deviceObj);
+                createCache.push('total');
+            }
+            for (const [stateName, val] of Object.entries(message.total)) {
+                this.setObjectAndState('total', `total_${stateName.toLowerCase()}`, val);
+            }
+        }
     }
 
-    async setObjectAndState(stateID, stateName, val) {
+    async setObjectAndState(stateID, stateName, val, count) {
 
         const state = stateDefinition[stateName];
         if (!state) {
             return;
         }
 
-        const fullStateID = `${stateID}.${state.id}`;
+        const fullStateID = `${stateID}.${state.id}`.replace('%count%', count);
 
         if (!createCache.includes(fullStateID)) {
             await this.extendObjectAsync(fullStateID,
@@ -197,10 +286,10 @@ class Opendtu extends utils.Adapter {
 
             if (deviceState.setter) {
                 // @ts-ignore
-                mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, deviceState.setter(state.val));
+                //  mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, deviceState.setter(state.val));
             } else {
                 // @ts-ignore
-                mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, state.val);
+                //  mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, state.val);
             }
 
             this.setStateAsync(id, state, true);
