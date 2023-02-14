@@ -7,6 +7,9 @@ const schedule = require('node-schedule');
 const stateDefinition = require('./lib/stateDefinition').stateDefinition;
 const WebsocketController = require('./lib/websocketController').WebsocketController;
 
+let dtuApiURL;
+let powerApiURL;
+let axiosConf;
 let websocketController;
 const createCache = [];
 
@@ -28,6 +31,10 @@ class Opendtu extends utils.Adapter {
             this.log.warn('Please configure the Websoket connection!');
             return;
         }
+
+        dtuApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/system/status`;
+        powerApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/limit/config`;
+        axiosConf = { auth: { username: this.config.userName, password: this.config.password } };
 
         this.startWebsocket();
         this.getDTUData();
@@ -111,7 +118,7 @@ class Opendtu extends utils.Adapter {
                 }
 
                 // Power control
-                const forceStatesNameList = ['limit_persistent_relative', 'limit_persistent_absolute', 'limit_nonpersistent_relative', 'limit_nonpersistent_absolute', 'power_switch', 'restart'];
+                const forceStatesNameList = ['limit_persistent_relative', 'limit_persistent_absolute', 'limit_nonpersistent_relative', 'limit_nonpersistent_absolute', 'power_on', 'power_off', 'restart'];
                 if (!createCache.includes(`${inv.serial}.power_control`)) {
                     const deviceObj = {
                         type: 'channel',
@@ -131,8 +138,9 @@ class Opendtu extends utils.Adapter {
                 // States
                 for (const [stateName, val] of Object.entries(inv)) {
                     if (typeof (val) === 'object') {
+
                         // AC
-                        if (stateName == '0') {
+                        if (stateName == 'AC') {
                             if (!createCache.includes(`${inv.serial}.ac`)) {
                                 const deviceObj = {
                                     type: 'channel',
@@ -147,29 +155,29 @@ class Opendtu extends utils.Adapter {
                             }
 
                             // AC Phase x
-                            let counter = 1;
-                            if (!createCache.includes(`${inv.serial}.ac.phase_${counter}`)) {
-                                const deviceObj = {
-                                    type: 'channel',
-                                    common: {
-                                        name: `Phase ${counter}`,
-                                    },
-                                    native: {}
-                                };
-                                // @ts-ignore
-                                await this.extendObjectAsync(`${inv.serial}.ac.phase_${counter}`, deviceObj);
-                                createCache.push(`${inv.serial}.ac.phase_${counter}`);
-                            }
+                            for (const [phase, phaseObj] of Object.entries(val)) {
+                                const phaseNumber = Number(phase) + 1;
+                                if (!createCache.includes(`${inv.serial}.ac.phase_${phaseNumber}`)) {
+                                    const deviceObj = {
+                                        type: 'channel',
+                                        common: {
+                                            name: `Phase ${phase + 1}`,
+                                        },
+                                        native: {}
+                                    };
+                                    // @ts-ignore
+                                    await this.extendObjectAsync(`${inv.serial}.ac.phase_${phaseNumber}`, deviceObj);
+                                    createCache.push(`${inv.serial}.ac.phase_${phaseNumber}`);
+                                }
 
-                            for (const [phaseStateName, phaseVal] of Object.entries(val)) {
-                                this.setObjectAndState(inv.serial, `ac_${phaseStateName.toLowerCase()}`, phaseVal, counter);
+                                for (const [phaseStateName, phaseVal] of Object.entries(phaseObj)) {
+                                    this.setObjectAndState(inv.serial, `ac_${phaseStateName.toLowerCase()}`, phaseVal, phaseNumber);
+                                }
                             }
-
-                            counter++;
                         }
 
                         // DC
-                        else if (['1', '2', '3', '4'].includes(stateName)) {
+                        else if (stateName == 'DC') {
                             if (!createCache.includes(`${inv.serial}.dc`)) {
                                 const deviceObj = {
                                     type: 'channel',
@@ -183,26 +191,37 @@ class Opendtu extends utils.Adapter {
                                 createCache.push(`${inv.serial}.dc`);
                             }
 
-                            if (!createCache.includes(`${inv.serial}.dc.channel_${stateName}`)) {
-                                const deviceObj = {
-                                    type: 'channel',
-                                    common: {
-                                        name: `DC Input ${stateName}`,
-                                    },
-                                    native: {}
-                                };
-                                // @ts-ignore
-                                await this.extendObjectAsync(`${inv.serial}.dc.channel_${stateName}`, deviceObj);
-                                createCache.push(`${inv.serial}.dc.channel_${stateName}`);
-                            }
+                            // DC Input x
+                            for (const [string, stringObj] of Object.entries(val)) {
+                                const stringNumber = Number(string) + 1;
+                                if (!createCache.includes(`${inv.serial}.dc.input_${stringNumber}`)) {
+                                    const deviceObj = {
+                                        type: 'channel',
+                                        common: {
+                                            name: `DC Input ${stringNumber}`,
+                                        },
+                                        native: {}
+                                    };
+                                    // @ts-ignore
+                                    await this.extendObjectAsync(`${inv.serial}.dc.input_${stringNumber}`, deviceObj);
+                                    createCache.push(`${inv.serial}.dc.input_${stringNumber}`);
+                                }
 
-                            for (const [channelStateName, channelVal] of Object.entries(val)) {
-                                this.setObjectAndState(inv.serial, `dc_${channelStateName.toLowerCase()}`, channelVal, stateName);
+                                for (const [channelStateName, channelVal] of Object.entries(stringObj)) {
+                                    this.setObjectAndState(inv.serial, `dc_${channelStateName.toLowerCase()}`, channelVal, stringNumber);
+                                }
                             }
                         }
+
+                        //INV
+                        else if (stateName == 'INV') {
+                            for (const [invStateName, invVal] of Object.entries(val['0'])) {
+                                this.setObjectAndState(inv.serial, `inv_${invStateName.toLowerCase()}`, invVal);
+                            }
+                        }
+
                         continue;
                     }
-
 
                     this.setObjectAndState(inv.serial, stateName.toLowerCase(), val);
                 }
@@ -254,14 +273,39 @@ class Opendtu extends utils.Adapter {
 
     async getDTUData() {
         try {
-            const axiosURL = `http://${this.config.webUIServer}/api/system/status`;
-            let dtuData = (await axios.get(axiosURL)).data;
-            dtuData = { dtu: dtuData };
-            dtuData.dtu.reachable = true;
-            this.messageParse(dtuData);
+            const dtuData = (await axios.get(dtuApiURL)).data;
+            dtuData.reachable = true;
+            this.messageParse({ dtu: dtuData });
 
         } catch (err) {
-            console.log({ dtu: { reachable: false } });
+            this.messageParse({ dtu: { reachable: false } });
+        }
+    }
+
+    async setInverterLimit(serial, limit_value, limit_type) {
+        try {
+            const payload = `data=${JSON.stringify({ serial, limit_type, limit_value })}`;
+            await axios.post(powerApiURL, payload, axiosConf);
+        } catch (err) {
+            this.log.warn(err);
+        }
+    }
+
+    async setInverterPower(serial, power) {
+        try {
+            const payload = `data=${JSON.stringify({ serial, power })}`;
+            await axios.post(powerApiURL, payload, axiosConf);
+        } catch (err) {
+            this.log.warn(err);
+        }
+    }
+
+    async setInverterRestart(serial, restart) {
+        try {
+            const payload = `data=${JSON.stringify({ serial, restart })}`;
+            await axios.post(powerApiURL, payload, axiosConf);
+        } catch (err) {
+            this.log.warn(err);
         }
     }
 
@@ -281,6 +325,9 @@ class Opendtu extends utils.Adapter {
                     common: this.copyAndCleanStateObj(state),
                     native: {},
                 });
+            if (state.write == true) {
+                await this.subscribeStatesAsync(fullStateID);
+            }
             createCache.push(fullStateID);
         }
 
@@ -310,34 +357,39 @@ class Opendtu extends utils.Adapter {
 
     async onStateChange(id, state) {
         if (state && state.ack == false) {
+            console.log(id);
             const serial = id.split('.')[2];
             const stateID = id.split('.')[4];
 
-            const device = createCache.find(x => x.id == `${serial}.power_control`);
-
-            if (!device) {
-                return;
-            }
-
-            const deviceState = device.states.find(x => x.id == stateID);
-
-            if (!deviceState) {
-                return;
-            }
-
-            if (deviceState.setter) {
-                // @ts-ignore
-                //  mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, deviceState.setter(state.val));
-            } else {
-                // @ts-ignore
-                //  mqttClient.publish(`${this.config.mqttTopic}/${serial}/cmd/${deviceState.prob}`, state.val);
+            switch (stateID) {
+                case 'limit_persistent_relative':
+                    this.setInverterLimit(serial, state.val, 257);
+                    break;
+                case 'limit_persistent_absolute':
+                    this.setInverterLimit(serial, state.val, 256);
+                    break;
+                case 'limit_nonpersistent_relative':
+                    this.setInverterLimit(serial, state.val, 0);
+                    break;
+                case 'limit_nonpersistent_absolute':
+                    this.setInverterLimit(serial, state.val, 1);
+                    break;
+                case 'power_on':
+                    this.setInverterPower(serial, state.val);
+                    break;
+                case 'power_off':
+                    this.setInverterPower(serial, state.val);
+                    break;
+                case 'restart':
+                    this.setInverterRestart(serial, state.val);
+                    break;
+                default:
+                    return;
             }
 
             this.setStateAsync(id, state, true);
         }
     }
-
-
 
     async onUnload(callback) {
         // Websocket
@@ -366,7 +418,6 @@ class Opendtu extends utils.Adapter {
         }
         callback();
     }
-
 }
 
 if (require.main !== module) {
