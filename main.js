@@ -369,10 +369,10 @@ class Opendtu extends utils.Adapter {
                     this.setInverterLimit(serial, state.val, 256);
                     break;
                 case 'limit_nonpersistent_relative':
-                    this.setInverterLimit(serial, state.val, 0);
+                    this.setInverterLimit(serial, state.val, 1);
                     break;
                 case 'limit_nonpersistent_absolute':
-                    this.setInverterLimit(serial, state.val, 1);
+                    this.setInverterLimit(serial, state.val, 0);
                     break;
                 case 'power_on':
                     this.setInverterPower(serial, state.val);
