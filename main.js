@@ -11,7 +11,10 @@ let dtuApiURL;
 let powerApiURL;
 let axiosConf;
 let websocketController;
+let inverterOffline = [];
 const createCache = [];
+const yieldGuardCache = {};
+const statesToSetZero = ['current', 'irradiation', 'power', 'voltage', 'frequency', 'power_dc', 'reactivepower', 'temperature'];
 
 class Opendtu extends utils.Adapter {
     constructor(options) {
@@ -38,7 +41,7 @@ class Opendtu extends utils.Adapter {
 
         this.startWebsocket();
         this.getDTUData();
-        //schedule.scheduleJob('dayEndJob', '0 0 0 * * *', () => this.dayEndJob(this));
+        schedule.scheduleJob('dayEndJob', '0 0 0 * * *', () => this.dayEndJob());
         schedule.scheduleJob('getDTUData', '*/10 * * * * *', () => this.getDTUData());
     }
 
@@ -127,30 +130,50 @@ class Opendtu extends utils.Adapter {
         });
     }
 
-    async dayEndJob(adapter) {
-        const listYieldDay = createCache.filter(x => x.states.map(y => y.prob).includes('yieldday'));
-        for (const yild of listYieldDay) {
-            adapter.setStateAsync(`${yild.id}.yieldday`, 0, true);
+    async dayEndJob() {
+        // Get all StateIDs
+        const allStateIDs = Object.keys(await this.getAdapterObjectsAsync());
+
+        // Get all yieldday StateIDs to set zero
+        const idsSetToZero = allStateIDs.filter(x => x.endsWith('yieldday'));
+        for (const id of idsSetToZero) {
+            this.setStateAsync(id, 0, true);
         }
 
-        const listYieldTotal = createCache.filter(x => x.states.map(y => y.prob).includes('yieldtotal'));
-        for (const yild of listYieldTotal) {
-            const stateVal = (await adapter.getStateAsync(`${yild.id}.yieldtotal`)).val;
-            adapter.setStateAsync(`${yild.id}.yieldtotal`, stateVal, true);
+        // Get all yieldtotal StateIDs to reset for eg. sourceanalytix
+        const idsSetToReset = allStateIDs.filter(x => x.endsWith('yieldtotal'));
+        for (const id of idsSetToReset) {
+            const currentState = await this.getStateAsync(id);
+            if (currentState) {
+                this.setStateAsync(id, currentState.val, true);
+            }
         }
     }
 
-    setStateToZero(rootDeviceID) {
-        const statesToSetZero = ['current', 'irradiation', 'power', 'voltage', 'frequency', 'powerdc', 'reactivepower', 'temperature'];
-        const deviceList = createCache.filter(x => x.id.startsWith(rootDeviceID) && x.states.map(y => y.id).some(z => statesToSetZero.includes(z)));
-        for (const device of deviceList) {
-            const states = device.states.filter(x => statesToSetZero.includes(x.id));
-            for (const state of states) {
-                const fullStateID = `${device.id}.${state.id}`;
-                console.log(fullStateID);
-                this.setStateChangedAsync(fullStateID, 0, true);
+    async invOfflineStatesToZero(serial) {
+
+        if (inverterOffline.includes(serial)) {
+            return;
+        }
+
+        // Get all StateIDs
+        const allStateIDs = Object.keys(await this.getAdapterObjectsAsync());
+
+        // Get all yieldday StateIDs to set zero
+        const idsSetToZero = [];
+        for (const id of allStateIDs.filter(x => x.includes(serial))) {
+            // @ts-ignore
+            if (statesToSetZero.includes(id.split('.').at(-1))) {
+                idsSetToZero.push(id);
             }
         }
+
+        // Set IDs to Zero
+        for (const id of idsSetToZero) {
+            this.setStateChangedAsync(id, 0, true);
+        }
+
+        inverterOffline.push(serial);
     }
 
     // @ts-ignore
@@ -216,6 +239,15 @@ class Opendtu extends utils.Adapter {
                         }
                         break;
                     default:
+                        // Must states be set to zero?
+                        if (stateName.toLowerCase() == 'reachable') {
+                            if (val == true) {
+                                inverterOffline = inverterOffline.filter(x => x !== inverter.serial);
+                            }
+                            else {
+                                this.invOfflineStatesToZero(inverter.serial);
+                            }
+                        }
                         // Create and/or set values
                         this.setObjectAndState(inverter.serial, stateName.toLowerCase(), val);
                 }
@@ -423,20 +455,53 @@ class Opendtu extends utils.Adapter {
                     common: this.copyAndCleanStateObj(state),
                     native: {},
                 });
+
+            // Subscribe to writable states
             if (state.write == true) {
                 await this.subscribeStatesAsync(fullStateID);
             }
+
             createCache.push(fullStateID);
         }
 
         if (val !== undefined) {
+            let value = val;
+
             if (state.getter) {
-                await this.setStateChangedAsync(fullStateID, state.getter(val), true);
+                value = state.getter(val);
             }
-            else {
-                await this.setStateChangedAsync(fullStateID, val, true);
+
+            if (fullStateID.includes('yield')) {
+                if (await this.yieldGuard(fullStateID, value) == false) {
+                    return;
+                }
             }
+
+            // Are the states allowed to be set or is the inverter offline?
+            for (const serial of inverterOffline) {
+                if (fullStateID.includes(serial)) {
+                    // @ts-ignore
+                    if (statesToSetZero.includes(fullStateID.split('.').at(-1))) {
+                        return;
+                    }
+                }
+            }
+
+            await this.setStateChangedAsync(fullStateID, value, true);
         }
+    }
+
+    async yieldGuard(id, val) {
+        if (yieldGuardCache[id] == undefined) {
+            yieldGuardCache[id] = (await this.getStateAsync(id))?.val;
+        }
+
+        if (val > yieldGuardCache[id]) {
+            yieldGuardCache[id] = val;
+            return true;
+        }
+
+        return false;
     }
 
     copyAndCleanStateObj(state) {
