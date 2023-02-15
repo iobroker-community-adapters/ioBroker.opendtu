@@ -1,0 +1,236 @@
+{
+    "inverters": [
+        {
+            "serial": "11617160xxxx",
+            "name": "Meine Solaranlage",
+            "data_age": 6983,
+            "reachable": false,
+            "producing": false,
+            "limit_relative": 0,
+            "limit_absolute": -1,
+            "AC": {
+                "0": {
+                    "Power": {
+                        "v": 0,
+                        "u": "W",
+                        "d": 1
+                    },
+                    "Voltage": {
+                        "v": 0,
+                        "u": "V",
+                        "d": 1
+                    },
+                    "Current": {
+                        "v": 0,
+                        "u": "A",
+                        "d": 2
+                    },
+                    "Power DC": {
+                        "v": 0,
+                        "u": "W",
+                        "d": 1
+                    },
+                    "YieldDay": {
+                        "v": 0,
+                        "u": "Wh",
+                        "d": 0
+                    },
+                    "YieldTotal": {
+                        "v": 0,
+                        "u": "kWh",
+                        "d": 3
+                    },
+                    "Frequency": {
+                        "v": 0,
+                        "u": "Hz",
+                        "d": 2
+                    },
+                    "PowerFactor": {
+                        "v": 0,
+                        "u": "",
+                        "d": 3
+                    },
+                    "ReactivePower": {
+                        "v": 0,
+                        "u": "var",
+                        "d": 1
+                    },
+                    "Efficiency": {
+                        "v": 0,
+                        "u": "%",
+                        "d": 3
+                    }
+                }
+            },
+            "DC": {
+                "0": {
+                    "name": {
+                        "u": ""
+                    },
+                    "Power": {
+                        "v": 0,
+                        "u": "W",
+                        "d": 1
+                    },
+                    "Voltage": {
+                        "v": 0,
+                        "u": "V",
+                        "d": 1
+                    },
+                    "Current": {
+                        "v": 0,
+                        "u": "A",
+                        "d": 2
+                    },
+                    "YieldDay": {
+                        "v": 0,
+                        "u": "Wh",
+                        "d": 0
+                    },
+                    "YieldTotal": {
+                        "v": 0,
+                        "u": "kWh",
+                        "d": 3
+                    },
+                    "Irradiation": {
+                        "v": 0,
+                        "u": "%",
+                        "d": 3
+                    }
+                },
+                "1": {
+                    "name": {
+                        "u": ""
+                    },
+                    "Power": {
+                        "v": 0,
+                        "u": "W",
+                        "d": 1
+                    },
+                    "Voltage": {
+                        "v": 0,
+                        "u": "V",
+                        "d": 1
+                    },
+                    "Current": {
+                        "v": 0,
+                        "u": "A",
+                        "d": 2
+                    },
+                    "YieldDay": {
+                        "v": 0,
+                        "u": "Wh",
+                        "d": 0
+                    },
+                    "YieldTotal": {
+                        "v": 0,
+                        "u": "kWh",
+                        "d": 3
+                    },
+                    "Irradiation": {
+                        "v": 0,
+                        "u": "%",
+                        "d": 3
+                    }
+                },
+                "2": {
+                    "name": {
+                        "u": ""
+                    },
+                    "Power": {
+                        "v": 0,
+                        "u": "W",
+                        "d": 1
+                    },
+                    "Voltage": {
+                        "v": 0,
+                        "u": "V",
+                        "d": 1
+                    },
+                    "Current": {
+                        "v": 0,
+                        "u": "A",
+                        "d": 2
+                    },
+                    "YieldDay": {
+                        "v": 0,
+                        "u": "Wh",
+                        "d": 0
+                    },
+                    "YieldTotal": {
+                        "v": 0,
+                        "u": "kWh",
+                        "d": 3
+                    },
+                    "Irradiation": {
+                        "v": 0,
+                        "u": "%",
+                        "d": 3
+                    }
+                },
+                "3": {
+                    "name": {
+                        "u": ""
+                    },
+                    "Power": {
+                        "v": 0,
+                        "u": "W",
+                        "d": 1
+                    },
+                    "Voltage": {
+                        "v": 0,
+                        "u": "V",
+                        "d": 1
+                    },
+                    "Current": {
+                        "v": 0,
+                        "u": "A",
+                        "d": 2
+                    },
+                    "YieldDay": {
+                        "v": 0,
+                        "u": "Wh",
+                        "d": 0
+                    },
+                    "YieldTotal": {
+                        "v": 0,
+                        "u": "kWh",
+                        "d": 3
+                    }
+                }
+            },
+            "INV": {
+                "0": {
+                    "Temperature": {
+                        "v": 0,
+                        "u": "°C",
+                        "d": 1
+                    }
+                }
+            },
+            "events": 0
+        }
+    ],
+    "total": {
+        "Power": {
+            "v": 0,
+            "u": "W",
+            "d": 1
+        },
+        "YieldDay": {
+            "v": 0,
+            "u": "Wh",
+            "d": 0
+        },
+        "YieldTotal": {
+            "v": 0,
+            "u": "kWh",
+            "d": 2
+        }
+    },
+    "hints": {
+        "time_sync": false,
+        "radio_problem": false,
+        "default_password": false
+    }
+}

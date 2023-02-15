@@ -97,13 +97,18 @@
         ]
     },
     "native": {
-        "externalMqttServerIP": "",
-        "externalMqttServerPort": 1883,
-        "mqttTopic": "solar",
         "webUIScheme": "http",
         "webUIServer": "",
-        "webUIPort": 80
+        "webUIPort": 80,
+        "userName": "admin",
+        "password": ""
     },
+    "protectedNative": [
+        "password"
+    ],
+    "encryptedNative": [
+        "password"
+    ],
     "objects": [],
     "instanceObjects": [
         {
