@@ -86,6 +86,11 @@ class Opendtu extends utils.Adapter {
     }
 
     async onUnload(callback) {
+        try {
+            this.allAvailableToFalse();
+        } catch (e) {
+            this.log.error(e);
+        }
         // Websocket
         try {
             websocketController.closeConnection();
@@ -127,6 +132,7 @@ class Opendtu extends utils.Adapter {
         });
 
         wsClient.on('close', async () => {
+            this.allAvailableToFalse();
         });
     }
 
@@ -316,6 +322,16 @@ class Opendtu extends utils.Adapter {
         }
 
         inverterOffline.push(serial);
+    }
+
+    async allAvailableToFalse() {
+        // Get all available StateIDs
+        const allAvailableStates = Object.keys(await this.getAdapterObjectsAsync()).filter(x => x.endsWith('.available'));
+
+        // Set all available StateIDs to false
+        for (const id of allAvailableStates) {
+            this.setStateChangedAsync(id, false, true);
+        }
     }
 }
 
