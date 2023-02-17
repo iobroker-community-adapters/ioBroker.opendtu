@@ -13,8 +13,7 @@ let powerApiURL;
 let axiosConf;
 let websocketController;
 let dataController;
-// eslint-disable-next-line prefer-const
-let inverterOffline = [];
+const inverterOffline = [];
 const createCache = [];
 const yieldGuardCache = {};
 const statesToSetZero = ['current', 'irradiation', 'power', 'voltage', 'frequency', 'power_dc', 'reactivepower', 'temperature'];
