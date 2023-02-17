@@ -1,11 +1,7 @@
 {
-    "opendtu adapter settings": "opendtu 的适配器设置",
-    "External MQTT-Server IP-Address": "外部 MQTT 服务器 IP 地址",
-    "External MQTT-Server Port": "外部 MQTT 服务器端口",
-    "MQTT-Topic from OpenDTU": "来自 OpenDTU 的 MQTT-主题",
-    "Configure your MQTT connection": "配置您的 MQTT 连接",
+    "Configure your OpenDTU WebUi connection": "配置您的 OpenDTU WebUi 连接",
+    "Scheme": "方案",
     "WebUi Address": "WebUi地址",
     "WebUi Port": "WebUi端口",
-    "Configure your OpenDTU WebUi connection": "配置您的 OpenDTU WebUi 连接",
-    "Scheme": "方案"
+    "WebUi Password": "密码"
 }
