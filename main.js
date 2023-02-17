@@ -45,6 +45,7 @@ class Opendtu extends utils.Adapter {
         this.getDTUData();
 
         schedule.scheduleJob('dayEndJob', '0 0 0 * * *', () => this.dayEndJob());
+        schedule.scheduleJob('rewriteYildTotal', '0 1 0 * * *', () => this.rewriteYildTotal());
         schedule.scheduleJob('getDTUData', '*/10 * * * * *', () => this.getDTUData());
     }
 
@@ -110,13 +111,18 @@ class Opendtu extends utils.Adapter {
         }
 
         try {
+            schedule.cancelJob('rewriteYildTotal');
+        } catch (e) {
+            this.log.error(e);
+        }
+
+        try {
             schedule.cancelJob('getDTUData');
         } catch (e) {
             this.log.error(e);
         }
         callback();
     }
-
 
     startWebsocket() {
         websocketController = new WebsocketController(this);
@@ -286,6 +292,11 @@ class Opendtu extends utils.Adapter {
         for (const id of idsSetToZero) {
             this.setStateAsync(id, 0, true);
         }
+    }
+
+    async rewriteYildTotal() {
+        // Get all StateIDs
+        const allStateIDs = Object.keys(await this.getAdapterObjectsAsync());
 
         // Get all yieldtotal StateIDs to reset for eg. sourceanalytix
         const idsSetToReset = allStateIDs.filter(x => x.endsWith('yieldtotal'));

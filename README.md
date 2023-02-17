@@ -19,8 +19,13 @@ Adapter for the OpenDTU project
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (o0shojo0o) repeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)
+
 ### 0.1.0 (2023-02-17)
-* (Dennis Rathjen) initial release
+
+- (o0shojo0o) initial release
 
 ## License
 MIT License
