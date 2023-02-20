@@ -21,6 +21,7 @@ Adapter for the OpenDTU project
 -->
 ### **WORK IN PROGRESS**
 
+- (o0shojo0o) add DTU datapoint `rssi` and `ip`
 - (o0shojo0o) repeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)
 
 ### 0.1.0 (2023-02-17)

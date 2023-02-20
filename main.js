@@ -9,6 +9,7 @@ const WebsocketController = require('./lib/websocketController').WebsocketContro
 const DataController = require('./lib/dataController').DataController;
 
 let dtuApiURL;
+let dtuNetworkApiURL;
 let powerApiURL;
 let axiosConf;
 let websocketController;
@@ -36,6 +37,7 @@ class Opendtu extends utils.Adapter {
         }
 
         dtuApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/system/status`;
+        dtuNetworkApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/network/status`;
         powerApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/limit/config`;
         axiosConf = { auth: { username: this.config.userName, password: this.config.password } };
 
@@ -168,10 +170,13 @@ class Opendtu extends utils.Adapter {
 
     async getDTUData() {
         try {
-            const dtuData = (await axios.get(dtuApiURL)).data;
-            dtuData.reachable = true;
-            this.messageParse({ dtu: dtuData });
+            const res = await axios.all([axios.get(dtuNetworkApiURL), axios.get(dtuApiURL)]);
 
+            const dtuData = res[0].data;
+            dtuData.uptime = res[1].data.uptime;
+            dtuData.reachable = true;
+
+            this.messageParse({ dtu: dtuData });
         } catch (err) {
             this.messageParse({ dtu: { reachable: false } });
         }
