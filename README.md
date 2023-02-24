@@ -19,8 +19,9 @@ Adapter for the OpenDTU project
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.1 (2023-02-24)
 
+- (o0shojo0o) state rolls corrected
 - (o0shojo0o) add DTU datapoint `rssi` and `ip`
 - (o0shojo0o) repeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)
 

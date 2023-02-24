@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "state rolls corrected\nadd DTU datapoint `rssi` and `ip`\nrepeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)",
+        "de": "zustandsrollen korrigiert\ndTU Datapoint rssi und ip\nwiederholtes schreiben des renditensatzes auf 00:01:00. (für z.b. sourceanalytix)",
+        "ru": "государственные рулоны исправлены\nдобавить DTU datapoint rssi и ip\nповторное написание комплекта до 00:01:00. (необходимо для e.g sourceanalytix)",
+        "pt": "rolos de estado corrigidos\nadicionar DTU datapoint rssi e ip\nescrita repetida do conjunto de rendertotal para 00:01:00. (é necessário, por exemplo, sourceanalytix)",
+        "nl": "staatsrollen gecorrigeerd\ndTU datapoint rssi en ip\nherhaaldelijk geschreven van de opbrengst naar 00:01 uur. (is noodzakelijk voor e.g bronanalytix)",
+        "fr": "rouleaux d'état corrigés\najouter le point de données DTU rssi et ip\nl'écriture répétée du ensemble de rendement à 00:01:00. (est nécessaire pour par exemple sourceanalytix)",
+        "it": "bobine di stato corretto\naggiungere DTU datapoint rssi e ip\nscrittura ripetuta del set di rendimento a 00:01:00. (è necessario per esempio fonteanalytix)",
+        "es": "los rollos estatales corregidos\nañadir DTU datapoint rssi y ip\nrepetida escritura del set de rendimiento a 00:01:00. (es necesario para, por ejemplo, sourceanalytix)",
+        "pl": "walić\ndodanie DTU datapoint rssi i ip\nponowne pisanie listu do 00:01:00. (czy jest potrzebna dla e.g. źródła?)",
+        "uk": "державні рулони виправили\nдодати DTU rssi і ip\nповторне написання інвентарю до 00:01:00. (обов'язково для e.g джерелоналітікс)",
+        "zh-cn": "纠正的国家滚动\n增加工业数据点\n反复写到00:01:00。 (例如源analytix)"
+      },
       "0.1.0": {
         "en": "initial release",
         "de": "erstausstrahlung",
