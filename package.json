@@ -17,7 +17,7 @@
     "url": "https://github.com/o0shojo0o/ioBroker.opendtu.git"
   },
   "engines": {
-    "node": ">= 14"
+    "node": ">= 16"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.7",
