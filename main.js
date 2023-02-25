@@ -16,7 +16,6 @@ let websocketController;
 let dataController;
 const inverterOffline = [];
 const createCache = [];
-const yieldGuardCache = {};
 const statesToSetZero = ['current', 'irradiation', 'power', 'voltage', 'frequency', 'power_dc', 'reactivepower', 'temperature'];
 
 class Opendtu extends utils.Adapter {
@@ -242,7 +241,7 @@ class Opendtu extends utils.Adapter {
             }
 
             if (fullStateID.includes('yield')) {
-                if (await this.yieldGuard(fullStateID, value) == false) {
+                if (Number(value) <= 0) {
                     return;
                 }
             }
@@ -259,19 +258,6 @@ class Opendtu extends utils.Adapter {
 
             await this.setStateChangedAsync(fullStateID, value, true);
         }
-    }
-
-    async yieldGuard(id, val) {
-        if (yieldGuardCache[id] == undefined) {
-            yieldGuardCache[id] = (await this.getStateAsync(id))?.val;
-        }
-
-        if (val > yieldGuardCache[id]) {
-            yieldGuardCache[id] = val;
-            return true;
-        }
-
-        return false;
     }
 
     copyAndCleanStateObj(state) {
