@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "news": {
+      "0.1.2": {
+        "en": "fix yield* values",
+        "de": "werte der ausbeute*",
+        "ru": "исправить доходность* значения",
+        "pt": "fixar valores de rendimento*",
+        "nl": "waarden",
+        "fr": "valeurs de rendement fixe*",
+        "it": "correzione dei valori di rendimento*",
+        "es": "valores de rendimiento fijo*",
+        "pl": "poprawka",
+        "uk": "фіксувати значення врожайності*",
+        "zh-cn": "fix 产量*"
+      },
       "0.1.1": {
         "en": "state rolls corrected\nadd DTU datapoint `rssi` and `ip`\nrepeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)",
         "de": "zustandsrollen korrigiert\ndTU Datapoint rssi und ip\nwiederholtes schreiben des renditensatzes auf 00:01:00. (für z.b. sourceanalytix)",

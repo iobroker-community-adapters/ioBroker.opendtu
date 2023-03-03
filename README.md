@@ -19,7 +19,7 @@ Adapter for the OpenDTU project
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.2 (2023-03-03)
 
 - (o0shojo0o) fix yield* values
 
