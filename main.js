@@ -94,13 +94,17 @@ class Opendtu extends utils.Adapter {
         }
         // Websocket
         try {
-            websocketController.closeConnection();
+            if (websocketController) {
+                websocketController.closeConnection();
+            }
         } catch (e) {
             this.log.error(e);
         }
         // Clear all websocket timers
         try {
-            await websocketController.allTimerClear();
+            if (websocketController) {
+                await websocketController.allTimerClear();
+            }
         } catch (e) {
             this.log.error(e);
         }
@@ -134,7 +138,7 @@ class Opendtu extends utils.Adapter {
         });
 
         wsClient.on('message', (message) => {
-            this.messageParse(message);
+            this.processMessage(message);
         });
 
         wsClient.on('close', async () => {
@@ -143,13 +147,17 @@ class Opendtu extends utils.Adapter {
     }
 
     // @ts-ignore
-    async messageParse(message) {
+    async processMessage(message, isObject) {
         try {
-            message = JSON.parse(message);
+            if (!isObject) {
+                message = JSON.parse(message);
+            }
         }
         catch (err) {
-            // no action..
+            this.log.error(err);
         }
+
+        this.log.debug(JSON.stringify(message));
 
         // Create inverter rootfolder
         if (message.inverters) {
@@ -175,9 +183,9 @@ class Opendtu extends utils.Adapter {
             dtuData.uptime = res[1].data.uptime;
             dtuData.reachable = true;
 
-            this.messageParse({ dtu: dtuData });
+            this.processMessage({ dtu: dtuData }, true);
         } catch (err) {
-            this.messageParse({ dtu: { reachable: false } });
+            this.processMessage({ dtu: { reachable: false } }, true);
         }
     }
 
