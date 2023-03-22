@@ -157,8 +157,6 @@ class Opendtu extends utils.Adapter {
             this.log.error(err);
         }
 
-        this.log.debug(JSON.stringify(message));
-
         // Create inverter rootfolder
         if (message.inverters) {
             dataController.processInverterData(message.inverters);
@@ -185,6 +183,7 @@ class Opendtu extends utils.Adapter {
 
             this.processMessage({ dtu: dtuData }, true);
         } catch (err) {
+            this.log.debug(`getDTUData axios error: ${err}`);
             this.processMessage({ dtu: { reachable: false } }, true);
         }
     }
@@ -194,7 +193,7 @@ class Opendtu extends utils.Adapter {
             const payload = `data=${JSON.stringify({ serial, limit_type, limit_value })}`;
             await axios.post(powerApiURL, payload, axiosConf);
         } catch (err) {
-            this.log.warn(err);
+            this.log.warn(`setInverterLimit axios error: ${err}`);
         }
     }
 
@@ -203,7 +202,7 @@ class Opendtu extends utils.Adapter {
             const payload = `data=${JSON.stringify({ serial, power })}`;
             await axios.post(powerApiURL, payload, axiosConf);
         } catch (err) {
-            this.log.warn(err);
+            this.log.warn(`setInverterPower axios error: ${err}`);
         }
     }
 
@@ -212,7 +211,7 @@ class Opendtu extends utils.Adapter {
             const payload = `data=${JSON.stringify({ serial, restart })}`;
             await axios.post(powerApiURL, payload, axiosConf);
         } catch (err) {
-            this.log.warn(err);
+            this.log.warn(`setInverterRestart axios error: ${err}`);
         }
     }
 
