@@ -19,7 +19,7 @@ Adapter for the OpenDTU project
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.3 (2023-03-23)
 
 - (o0shojo0o) fix power control `on`, `off`, `restart`
 - (o0shojo0o) support for password protected liveview

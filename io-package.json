@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "news": {
+      "0.1.3": {
+        "en": "fix power control `on`, `off`, `restart`\nsupport for password protected liveview\nother small fixes",
+        "de": "festlegen der leistungssteuerung an, aus, neustart\nunterstützung für passwortgeschützte liveview\nandere kleine fixes",
+        "ru": "зафиксируйте контроль мощности, выключите, перезапустите\nподдержка паролей защищено liveview\nдругие небольшие исправления",
+        "pt": "corrigir o controle de energia em, off, reiniciar\nsuporte para visualização ao vivo protegida por senha\noutras pequenas correções",
+        "nl": "controle aan, uit, herstart\nquality over quantity (qoq) releases vertaling:\nandere kleine fixes",
+        "fr": "régler le contrôle de puissance sur, off, restart\nsupport pour mot de passe protégé\nautres petites corrections",
+        "it": "fissare il controllo di potenza su, off, riavviare\nsupporto per password protetta liveview\naltre piccole correzioni",
+        "es": "fijar el control de potencia en, apagado, reiniciar\nsoporte para contraseña protegida\notras pequeñas correcciones",
+        "pl": "po naprawie kontroli mocy, odwraca się, restartuje\nwsparcie dla hasła chronionego liveview\ninne drobne rozwiązanie",
+        "uk": "фіксувати контроль потужності, вимкнено, перезавантажити\nпідтримка захищеного пароля\nінші маленькі кріплення",
+        "zh-cn": "f 剩余电力控制\n支持受保护的密码\n其他小型配件"
+      },
       "0.1.2": {
         "en": "fix yield* values",
         "de": "werte der ausbeute*",
