@@ -10,8 +10,8 @@ const DataController = require('./lib/dataController').DataController;
 
 let dtuApiURL;
 let dtuNetworkApiURL;
+let limitApiURL;
 let powerApiURL;
-let axiosConf;
 let websocketController;
 let dataController;
 const inverterOffline = [];
@@ -37,8 +37,9 @@ class Opendtu extends utils.Adapter {
 
         dtuApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/system/status`;
         dtuNetworkApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/network/status`;
-        powerApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/limit/config`;
-        axiosConf = { auth: { username: this.config.userName, password: this.config.password } };
+        limitApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/limit/config`;
+        powerApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/power/config`;
+        axios.defaults.auth = { username: this.config.userName, password: this.config.password };
 
         dataController = new DataController(this, createCache, inverterOffline);
 
@@ -191,7 +192,7 @@ class Opendtu extends utils.Adapter {
     async setInverterLimit(serial, limit_value, limit_type) {
         try {
             const payload = `data=${JSON.stringify({ serial, limit_type, limit_value })}`;
-            await axios.post(powerApiURL, payload, axiosConf);
+            await axios.post(limitApiURL, payload);
         } catch (err) {
             this.log.warn(`setInverterLimit axios error: ${err}`);
         }
@@ -200,7 +201,7 @@ class Opendtu extends utils.Adapter {
     async setInverterPower(serial, power) {
         try {
             const payload = `data=${JSON.stringify({ serial, power })}`;
-            await axios.post(powerApiURL, payload, axiosConf);
+            await axios.post(powerApiURL, payload);
         } catch (err) {
             this.log.warn(`setInverterPower axios error: ${err}`);
         }
@@ -209,7 +210,7 @@ class Opendtu extends utils.Adapter {
     async setInverterRestart(serial, restart) {
         try {
             const payload = `data=${JSON.stringify({ serial, restart })}`;
-            await axios.post(powerApiURL, payload, axiosConf);
+            await axios.post(powerApiURL, payload);
         } catch (err) {
             this.log.warn(`setInverterRestart axios error: ${err}`);
         }
