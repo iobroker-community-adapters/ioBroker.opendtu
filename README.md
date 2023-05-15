@@ -21,7 +21,7 @@ In addition, the following data points can be used via the adapter to the power 
 - opendtu.0.xxxxxx.power_control.limit_persistent_absolute
 - opendtu.0.xxxxxx.power_control.limit_persistent_relative  
 ```
-For more information on the data points, please click [here](https://github.com/tbnobody/OpenDTU/blob/master/docs/MQTT_Topics.md#inverter-limit-specific-topics).
+For more information on the data points, see their description or click [here](https://github.com/tbnobody/OpenDTU/blob/master/docs/MQTT_Topics.md#inverter-limit-specific-topics).
 
 ## Configuration
 
