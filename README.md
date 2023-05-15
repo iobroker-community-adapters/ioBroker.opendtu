@@ -27,7 +27,7 @@ For more information on the data points, see their description or click [here](h
 
 1. Create a new instance of the adapter
 2. Fill in Scheme *(default http)*, WebUi-Address and WebUi-port *(default 80)* of the [OpenDTU](https://github.com/tbnobody/OpenDTU) hardware 
-3. Set the WebUi-Passwort **(this is mandatory, if it is incorrect no limit can be set!)**
+3. Set the WebUi-Password **(this is mandatory, if it is incorrect no limit can be set!)**
 4. Save the settings
 
 ## Changelog
