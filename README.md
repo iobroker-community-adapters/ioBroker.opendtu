@@ -12,13 +12,33 @@
 
 ## opendtu adapter for ioBroker
 
-Adapter for the OpenDTU project
+This adapter makes the data points from the project [OpenDTU](https://github.com/tbnobody/OpenDTU) available in real time.  
+In addition, the following data points can be used via the adapter to the power limitation of the OpenDTU can be controlled.
+
+```
+- opendtu.0.xxxxxx.power_control.limit_nonpersistent_absolute
+- opendtu.0.xxxxxx.power_control.limit_nonpersistent_relative
+- opendtu.0.xxxxxx.power_control.limit_persistent_absolute
+- opendtu.0.xxxxxx.power_control.limit_persistent_relative  
+```
+For more information on the data points, please click [here](https://github.com/tbnobody/OpenDTU/blob/master/docs/MQTT_Topics.md#inverter-limit-specific-topics).
+
+## Configuration
+
+1. Create a new instance of the adapter
+2. Fill in Scheme *(default http)*, WebUi-Address and WebUi-port *(default 80)* of the [OpenDTU](https://github.com/tbnobody/OpenDTU) hardware 
+3. Set the WebUi-Passwort **(this is mandatory, if it is incorrect no limit can be set!)**
+4. Save the settings
 
 ## Changelog
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (o0shojo0o) code optimizations 
+
 ### 0.1.4 (2023-03-23)
 
 - (o0shojo0o) fix power control `on`, `off`, `restart`

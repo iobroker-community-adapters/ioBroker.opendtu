@@ -30,35 +30,51 @@ class Opendtu extends utils.Adapter {
     }
 
     async onReady() {
-        if (this.config.webUIServer == '') {
+
+        // Check if webUIServer is configured, log warning message and return if not
+        if (!this.config.webUIServer) {
             this.log.warn('Please configure the Websoket connection!');
             return;
         }
 
-        dtuApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/system/status`;
-        dtuNetworkApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/network/status`;
-        limitApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/limit/config`;
-        powerApiURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api/power/config`;
+        // Construct the base URL for API calls using configuration variables
+        const baseURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api`;
+
+        // Construct URLs for various API endpoints using the base URL
+        dtuApiURL = `${baseURL}/system/status`;
+        dtuNetworkApiURL = `${baseURL}/network/status`;
+        limitApiURL = `${baseURL}/limit/config`;
+        powerApiURL = `${baseURL}/power/config`;
+
+        // Set default authentication credentials for Axios requests
         axios.defaults.auth = { username: this.config.userName, password: this.config.password };
 
+        // Instantiate a new DataController object with necessary arguments
         dataController = new DataController(this, createCache, inverterOffline);
 
+        // Start the websocket connection and initiate data retrieval from DTU
         this.startWebsocket();
         this.getDTUData();
 
-        schedule.scheduleJob('dayEndJob', '0 0 0 * * *', () => this.dayEndJob());
+        // Schedule jobs to run at specified intervals using Cron-style syntax
+        schedule.scheduleJob('dayEndJob', '50 59 23 * * *', () => this.dayEndJob());
         schedule.scheduleJob('rewriteYildTotal', '0 1 0 * * *', () => this.rewriteYildTotal());
         schedule.scheduleJob('getDTUData', '*/10 * * * * *', () => this.getDTUData());
     }
 
+    // This function gets called whenever there's a state change in the system.
     async onStateChange(id, state) {
+        // Check that the new state is not an acknowledgement of a previous command.
         if (state && state.ack == false) {
-            console.log(id);
-            const serial = id.split('.')[2];
-            const stateID = id.split('.')[4];
+            // Split the ID into parts to get the serial number and state identifier.
+            const idParts = id.split('.');
+            const serial = idParts[2];
+            const stateID = idParts[4];
 
+            // Use a switch statement to handle different types of state changes.
             switch (stateID) {
                 case 'limit_persistent_relative':
+                    // Set the inverter limit based on the new value and a fixed parameter.
                     this.setInverterLimit(serial, state.val, 257);
                     break;
                 case 'limit_persistent_absolute':
@@ -71,18 +87,20 @@ class Opendtu extends utils.Adapter {
                     this.setInverterLimit(serial, state.val, 0);
                     break;
                 case 'power_on':
-                    this.setInverterPower(serial, state.val);
-                    break;
                 case 'power_off':
+                    // Switch the inverter power status based on the new value.
                     this.setInverterPower(serial, state.val);
                     break;
                 case 'restart':
+                    // Restart the inverter based on the new value.
                     this.setInverterRestart(serial, state.val);
                     break;
                 default:
+                    // If the state change isn't recognized, do nothing.
                     return;
             }
 
+            // Update the state with the new values and acknowledge the change.
             this.setStateAsync(id, state, true);
         }
     }
