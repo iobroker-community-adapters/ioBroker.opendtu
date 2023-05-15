@@ -35,9 +35,9 @@ For more information on the data points, please click [here](https://github.com/
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.5 (2023-05-15)
 
-- (o0shojo0o) code optimizations 
+- (o0shojo0o) code optimizations
 
 ### 0.1.4 (2023-03-23)
 

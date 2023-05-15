@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "news": {
+      "0.1.5": {
+        "en": "code optimizations",
+        "de": "codeoptimierungen",
+        "ru": "оптимизация кода",
+        "pt": "otimizações de código",
+        "nl": "vertaling:",
+        "fr": "optimisation des codes",
+        "it": "ottimizzazioni del codice",
+        "es": "optimizaciones de código",
+        "pl": "optymalizacja kodu",
+        "uk": "оптимізація коду",
+        "zh-cn": "准则的优化"
+      },
       "0.1.4": {
         "en": "fix power control `on`, `off`, `restart`\nsupport for password protected liveview\nother small fixes",
         "de": "festlegen der leistungssteuerung an, aus, neustart\nunterstützung für passwortgeschützte liveview\nandere kleine fixes",
