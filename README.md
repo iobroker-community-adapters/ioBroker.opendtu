@@ -12,7 +12,7 @@
 
 ## opendtu adapter for ioBroker
 
-This adapter makes the data points from the project [OpenDTU](https://github.com/tbnobody/OpenDTU) available in real time.  
+This adapter get the data points from the project [OpenDTU](https://github.com/tbnobody/OpenDTU) available in real time.  
 In addition, the following data points can be used via the adapter to the power limitation of the OpenDTU can be controlled.
 
 ```
