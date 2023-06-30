@@ -32,9 +32,19 @@ For more information on the data points, see their description or click [here](h
 
 ## Changelog
 <!--
+ https://github.com/AlCalzone/release-script#usage
+    npm run release major -- -p iobroker license --all 0.9.8 -> 1.0.0
+    npm run release minor -- -p iobroker license --all 0.9.8 -> 0.10.0
+    npm run release patch -- -p iobroker license --all 0.9.8 -> 0.9.9
+    npm run release prerelease beta -- -p iobroker license --all v0.2.1 -> v0.2.2-beta.0
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- (o0shojo0o) fix power control (power_off)
+
 ### 0.1.5 (2023-05-15)
 
 - (o0shojo0o) code optimizations
