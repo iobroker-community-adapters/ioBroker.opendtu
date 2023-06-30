@@ -40,6 +40,10 @@ For more information on the data points, see their description or click [here](h
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.1.7 (2023-06-30)
+
+- (o0shojo0o) workaround for incorrectly used button data point
+
 ### 0.1.6 (2023-06-30)
 
 - (o0shojo0o) fix power control (power_off)

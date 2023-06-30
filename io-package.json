@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "news": {
+      "0.1.7": {
+        "en": "workaround for incorrectly used button data point",
+        "de": "workaround für falsch genutzte tastendatenpunkt",
+        "ru": "workaround для неправильно использованного пункта данных кнопки",
+        "pt": "solução alternativa para o ponto de dados do botão incorretamente usado",
+        "nl": "werken voor onjuist gebruikt knopgegevens",
+        "fr": "workaround for incorrectly used button data point",
+        "it": "workaround per il punto di dati del pulsante non corretto",
+        "es": "workaround for incorrectly used botón data point",
+        "pl": "wokół pracy nieprawidłowo używany punkt danych przycisków",
+        "uk": "робота для неправильного використання точки даних",
+        "zh-cn": "使用不当但顿数据点的工作"
+      },
       "0.1.6": {
         "en": "fix power control (power_off)",
         "de": "festnetzsteuerung (power_off)",
@@ -80,19 +93,6 @@
         "pl": "pierwsze wydanie",
         "uk": "початковий реліз",
         "zh-cn": "初步释放"
-      },
-      "0.0.1": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "zh-cn": "首次出版",
-        "uk": "початковий випуск"
       }
     },
     "title": "OpenDTU",

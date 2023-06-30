@@ -88,15 +88,21 @@ class Opendtu extends utils.Adapter {
                     break;
                 case 'power_on':
                     // Switch the inverter power status based on the new value.
-                    this.setInverterPower(serial, state.val);
+                    if (state.val == true) {
+                        this.setInverterPower(serial, true);
+                    }
                     break;
                 case 'power_off':
                     // Switch the inverter power status based on the new value.
-                    this.setInverterPower(serial, !state.val);
+                    if (state.val == true) {
+                        this.setInverterPower(serial, false);
+                    }
                     break;
                 case 'restart':
                     // Restart the inverter based on the new value.
-                    this.setInverterRestart(serial, state.val);
+                    if (state.val == true) {
+                        this.setInverterRestart(serial, true);
+                    }
                     break;
                 default:
                     // If the state change isn't recognized, do nothing.
