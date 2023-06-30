@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "news": {
+      "0.1.6": {
+        "en": "fix power control (power_off)",
+        "de": "festnetzsteuerung (power_off)",
+        "ru": "управление властью (power_off)",
+        "pt": "corrigir o controle de energia (power_off)",
+        "nl": "vertaling:",
+        "fr": "commande de puissance (power_off)",
+        "it": "correzione del controllo di potenza (power_off)",
+        "es": "fijar control de potencia (power_off)",
+        "pl": "regulacja kontroli mocy (pol.)",
+        "uk": "фіксувати контроль потужності (power_off)",
+        "zh-cn": "fix 权力控制(力量/力量)"
+      },
       "0.1.5": {
         "en": "code optimizations",
         "de": "codeoptimierungen",
