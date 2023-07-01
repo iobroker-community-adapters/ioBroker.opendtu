@@ -95,7 +95,6 @@
         "zh-cn": "初步释放"
       }
     },
-    "title": "OpenDTU",
     "titleLang": {
       "en": "OpenDTU",
       "de": "OpenDTU",
@@ -106,8 +105,8 @@
       "it": "OpenDTU",
       "es": "OpenDTU",
       "pl": "OpenDTU",
-      "zh-cn": "OpenDTU",
-      "uk": "OpenDTU"
+      "uk": "OpenDTU",
+      "zh-cn": "OpenDTU"
     },
     "desc": {
       "en": "Adapter for the OpenDTU project",
