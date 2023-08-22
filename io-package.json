@@ -146,7 +146,7 @@
       "tab": "materialize"
     },
     "adminTab": {
-      "singleton": true,
+      "singleton": false,
       "name": {
         "en": "OpenDTU",
         "de": "OpenDTU",

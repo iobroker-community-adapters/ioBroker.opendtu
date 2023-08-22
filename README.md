@@ -40,6 +40,11 @@ For more information on the data points, see their description or click [here](h
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- (o0shojo0o) allow multiple AdminTabs for multiple instances ([#88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88))
+
 ### 0.1.7 (2023-06-30)
 
 - (o0shojo0o) workaround for incorrectly used button data point
