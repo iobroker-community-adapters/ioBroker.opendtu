@@ -252,18 +252,23 @@ class Opendtu extends utils.Adapter {
 
         const fullStateID = `${stateID}.${state.id}`.replace('%count%', count);
 
+        let options = undefined;
+
+        if (this.config.protectNames) {
+            options = {
+                preserve: {
+                    common: ['name']
+                }
+            };
+        }
+
         if (!createCache.includes(fullStateID)) {
             await this.extendObjectAsync(fullStateID,
                 {
                     type: 'state',
                     common: this.copyAndCleanStateObj(state),
                     native: {},
-                },
-                {
-                    preserve: {
-                        common: ['name']
-                    }
-                });
+                }, options);
 
             // Subscribe to writable states
             if (state.write == true) {

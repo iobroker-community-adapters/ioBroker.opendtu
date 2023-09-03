@@ -1,191 +1,192 @@
 {
-  "common": {
-    "name": "opendtu",
-    "version": "0.1.7",
-    "news": {
-      "0.1.7": {
-        "en": "workaround for incorrectly used button data point",
-        "de": "workaround für falsch genutzte tastendatenpunkt",
-        "ru": "workaround для неправильно использованного пункта данных кнопки",
-        "pt": "solução alternativa para o ponto de dados do botão incorretamente usado",
-        "nl": "werken voor onjuist gebruikt knopgegevens",
-        "fr": "workaround for incorrectly used button data point",
-        "it": "workaround per il punto di dati del pulsante non corretto",
-        "es": "workaround for incorrectly used botón data point",
-        "pl": "wokół pracy nieprawidłowo używany punkt danych przycisków",
-        "uk": "робота для неправильного використання точки даних",
-        "zh-cn": "使用不当但顿数据点的工作"
-      },
-      "0.1.6": {
-        "en": "fix power control (power_off)",
-        "de": "festnetzsteuerung (power_off)",
-        "ru": "управление властью (power_off)",
-        "pt": "corrigir o controle de energia (power_off)",
-        "nl": "vertaling:",
-        "fr": "commande de puissance (power_off)",
-        "it": "correzione del controllo di potenza (power_off)",
-        "es": "fijar control de potencia (power_off)",
-        "pl": "regulacja kontroli mocy (pol.)",
-        "uk": "фіксувати контроль потужності (power_off)",
-        "zh-cn": "fix 权力控制(力量/力量)"
-      },
-      "0.1.5": {
-        "en": "code optimizations",
-        "de": "codeoptimierungen",
-        "ru": "оптимизация кода",
-        "pt": "otimizações de código",
-        "nl": "vertaling:",
-        "fr": "optimisation des codes",
-        "it": "ottimizzazioni del codice",
-        "es": "optimizaciones de código",
-        "pl": "optymalizacja kodu",
-        "uk": "оптимізація коду",
-        "zh-cn": "准则的优化"
-      },
-      "0.1.4": {
-        "en": "fix power control `on`, `off`, `restart`\nsupport for password protected liveview\nother small fixes",
-        "de": "festlegen der leistungssteuerung an, aus, neustart\nunterstützung für passwortgeschützte liveview\nandere kleine fixes",
-        "ru": "зафиксируйте контроль мощности, выключите, перезапустите\nподдержка паролей защищено liveview\nдругие небольшие исправления",
-        "pt": "corrigir o controle de energia em, off, reiniciar\nsuporte para visualização ao vivo protegida por senha\noutras pequenas correções",
-        "nl": "controle aan, uit, herstart\nquality over quantity (qoq) releases vertaling:\nandere kleine fixes",
-        "fr": "régler le contrôle de puissance sur, off, restart\nsupport pour mot de passe protégé\nautres petites corrections",
-        "it": "fissare il controllo di potenza su, off, riavviare\nsupporto per password protetta liveview\naltre piccole correzioni",
-        "es": "fijar el control de potencia en, apagado, reiniciar\nsoporte para contraseña protegida\notras pequeñas correcciones",
-        "pl": "po naprawie kontroli mocy, odwraca się, restartuje\nwsparcie dla hasła chronionego liveview\ninne drobne rozwiązanie",
-        "uk": "фіксувати контроль потужності, вимкнено, перезавантажити\nпідтримка захищеного пароля\nінші маленькі кріплення",
-        "zh-cn": "f 剩余电力控制\n支持受保护的密码\n其他小型配件"
-      },
-      "0.1.2": {
-        "en": "fix yield* values",
-        "de": "werte der ausbeute*",
-        "ru": "исправить доходность* значения",
-        "pt": "fixar valores de rendimento*",
-        "nl": "waarden",
-        "fr": "valeurs de rendement fixe*",
-        "it": "correzione dei valori di rendimento*",
-        "es": "valores de rendimiento fijo*",
-        "pl": "poprawka",
-        "uk": "фіксувати значення врожайності*",
-        "zh-cn": "fix 产量*"
-      },
-      "0.1.1": {
-        "en": "state rolls corrected\nadd DTU datapoint `rssi` and `ip`\nrepeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)",
-        "de": "zustandsrollen korrigiert\ndTU Datapoint rssi und ip\nwiederholtes schreiben des renditensatzes auf 00:01:00. (für z.b. sourceanalytix)",
-        "ru": "государственные рулоны исправлены\nдобавить DTU datapoint rssi и ip\nповторное написание комплекта до 00:01:00. (необходимо для e.g sourceanalytix)",
-        "pt": "rolos de estado corrigidos\nadicionar DTU datapoint rssi e ip\nescrita repetida do conjunto de rendertotal para 00:01:00. (é necessário, por exemplo, sourceanalytix)",
-        "nl": "staatsrollen gecorrigeerd\ndTU datapoint rssi en ip\nherhaaldelijk geschreven van de opbrengst naar 00:01 uur. (is noodzakelijk voor e.g bronanalytix)",
-        "fr": "rouleaux d'état corrigés\najouter le point de données DTU rssi et ip\nl'écriture répétée du ensemble de rendement à 00:01:00. (est nécessaire pour par exemple sourceanalytix)",
-        "it": "bobine di stato corretto\naggiungere DTU datapoint rssi e ip\nscrittura ripetuta del set di rendimento a 00:01:00. (è necessario per esempio fonteanalytix)",
-        "es": "los rollos estatales corregidos\nañadir DTU datapoint rssi y ip\nrepetida escritura del set de rendimiento a 00:01:00. (es necesario para, por ejemplo, sourceanalytix)",
-        "pl": "walić\ndodanie DTU datapoint rssi i ip\nponowne pisanie listu do 00:01:00. (czy jest potrzebna dla e.g. źródła?)",
-        "uk": "державні рулони виправили\nдодати DTU rssi і ip\nповторне написання інвентарю до 00:01:00. (обов'язково для e.g джерелоналітікс)",
-        "zh-cn": "纠正的国家滚动\n增加工业数据点\n反复写到00:01:00。 (例如源analytix)"
-      },
-      "0.1.0": {
-        "en": "initial release",
-        "de": "erstausstrahlung",
-        "ru": "начальный выпуск",
-        "pt": "lançamento inicial",
-        "nl": "niet",
-        "fr": "initial release",
-        "it": "rilascio iniziale",
-        "es": "liberación inicial",
-        "pl": "pierwsze wydanie",
-        "uk": "початковий реліз",
-        "zh-cn": "初步释放"
-      }
+    "common": {
+        "name": "opendtu",
+        "version": "0.1.7",
+        "news": {
+            "0.1.7": {
+                "en": "workaround for incorrectly used button data point",
+                "de": "workaround für falsch genutzte tastendatenpunkt",
+                "ru": "workaround для неправильно использованного пункта данных кнопки",
+                "pt": "solução alternativa para o ponto de dados do botão incorretamente usado",
+                "nl": "werken voor onjuist gebruikt knopgegevens",
+                "fr": "workaround for incorrectly used button data point",
+                "it": "workaround per il punto di dati del pulsante non corretto",
+                "es": "workaround for incorrectly used botón data point",
+                "pl": "wokół pracy nieprawidłowo używany punkt danych przycisków",
+                "uk": "робота для неправильного використання точки даних",
+                "zh-cn": "使用不当但顿数据点的工作"
+            },
+            "0.1.6": {
+                "en": "fix power control (power_off)",
+                "de": "festnetzsteuerung (power_off)",
+                "ru": "управление властью (power_off)",
+                "pt": "corrigir o controle de energia (power_off)",
+                "nl": "vertaling:",
+                "fr": "commande de puissance (power_off)",
+                "it": "correzione del controllo di potenza (power_off)",
+                "es": "fijar control de potencia (power_off)",
+                "pl": "regulacja kontroli mocy (pol.)",
+                "uk": "фіксувати контроль потужності (power_off)",
+                "zh-cn": "fix 权力控制(力量/力量)"
+            },
+            "0.1.5": {
+                "en": "code optimizations",
+                "de": "codeoptimierungen",
+                "ru": "оптимизация кода",
+                "pt": "otimizações de código",
+                "nl": "vertaling:",
+                "fr": "optimisation des codes",
+                "it": "ottimizzazioni del codice",
+                "es": "optimizaciones de código",
+                "pl": "optymalizacja kodu",
+                "uk": "оптимізація коду",
+                "zh-cn": "准则的优化"
+            },
+            "0.1.4": {
+                "en": "fix power control `on`, `off`, `restart`\nsupport for password protected liveview\nother small fixes",
+                "de": "festlegen der leistungssteuerung an, aus, neustart\nunterstützung für passwortgeschützte liveview\nandere kleine fixes",
+                "ru": "зафиксируйте контроль мощности, выключите, перезапустите\nподдержка паролей защищено liveview\nдругие небольшие исправления",
+                "pt": "corrigir o controle de energia em, off, reiniciar\nsuporte para visualização ao vivo protegida por senha\noutras pequenas correções",
+                "nl": "controle aan, uit, herstart\nquality over quantity (qoq) releases vertaling:\nandere kleine fixes",
+                "fr": "régler le contrôle de puissance sur, off, restart\nsupport pour mot de passe protégé\nautres petites corrections",
+                "it": "fissare il controllo di potenza su, off, riavviare\nsupporto per password protetta liveview\naltre piccole correzioni",
+                "es": "fijar el control de potencia en, apagado, reiniciar\nsoporte para contraseña protegida\notras pequeñas correcciones",
+                "pl": "po naprawie kontroli mocy, odwraca się, restartuje\nwsparcie dla hasła chronionego liveview\ninne drobne rozwiązanie",
+                "uk": "фіксувати контроль потужності, вимкнено, перезавантажити\nпідтримка захищеного пароля\nінші маленькі кріплення",
+                "zh-cn": "f 剩余电力控制\n支持受保护的密码\n其他小型配件"
+            },
+            "0.1.2": {
+                "en": "fix yield* values",
+                "de": "werte der ausbeute*",
+                "ru": "исправить доходность* значения",
+                "pt": "fixar valores de rendimento*",
+                "nl": "waarden",
+                "fr": "valeurs de rendement fixe*",
+                "it": "correzione dei valori di rendimento*",
+                "es": "valores de rendimiento fijo*",
+                "pl": "poprawka",
+                "uk": "фіксувати значення врожайності*",
+                "zh-cn": "fix 产量*"
+            },
+            "0.1.1": {
+                "en": "state rolls corrected\nadd DTU datapoint `rssi` and `ip`\nrepeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)",
+                "de": "zustandsrollen korrigiert\ndTU Datapoint rssi und ip\nwiederholtes schreiben des renditensatzes auf 00:01:00. (für z.b. sourceanalytix)",
+                "ru": "государственные рулоны исправлены\nдобавить DTU datapoint rssi и ip\nповторное написание комплекта до 00:01:00. (необходимо для e.g sourceanalytix)",
+                "pt": "rolos de estado corrigidos\nadicionar DTU datapoint rssi e ip\nescrita repetida do conjunto de rendertotal para 00:01:00. (é necessário, por exemplo, sourceanalytix)",
+                "nl": "staatsrollen gecorrigeerd\ndTU datapoint rssi en ip\nherhaaldelijk geschreven van de opbrengst naar 00:01 uur. (is noodzakelijk voor e.g bronanalytix)",
+                "fr": "rouleaux d'état corrigés\najouter le point de données DTU rssi et ip\nl'écriture répétée du ensemble de rendement à 00:01:00. (est nécessaire pour par exemple sourceanalytix)",
+                "it": "bobine di stato corretto\naggiungere DTU datapoint rssi e ip\nscrittura ripetuta del set di rendimento a 00:01:00. (è necessario per esempio fonteanalytix)",
+                "es": "los rollos estatales corregidos\nañadir DTU datapoint rssi y ip\nrepetida escritura del set de rendimiento a 00:01:00. (es necesario para, por ejemplo, sourceanalytix)",
+                "pl": "walić\ndodanie DTU datapoint rssi i ip\nponowne pisanie listu do 00:01:00. (czy jest potrzebna dla e.g. źródła?)",
+                "uk": "державні рулони виправили\nдодати DTU rssi і ip\nповторне написання інвентарю до 00:01:00. (обов'язково для e.g джерелоналітікс)",
+                "zh-cn": "纠正的国家滚动\n增加工业数据点\n反复写到00:01:00。 (例如源analytix)"
+            },
+            "0.1.0": {
+                "en": "initial release",
+                "de": "erstausstrahlung",
+                "ru": "начальный выпуск",
+                "pt": "lançamento inicial",
+                "nl": "niet",
+                "fr": "initial release",
+                "it": "rilascio iniziale",
+                "es": "liberación inicial",
+                "pl": "pierwsze wydanie",
+                "uk": "початковий реліз",
+                "zh-cn": "初步释放"
+            }
+        },
+        "titleLang": {
+            "en": "OpenDTU",
+            "de": "OpenDTU",
+            "ru": "OpenDTU",
+            "pt": "OpenDTU",
+            "nl": "OpenDTU",
+            "fr": "OpenDTU",
+            "it": "OpenDTU",
+            "es": "OpenDTU",
+            "pl": "OpenDTU",
+            "uk": "OpenDTU",
+            "zh-cn": "OpenDTU"
+        },
+        "desc": {
+            "en": "Adapter for the OpenDTU project",
+            "de": "Adapter for the OpenDTU project",
+            "ru": "Adapter for the OpenDTU project",
+            "pt": "Adapter for the OpenDTU project",
+            "nl": "Adapter for the OpenDTU project",
+            "fr": "Adapter for the OpenDTU project",
+            "it": "Adapter for the OpenDTU project",
+            "es": "Adapter for the OpenDTU project",
+            "pl": "Adapter for the OpenDTU project",
+            "zh-cn": "Adapter for the OpenDTU project",
+            "uk": "Адаптер для проекту OpenDTU"
+        },
+        "authors": [
+            "Dennis Rathjen <dennis.rathjen@outlook.de>"
+        ],
+        "keywords": [
+            "OpenDTU",
+            "Solar"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "opendtu.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/o0shojo0o/ioBroker.opendtu/main/admin/opendtu.png",
+        "readme": "https://github.com/o0shojo0o/ioBroker.opendtu/blob/main/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "energy",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "push",
+        "adminUI": {
+            "config": "json",
+            "tab": "materialize"
+        },
+        "adminTab": {
+            "singleton": false,
+            "name": {
+                "en": "OpenDTU",
+                "de": "OpenDTU",
+                "ru": "OpenDTU",
+                "pt": "OpenDTU",
+                "nl": "OpenDTU",
+                "fr": "OpenDTU",
+                "it": "OpenDTU",
+                "es": "OpenDTU",
+                "pl": "OpenDTU",
+                "zh-cn": "OpenDTU"
+            },
+            "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
+            "fa-icon": "info"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=3.3.22"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=5.1.13"
+            }
+        ]
     },
-    "titleLang": {
-      "en": "OpenDTU",
-      "de": "OpenDTU",
-      "ru": "OpenDTU",
-      "pt": "OpenDTU",
-      "nl": "OpenDTU",
-      "fr": "OpenDTU",
-      "it": "OpenDTU",
-      "es": "OpenDTU",
-      "pl": "OpenDTU",
-      "uk": "OpenDTU",
-      "zh-cn": "OpenDTU"
+    "native": {
+        "webUIScheme": "http",
+        "webUIServer": "",
+        "webUIPort": 80,
+        "userName": "admin",
+        "password": "",
+        "protectNames": false
     },
-    "desc": {
-      "en": "Adapter for the OpenDTU project",
-      "de": "Adapter for the OpenDTU project",
-      "ru": "Adapter for the OpenDTU project",
-      "pt": "Adapter for the OpenDTU project",
-      "nl": "Adapter for the OpenDTU project",
-      "fr": "Adapter for the OpenDTU project",
-      "it": "Adapter for the OpenDTU project",
-      "es": "Adapter for the OpenDTU project",
-      "pl": "Adapter for the OpenDTU project",
-      "zh-cn": "Adapter for the OpenDTU project",
-      "uk": "Адаптер для проекту OpenDTU"
-    },
-    "authors": [
-      "Dennis Rathjen <dennis.rathjen@outlook.de>"
+    "protectedNative": [
+        "password"
     ],
-    "keywords": [
-      "OpenDTU",
-      "Solar"
+    "encryptedNative": [
+        "password"
     ],
-    "license": "MIT",
-    "platform": "Javascript/Node.js",
-    "main": "main.js",
-    "icon": "opendtu.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/o0shojo0o/ioBroker.opendtu/main/admin/opendtu.png",
-    "readme": "https://github.com/o0shojo0o/ioBroker.opendtu/blob/main/README.md",
-    "loglevel": "info",
-    "mode": "daemon",
-    "type": "energy",
-    "compact": true,
-    "connectionType": "local",
-    "dataSource": "push",
-    "adminUI": {
-      "config": "json",
-      "tab": "materialize"
-    },
-    "adminTab": {
-      "singleton": false,
-      "name": {
-        "en": "OpenDTU",
-        "de": "OpenDTU",
-        "ru": "OpenDTU",
-        "pt": "OpenDTU",
-        "nl": "OpenDTU",
-        "fr": "OpenDTU",
-        "it": "OpenDTU",
-        "es": "OpenDTU",
-        "pl": "OpenDTU",
-        "zh-cn": "OpenDTU"
-      },
-      "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
-      "fa-icon": "info"
-    },
-    "dependencies": [
-      {
-        "js-controller": ">=3.3.22"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=5.1.13"
-      }
-    ]
-  },
-  "native": {
-    "webUIScheme": "http",
-    "webUIServer": "",
-    "webUIPort": 80,
-    "userName": "admin",
-    "password": ""
-  },
-  "protectedNative": [
-    "password"
-  ],
-  "encryptedNative": [
-    "password"
-  ],
-  "objects": [],
-  "instanceObjects": []
+    "objects": [],
+    "instanceObjects": []
 }

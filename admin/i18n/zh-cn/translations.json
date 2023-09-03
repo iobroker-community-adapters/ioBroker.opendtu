@@ -3,5 +3,7 @@
     "Scheme": "方案",
     "WebUi Address": "WebUi地址",
     "WebUi Port": "WebUi端口",
-    "WebUi Password": "密码"
+    "WebUi Password": "密码",
+    "Other configurations": "其他配置",
+    "Protect self-set names from being overwritten by the adapter.": "保护自设置名称不被适配器覆盖。"
 }
