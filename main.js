@@ -258,7 +258,8 @@ class Opendtu extends utils.Adapter {
                     type: 'state',
                     common: this.copyAndCleanStateObj(state),
                     native: {},
-                });
+                },
+				{ preserve: { common: ['name'] } } );
 
             // Subscribe to writable states
             if (state.write == true) {
