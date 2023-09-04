@@ -3,5 +3,7 @@
     "Scheme": "Схема",
     "WebUi Address": "Адреса WebUI",
     "WebUi Port": "Порт WebUi",
-    "WebUi Password": "Пароль WebUi"
+    "WebUi Password": "Пароль WebUi",
+    "Other configurations": "Інші конфігурації",
+    "Protect self-set names from being overwritten by the adapter.": "Захистіть самовстановлені імена від перезапису адаптером."
 }

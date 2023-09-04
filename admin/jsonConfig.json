@@ -38,6 +38,17 @@
 			"label": "WebUi Password",
 			"sm": 2,
 			"newLine": true
+		},
+		"otherHeader": {
+			"type": "header",
+			"text": "Other configurations",
+			"size": 2,
+			"newLine": true
+		},
+		"protectNames": {
+			"type": "checkbox",
+			"label": "Protect self-set names from being overwritten by the adapter.",
+			"newLine": true
 		}
 	}
 }

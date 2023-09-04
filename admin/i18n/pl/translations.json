@@ -3,5 +3,7 @@
     "Scheme": "Schemat",
     "WebUi Address": "Adres WebUI",
     "WebUi Port": "Port WebUI",
-    "WebUi Password": "Hasło WebUI"
+    "WebUi Password": "Hasło WebUI",
+    "Other configurations": "Inne konfiguracje",
+    "Protect self-set names from being overwritten by the adapter.": "Chroń samodzielnie ustawione nazwy przed nadpisaniem przez adapter."
 }
