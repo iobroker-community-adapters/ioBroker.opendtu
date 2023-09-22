@@ -57,7 +57,6 @@ class Opendtu extends utils.Adapter {
         this.getDTUData();
 
         // Schedule jobs to run at specified intervals using Cron-style syntax
-        schedule.scheduleJob('dayEndJob', '50 59 23 * * *', () => this.dayEndJob());
         schedule.scheduleJob('rewriteYildTotal', '0 1 0 * * *', () => this.rewriteYildTotal());
         schedule.scheduleJob('getDTUData', '*/10 * * * * *', () => this.getDTUData());
     }
@@ -285,12 +284,6 @@ class Opendtu extends utils.Adapter {
                 value = state.getter(val);
             }
 
-            if (fullStateID.includes('yield')) {
-                if (Number(value) <= 0) {
-                    return;
-                }
-            }
-
             // Are the states allowed to be set or is the inverter offline?
             for (const serial of inverterOffline) {
                 if (fullStateID.includes(serial)) {
@@ -317,17 +310,6 @@ class Opendtu extends utils.Adapter {
             delete iobState[blacklistedKey];
         }
         return iobState;
-    }
-
-    async dayEndJob() {
-        // Get all StateIDs
-        const allStateIDs = Object.keys(await this.getAdapterObjectsAsync());
-
-        // Get all yieldday StateIDs to set zero
-        const idsSetToZero = allStateIDs.filter(x => x.endsWith('yieldday'));
-        for (const id of idsSetToZero) {
-            this.setStateAsync(id, 0, true);
-        }
     }
 
     async rewriteYildTotal() {
