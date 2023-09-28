@@ -4,7 +4,6 @@ const { default: axios } = require('axios');
 // @ts-ignore
 const schedule = require('node-schedule');
 // @ts-ignore
-const stateDefinition = require('./lib/stateDefinition').stateDefinition;
 const WebsocketController = require('./lib/websocketController').WebsocketController;
 const DataController = require('./lib/dataController').DataController;
 
@@ -14,9 +13,6 @@ let limitApiURL;
 let powerApiURL;
 let websocketController;
 let dataController;
-const inverterOffline = [];
-const createCache = [];
-const statesToSetZero = ['current', 'irradiation', 'power', 'voltage', 'frequency', 'power_dc', 'reactivepower', 'temperature'];
 
 class Opendtu extends utils.Adapter {
     constructor(options) {
@@ -50,7 +46,7 @@ class Opendtu extends utils.Adapter {
         axios.defaults.auth = { username: this.config.userName, password: this.config.password };
 
         // Instantiate a new DataController object with necessary arguments
-        dataController = new DataController(this, createCache, inverterOffline);
+        dataController = new DataController(this);
 
         // Start the websocket connection and initiate data retrieval from DTU
         this.startWebsocket();
@@ -242,76 +238,6 @@ class Opendtu extends utils.Adapter {
         }
     }
 
-    async setObjectAndState(stateID, stateName, val, count) {
-
-        const state = stateDefinition[stateName];
-        if (!state) {
-            return;
-        }
-
-        const fullStateID = `${stateID}.${state.id}`.replace('%count%', count);
-
-        let options = undefined;
-
-        if (this.config.protectNames) {
-            options = {
-                preserve: {
-                    common: ['name']
-                }
-            };
-        }
-
-        if (!createCache.includes(fullStateID)) {
-            await this.extendObjectAsync(fullStateID,
-                {
-                    type: 'state',
-                    common: this.copyAndCleanStateObj(state),
-                    native: {},
-                }, options);
-
-            // Subscribe to writable states
-            if (state.write == true) {
-                await this.subscribeStatesAsync(fullStateID);
-            }
-
-            createCache.push(fullStateID);
-        }
-
-        if (val !== undefined) {
-            let value = val;
-
-            if (state.getter) {
-                value = state.getter(val);
-            }
-
-            // Are the states allowed to be set or is the inverter offline?
-            for (const serial of inverterOffline) {
-                if (fullStateID.includes(serial)) {
-                    // @ts-ignore
-                    if (statesToSetZero.includes(fullStateID.split('.').at(-1))) {
-                        return;
-                    }
-                }
-            }
-
-            await this.setStateChangedAsync(fullStateID, value, true);
-        }
-    }
-
-    copyAndCleanStateObj(state) {
-        const iobState = { ...state };
-        const blacklistedKeys = [
-            'id',
-            'setter',
-            'getter',
-            'setattr'
-        ];
-        for (const blacklistedKey of blacklistedKeys) {
-            delete iobState[blacklistedKey];
-        }
-        return iobState;
-    }
-
     async rewriteYildTotal() {
         // Get all StateIDs
         const allStateIDs = Object.keys(await this.getAdapterObjectsAsync());
@@ -324,32 +250,6 @@ class Opendtu extends utils.Adapter {
                 this.setStateAsync(id, currentState.val, true);
             }
         }
-    }
-
-    async invOfflineStatesToZero(serial) {
-
-        if (inverterOffline.includes(serial)) {
-            return;
-        }
-
-        // Get all StateIDs
-        const allStateIDs = Object.keys(await this.getAdapterObjectsAsync());
-
-        // Get all yieldday StateIDs to set zero
-        const idsSetToZero = [];
-        for (const id of allStateIDs.filter(x => x.includes(serial))) {
-            // @ts-ignore
-            if (statesToSetZero.includes(id.split('.').at(-1))) {
-                idsSetToZero.push(id);
-            }
-        }
-
-        // Set IDs to Zero
-        for (const id of idsSetToZero) {
-            this.setStateChangedAsync(id, 0, true);
-        }
-
-        inverterOffline.push(serial);
     }
 
     async allAvailableToFalse() {

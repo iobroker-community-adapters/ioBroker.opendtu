@@ -1,192 +1,193 @@
 {
-  "common": {
-    "name": "opendtu",
-    "version": "0.1.8",
-    "news": {
-      "0.1.8": {
-        "en": "added option `Protect self-set names from being overwritten by the adapter` ([#76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76))\nallow multiple AdminTabs for multiple instances ([#88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88))\nfixed password with special characters ([#35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35))\nfixed incorrect handling of zeroing of `yield*` data points by OpenDTU ([#96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96))\nremove zeroing of `yield*` data points by this adapter ([#96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96))",
-        "de": "`Protect self-set names from being overwritten by the adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nmehrere AdminTabs für mehrere Instanzen #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nfestes Passwort mit Sonderzeichen #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nunrichtige Handhabung des Nullens von Ertrag*-Datenpunkten durch OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nlöschen von Ertrags-*-Datenpunkten durch diesen Adapter #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "ru": "добавлена опция `Protect self-set имена от overwritten by the Adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nразрешить несколько AdminTabs для нескольких экземпляров #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nфиксированный пароль со специальными символами #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nнекорректная обработка нуля доходности* пунктов данных OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nудалить нулевую доходность* точки данных этого адаптера #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "pt": "opção adicionada `Protect auto-ajustar nomes de ser substituído pelo adaptador` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npermitir múltiplos AdminTabs para múltiplas instâncias #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nsenha fixa com caracteres especiais #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nmanuseio incorreto fixo de zero dos pontos de dados do rendimento* pela OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nremover zero de pontos de dados de rendimento* por este adaptador #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "nl": "voegde optie 'Protect zelfverzekerde namen toe van overschreven worden door de adapter' technieken\nquality over Quantity (QoQ) Releases Vertaling:\ngerepareerd wachtwoord met speciale personages £35, htub.com/oshojoo/ioBroker\ngecorrecteerd met nuling of yield - data punten door OpenDTU nr.6\nverwijder de gegevens van de adapter _96:",
-        "fr": "option ajoutée `Protect self-set names from being overwritten by the adapt` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nautoriser plusieurs AdminTabs pour plusieurs instances #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nmot de passe fixe avec caractères spéciaux #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nmanipulation incorrecte fixe des points de données de rendement* par OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nsupprimer zéro des points de données de rendement* par cet adaptateur #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "it": "opzione aggiunta `Proteggere i nomi di auto-set da essere sovrascritti dall'adattatore` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nconsentire più AdminTabs per più istanze #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\npassword fissa con caratteri speciali #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\ngestione errata fissa dei punti di dati di rendimento* da parte di OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nrimuovere lo zero dei dati di rendimento* da questo adattatore #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "es": "añadido opción `Protect self-set names from being overwritten by the adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npermitir múltiples AdminTabs para múltiples instancias #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\ncontraseña fija con caracteres especiales #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nsolucion incorrect handling of ceroing of yield* data points by OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\neliminar cero puntos de datos de rendimiento* por este adaptador #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "pl": "dodał opcję 'Protect', która została napisana przez adapter' #76(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npozwala na wiele instancji #88(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nstałe hasło z specjalnymi znakami #35 (https:/github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nnieprawidłowa obsługa zerowych punktów danych przez OpenDTU #96(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/96)\n( usuwanie zużytych punktów danych poprzez ten adapter #96(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "uk": "додано опцію `Захистити імена з перезапису адаптера #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nможливість використання декількох додатків AdminTabs для декількох екземплярів #[88] (https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nфіксований пароль з особливими героями #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nвиправлено неправильне поводження з нульовим рівнем врожайності* точок даних OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nвидаліть нульовий приріст даних * за допомогою цього адаптера #[96] (https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "zh-cn": "备选案文:“适应者`第[76]号(https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)误用自发名称。\n允许许多 Admin Tabs采取多种行动[88](http://github.com/oshojo0o/ioBroker)。\n具有特殊特点的固定密码(http://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\n固定不正确地处理生产的零散情况* 数据点:开放的DTU #[96](http://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\n(http://github.com/oshojo0o/ioBroker.opendtu/issues/96)"
-      },
-      "0.1.7": {
-        "en": "workaround for incorrectly used button data point",
-        "de": "workaround für falsch genutzte tastendatenpunkt",
-        "ru": "workaround для неправильно использованного пункта данных кнопки",
-        "pt": "solução alternativa para o ponto de dados do botão incorretamente usado",
-        "nl": "werken voor onjuist gebruikt knopgegevens",
-        "fr": "workaround for incorrectly used button data point",
-        "it": "workaround per il punto di dati del pulsante non corretto",
-        "es": "workaround for incorrectly used botón data point",
-        "pl": "wokół pracy nieprawidłowo używany punkt danych przycisków",
-        "uk": "робота для неправильного використання точки даних",
-        "zh-cn": "使用不当但顿数据点的工作"
-      },
-      "0.1.6": {
-        "en": "fix power control (power_off)",
-        "de": "festnetzsteuerung (power_off)",
-        "ru": "управление властью (power_off)",
-        "pt": "corrigir o controle de energia (power_off)",
-        "nl": "vertaling:",
-        "fr": "commande de puissance (power_off)",
-        "it": "correzione del controllo di potenza (power_off)",
-        "es": "fijar control de potencia (power_off)",
-        "pl": "regulacja kontroli mocy (pol.)",
-        "uk": "фіксувати контроль потужності (power_off)",
-        "zh-cn": "fix 权力控制(力量/力量)"
-      },
-      "0.1.5": {
-        "en": "code optimizations",
-        "de": "codeoptimierungen",
-        "ru": "оптимизация кода",
-        "pt": "otimizações de código",
-        "nl": "vertaling:",
-        "fr": "optimisation des codes",
-        "it": "ottimizzazioni del codice",
-        "es": "optimizaciones de código",
-        "pl": "optymalizacja kodu",
-        "uk": "оптимізація коду",
-        "zh-cn": "准则的优化"
-      },
-      "0.1.4": {
-        "en": "fix power control `on`, `off`, `restart`\nsupport for password protected liveview\nother small fixes",
-        "de": "festlegen der leistungssteuerung an, aus, neustart\nunterstützung für passwortgeschützte liveview\nandere kleine fixes",
-        "ru": "зафиксируйте контроль мощности, выключите, перезапустите\nподдержка паролей защищено liveview\nдругие небольшие исправления",
-        "pt": "corrigir o controle de energia em, off, reiniciar\nsuporte para visualização ao vivo protegida por senha\noutras pequenas correções",
-        "nl": "controle aan, uit, herstart\nquality over quantity (qoq) releases vertaling:\nandere kleine fixes",
-        "fr": "régler le contrôle de puissance sur, off, restart\nsupport pour mot de passe protégé\nautres petites corrections",
-        "it": "fissare il controllo di potenza su, off, riavviare\nsupporto per password protetta liveview\naltre piccole correzioni",
-        "es": "fijar el control de potencia en, apagado, reiniciar\nsoporte para contraseña protegida\notras pequeñas correcciones",
-        "pl": "po naprawie kontroli mocy, odwraca się, restartuje\nwsparcie dla hasła chronionego liveview\ninne drobne rozwiązanie",
-        "uk": "фіксувати контроль потужності, вимкнено, перезавантажити\nпідтримка захищеного пароля\nінші маленькі кріплення",
-        "zh-cn": "f 剩余电力控制\n支持受保护的密码\n其他小型配件"
-      },
-      "0.1.2": {
-        "en": "fix yield* values",
-        "de": "werte der ausbeute*",
-        "ru": "исправить доходность* значения",
-        "pt": "fixar valores de rendimento*",
-        "nl": "waarden",
-        "fr": "valeurs de rendement fixe*",
-        "it": "correzione dei valori di rendimento*",
-        "es": "valores de rendimiento fijo*",
-        "pl": "poprawka",
-        "uk": "фіксувати значення врожайності*",
-        "zh-cn": "fix 产量*"
-      },
-      "0.1.1": {
-        "en": "state rolls corrected\nadd DTU datapoint `rssi` and `ip`\nrepeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)",
-        "de": "zustandsrollen korrigiert\ndTU Datapoint rssi und ip\nwiederholtes schreiben des renditensatzes auf 00:01:00. (für z.b. sourceanalytix)",
-        "ru": "государственные рулоны исправлены\nдобавить DTU datapoint rssi и ip\nповторное написание комплекта до 00:01:00. (необходимо для e.g sourceanalytix)",
-        "pt": "rolos de estado corrigidos\nadicionar DTU datapoint rssi e ip\nescrita repetida do conjunto de rendertotal para 00:01:00. (é necessário, por exemplo, sourceanalytix)",
-        "nl": "staatsrollen gecorrigeerd\ndTU datapoint rssi en ip\nherhaaldelijk geschreven van de opbrengst naar 00:01 uur. (is noodzakelijk voor e.g bronanalytix)",
-        "fr": "rouleaux d'état corrigés\najouter le point de données DTU rssi et ip\nl'écriture répétée du ensemble de rendement à 00:01:00. (est nécessaire pour par exemple sourceanalytix)",
-        "it": "bobine di stato corretto\naggiungere DTU datapoint rssi e ip\nscrittura ripetuta del set di rendimento a 00:01:00. (è necessario per esempio fonteanalytix)",
-        "es": "los rollos estatales corregidos\nañadir DTU datapoint rssi y ip\nrepetida escritura del set de rendimiento a 00:01:00. (es necesario para, por ejemplo, sourceanalytix)",
-        "pl": "walić\ndodanie DTU datapoint rssi i ip\nponowne pisanie listu do 00:01:00. (czy jest potrzebna dla e.g. źródła?)",
-        "uk": "державні рулони виправили\nдодати DTU rssi і ip\nповторне написання інвентарю до 00:01:00. (обов'язково для e.g джерелоналітікс)",
-        "zh-cn": "纠正的国家滚动\n增加工业数据点\n反复写到00:01:00。 (例如源analytix)"
-      }
+    "common": {
+        "name": "opendtu",
+        "version": "0.1.8",
+        "news": {
+            "0.1.8": {
+                "en": "added option `Protect self-set names from being overwritten by the adapter` ([#76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76))\nallow multiple AdminTabs for multiple instances ([#88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88))\nfixed password with special characters ([#35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35))\nfixed incorrect handling of zeroing of `yield*` data points by OpenDTU ([#96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96))\nremove zeroing of `yield*` data points by this adapter ([#96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96))",
+                "de": "`Protect self-set names from being overwritten by the adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nmehrere AdminTabs für mehrere Instanzen #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nfestes Passwort mit Sonderzeichen #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nunrichtige Handhabung des Nullens von Ertrag*-Datenpunkten durch OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nlöschen von Ertrags-*-Datenpunkten durch diesen Adapter #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "ru": "добавлена опция `Protect self-set имена от overwritten by the Adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nразрешить несколько AdminTabs для нескольких экземпляров #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nфиксированный пароль со специальными символами #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nнекорректная обработка нуля доходности* пунктов данных OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nудалить нулевую доходность* точки данных этого адаптера #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "pt": "opção adicionada `Protect auto-ajustar nomes de ser substituído pelo adaptador` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npermitir múltiplos AdminTabs para múltiplas instâncias #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nsenha fixa com caracteres especiais #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nmanuseio incorreto fixo de zero dos pontos de dados do rendimento* pela OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nremover zero de pontos de dados de rendimento* por este adaptador #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "nl": "voegde optie 'Protect zelfverzekerde namen toe van overschreven worden door de adapter' technieken\nquality over Quantity (QoQ) Releases Vertaling:\ngerepareerd wachtwoord met speciale personages £35, htub.com/oshojoo/ioBroker\ngecorrecteerd met nuling of yield - data punten door OpenDTU nr.6\nverwijder de gegevens van de adapter _96:",
+                "fr": "option ajoutée `Protect self-set names from being overwritten by the adapt` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nautoriser plusieurs AdminTabs pour plusieurs instances #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nmot de passe fixe avec caractères spéciaux #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nmanipulation incorrecte fixe des points de données de rendement* par OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nsupprimer zéro des points de données de rendement* par cet adaptateur #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "it": "opzione aggiunta `Proteggere i nomi di auto-set da essere sovrascritti dall'adattatore` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nconsentire più AdminTabs per più istanze #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\npassword fissa con caratteri speciali #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\ngestione errata fissa dei punti di dati di rendimento* da parte di OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nrimuovere lo zero dei dati di rendimento* da questo adattatore #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "es": "añadido opción `Protect self-set names from being overwritten by the adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npermitir múltiples AdminTabs para múltiples instancias #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\ncontraseña fija con caracteres especiales #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nsolucion incorrect handling of ceroing of yield* data points by OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\neliminar cero puntos de datos de rendimiento* por este adaptador #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "pl": "dodał opcję 'Protect', która została napisana przez adapter' #76(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npozwala na wiele instancji #88(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nstałe hasło z specjalnymi znakami #35 (https:/github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nnieprawidłowa obsługa zerowych punktów danych przez OpenDTU #96(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/96)\n( usuwanie zużytych punktów danych poprzez ten adapter #96(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "uk": "додано опцію `Захистити імена з перезапису адаптера #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nможливість використання декількох додатків AdminTabs для декількох екземплярів #[88] (https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nфіксований пароль з особливими героями #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nвиправлено неправильне поводження з нульовим рівнем врожайності* точок даних OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nвидаліть нульовий приріст даних * за допомогою цього адаптера #[96] (https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+                "zh-cn": "备选案文:“适应者`第[76]号(https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)误用自发名称。\n允许许多 Admin Tabs采取多种行动[88](http://github.com/oshojo0o/ioBroker)。\n具有特殊特点的固定密码(http://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\n固定不正确地处理生产的零散情况* 数据点:开放的DTU #[96](http://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\n(http://github.com/oshojo0o/ioBroker.opendtu/issues/96)"
+            },
+            "0.1.7": {
+                "en": "workaround for incorrectly used button data point",
+                "de": "workaround für falsch genutzte tastendatenpunkt",
+                "ru": "workaround для неправильно использованного пункта данных кнопки",
+                "pt": "solução alternativa para o ponto de dados do botão incorretamente usado",
+                "nl": "werken voor onjuist gebruikt knopgegevens",
+                "fr": "workaround for incorrectly used button data point",
+                "it": "workaround per il punto di dati del pulsante non corretto",
+                "es": "workaround for incorrectly used botón data point",
+                "pl": "wokół pracy nieprawidłowo używany punkt danych przycisków",
+                "uk": "робота для неправильного використання точки даних",
+                "zh-cn": "使用不当但顿数据点的工作"
+            },
+            "0.1.6": {
+                "en": "fix power control (power_off)",
+                "de": "festnetzsteuerung (power_off)",
+                "ru": "управление властью (power_off)",
+                "pt": "corrigir o controle de energia (power_off)",
+                "nl": "vertaling:",
+                "fr": "commande de puissance (power_off)",
+                "it": "correzione del controllo di potenza (power_off)",
+                "es": "fijar control de potencia (power_off)",
+                "pl": "regulacja kontroli mocy (pol.)",
+                "uk": "фіксувати контроль потужності (power_off)",
+                "zh-cn": "fix 权力控制(力量/力量)"
+            },
+            "0.1.5": {
+                "en": "code optimizations",
+                "de": "codeoptimierungen",
+                "ru": "оптимизация кода",
+                "pt": "otimizações de código",
+                "nl": "vertaling:",
+                "fr": "optimisation des codes",
+                "it": "ottimizzazioni del codice",
+                "es": "optimizaciones de código",
+                "pl": "optymalizacja kodu",
+                "uk": "оптимізація коду",
+                "zh-cn": "准则的优化"
+            },
+            "0.1.4": {
+                "en": "fix power control `on`, `off`, `restart`\nsupport for password protected liveview\nother small fixes",
+                "de": "festlegen der leistungssteuerung an, aus, neustart\nunterstützung für passwortgeschützte liveview\nandere kleine fixes",
+                "ru": "зафиксируйте контроль мощности, выключите, перезапустите\nподдержка паролей защищено liveview\nдругие небольшие исправления",
+                "pt": "corrigir o controle de energia em, off, reiniciar\nsuporte para visualização ao vivo protegida por senha\noutras pequenas correções",
+                "nl": "controle aan, uit, herstart\nquality over quantity (qoq) releases vertaling:\nandere kleine fixes",
+                "fr": "régler le contrôle de puissance sur, off, restart\nsupport pour mot de passe protégé\nautres petites corrections",
+                "it": "fissare il controllo di potenza su, off, riavviare\nsupporto per password protetta liveview\naltre piccole correzioni",
+                "es": "fijar el control de potencia en, apagado, reiniciar\nsoporte para contraseña protegida\notras pequeñas correcciones",
+                "pl": "po naprawie kontroli mocy, odwraca się, restartuje\nwsparcie dla hasła chronionego liveview\ninne drobne rozwiązanie",
+                "uk": "фіксувати контроль потужності, вимкнено, перезавантажити\nпідтримка захищеного пароля\nінші маленькі кріплення",
+                "zh-cn": "f 剩余电力控制\n支持受保护的密码\n其他小型配件"
+            },
+            "0.1.2": {
+                "en": "fix yield* values",
+                "de": "werte der ausbeute*",
+                "ru": "исправить доходность* значения",
+                "pt": "fixar valores de rendimento*",
+                "nl": "waarden",
+                "fr": "valeurs de rendement fixe*",
+                "it": "correzione dei valori di rendimento*",
+                "es": "valores de rendimiento fijo*",
+                "pl": "poprawka",
+                "uk": "фіксувати значення врожайності*",
+                "zh-cn": "fix 产量*"
+            },
+            "0.1.1": {
+                "en": "state rolls corrected\nadd DTU datapoint `rssi` and `ip`\nrepeated writing of the yieldtotal set to 00:01:00. (is necessary for e.g. sourceanalytix)",
+                "de": "zustandsrollen korrigiert\ndTU Datapoint rssi und ip\nwiederholtes schreiben des renditensatzes auf 00:01:00. (für z.b. sourceanalytix)",
+                "ru": "государственные рулоны исправлены\nдобавить DTU datapoint rssi и ip\nповторное написание комплекта до 00:01:00. (необходимо для e.g sourceanalytix)",
+                "pt": "rolos de estado corrigidos\nadicionar DTU datapoint rssi e ip\nescrita repetida do conjunto de rendertotal para 00:01:00. (é necessário, por exemplo, sourceanalytix)",
+                "nl": "staatsrollen gecorrigeerd\ndTU datapoint rssi en ip\nherhaaldelijk geschreven van de opbrengst naar 00:01 uur. (is noodzakelijk voor e.g bronanalytix)",
+                "fr": "rouleaux d'état corrigés\najouter le point de données DTU rssi et ip\nl'écriture répétée du ensemble de rendement à 00:01:00. (est nécessaire pour par exemple sourceanalytix)",
+                "it": "bobine di stato corretto\naggiungere DTU datapoint rssi e ip\nscrittura ripetuta del set di rendimento a 00:01:00. (è necessario per esempio fonteanalytix)",
+                "es": "los rollos estatales corregidos\nañadir DTU datapoint rssi y ip\nrepetida escritura del set de rendimiento a 00:01:00. (es necesario para, por ejemplo, sourceanalytix)",
+                "pl": "walić\ndodanie DTU datapoint rssi i ip\nponowne pisanie listu do 00:01:00. (czy jest potrzebna dla e.g. źródła?)",
+                "uk": "державні рулони виправили\nдодати DTU rssi і ip\nповторне написання інвентарю до 00:01:00. (обов'язково для e.g джерелоналітікс)",
+                "zh-cn": "纠正的国家滚动\n增加工业数据点\n反复写到00:01:00。 (例如源analytix)"
+            }
+        },
+        "titleLang": {
+            "en": "OpenDTU",
+            "de": "OpenDTU",
+            "ru": "OpenDTU",
+            "pt": "OpenDTU",
+            "nl": "OpenDTU",
+            "fr": "OpenDTU",
+            "it": "OpenDTU",
+            "es": "OpenDTU",
+            "pl": "OpenDTU",
+            "uk": "OpenDTU",
+            "zh-cn": "OpenDTU"
+        },
+        "desc": {
+            "en": "Adapter for the OpenDTU project",
+            "de": "Adapter for the OpenDTU project",
+            "ru": "Adapter for the OpenDTU project",
+            "pt": "Adapter for the OpenDTU project",
+            "nl": "Adapter for the OpenDTU project",
+            "fr": "Adapter for the OpenDTU project",
+            "it": "Adapter for the OpenDTU project",
+            "es": "Adapter for the OpenDTU project",
+            "pl": "Adapter for the OpenDTU project",
+            "zh-cn": "Adapter for the OpenDTU project",
+            "uk": "Адаптер для проекту OpenDTU"
+        },
+        "authors": [
+            "Dennis Rathjen <dennis.rathjen@outlook.de>"
+        ],
+        "keywords": [
+            "OpenDTU",
+            "Solar"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "opendtu.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/o0shojo0o/ioBroker.opendtu/main/admin/opendtu.png",
+        "readme": "https://github.com/o0shojo0o/ioBroker.opendtu/blob/main/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "energy",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "push",
+        "adminUI": {
+            "config": "json",
+            "tab": "materialize"
+        },
+        "adminTab": {
+            "singleton": false,
+            "name": {
+                "en": "OpenDTU",
+                "de": "OpenDTU",
+                "ru": "OpenDTU",
+                "pt": "OpenDTU",
+                "nl": "OpenDTU",
+                "fr": "OpenDTU",
+                "it": "OpenDTU",
+                "es": "OpenDTU",
+                "pl": "OpenDTU",
+                "zh-cn": "OpenDTU"
+            },
+            "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
+            "fa-icon": "info"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=3.3.22"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=5.1.13"
+            }
+        ]
     },
-    "titleLang": {
-      "en": "OpenDTU",
-      "de": "OpenDTU",
-      "ru": "OpenDTU",
-      "pt": "OpenDTU",
-      "nl": "OpenDTU",
-      "fr": "OpenDTU",
-      "it": "OpenDTU",
-      "es": "OpenDTU",
-      "pl": "OpenDTU",
-      "uk": "OpenDTU",
-      "zh-cn": "OpenDTU"
+    "native": {
+        "webUIScheme": "http",
+        "webUIServer": "",
+        "webUIPort": 80,
+        "userName": "admin",
+        "password": "",
+        "protectNames": false,
+        "useInvOfflineStatesToZero": true
     },
-    "desc": {
-      "en": "Adapter for the OpenDTU project",
-      "de": "Adapter for the OpenDTU project",
-      "ru": "Adapter for the OpenDTU project",
-      "pt": "Adapter for the OpenDTU project",
-      "nl": "Adapter for the OpenDTU project",
-      "fr": "Adapter for the OpenDTU project",
-      "it": "Adapter for the OpenDTU project",
-      "es": "Adapter for the OpenDTU project",
-      "pl": "Adapter for the OpenDTU project",
-      "zh-cn": "Adapter for the OpenDTU project",
-      "uk": "Адаптер для проекту OpenDTU"
-    },
-    "authors": [
-      "Dennis Rathjen <dennis.rathjen@outlook.de>"
+    "protectedNative": [
+        "password"
     ],
-    "keywords": [
-      "OpenDTU",
-      "Solar"
+    "encryptedNative": [
+        "password"
     ],
-    "license": "MIT",
-    "platform": "Javascript/Node.js",
-    "main": "main.js",
-    "icon": "opendtu.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/o0shojo0o/ioBroker.opendtu/main/admin/opendtu.png",
-    "readme": "https://github.com/o0shojo0o/ioBroker.opendtu/blob/main/README.md",
-    "loglevel": "info",
-    "mode": "daemon",
-    "type": "energy",
-    "compact": true,
-    "connectionType": "local",
-    "dataSource": "push",
-    "adminUI": {
-      "config": "json",
-      "tab": "materialize"
-    },
-    "adminTab": {
-      "singleton": false,
-      "name": {
-        "en": "OpenDTU",
-        "de": "OpenDTU",
-        "ru": "OpenDTU",
-        "pt": "OpenDTU",
-        "nl": "OpenDTU",
-        "fr": "OpenDTU",
-        "it": "OpenDTU",
-        "es": "OpenDTU",
-        "pl": "OpenDTU",
-        "zh-cn": "OpenDTU"
-      },
-      "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
-      "fa-icon": "info"
-    },
-    "dependencies": [
-      {
-        "js-controller": ">=3.3.22"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=5.1.13"
-      }
-    ]
-  },
-  "native": {
-    "webUIScheme": "http",
-    "webUIServer": "",
-    "webUIPort": 80,
-    "userName": "admin",
-    "password": "",
-    "protectNames": false
-  },
-  "protectedNative": [
-    "password"
-  ],
-  "encryptedNative": [
-    "password"
-  ],
-  "objects": [],
-  "instanceObjects": []
+    "objects": [],
+    "instanceObjects": []
 }

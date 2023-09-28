@@ -5,5 +5,6 @@
     "WebUi Port": "WebUi-poort",
     "WebUi Password": "WebUi-wachtwoord",
     "Other configurations": "Andere configuraties",
-    "Protect self-set names from being overwritten by the adapter.": "Bescherm zelfingestelde namen tegen overschrijving door de adapter."
+    "Protect self-set names from being overwritten by the adapter.": "Bescherm zelfingestelde namen tegen overschrijving door de adapter.",
+    "Set the states to 0 if the inverter is not available.": "Zet de statussen op 0 als de omvormer niet beschikbaar is."
 }

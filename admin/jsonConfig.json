@@ -49,6 +49,11 @@
 			"type": "checkbox",
 			"label": "Protect self-set names from being overwritten by the adapter.",
 			"newLine": true
+		},
+		"useInvOfflineStatesToZero": {
+			"type": "checkbox",
+			"label": "Set the states to 0 if the inverter is not accessible.",
+			"newLine": true
 		}
 	}
 }

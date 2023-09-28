@@ -5,5 +5,6 @@
     "WebUi Port": "WebUi端口",
     "WebUi Password": "密码",
     "Other configurations": "其他配置",
-    "Protect self-set names from being overwritten by the adapter.": "保护自设置名称不被适配器覆盖。"
+    "Protect self-set names from being overwritten by the adapter.": "保护自设置名称不被适配器覆盖。",
+    "Set the states to 0 if the inverter is not available.": "如果逆变器不可用，则将状态设置为 0。"
 }
