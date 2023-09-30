@@ -1,11 +1,12 @@
-name: Bug report
-labels: ["bug"]
+name: Problem report
+description: Create a report to help us improve
+labels: [problem]
 body:
   - type: markdown
     attributes:
       value: |
         **IMPORTANT:** Before submitting:
-        - Is your OpenDTU up to date? [Releases](https://github.com/tbnobody/OpenDTU/releases)  
+        - You read the [FAQ](https://github.com/o0shojo0o/ioBroker.zigbee2mqtt/blob/main/docs/EN/EN_faq.md)  
   - type: textarea
     id: what_happend
     attributes:
@@ -26,18 +27,11 @@ body:
       placeholder: First do this, than this..
     validations:
       required: false
-   - type: input
-    id: opendtu_version
-    attributes:
-      label: OpenDTU version
-      placeholder: 0.0.0
-    validations:
-      required: true
   - type: input
     id: adapter_version
     attributes:
       label: Adapter version
-      placeholder: 0.0.0
+      placeholder: 2.3.0
     validations:
       required: true
   - type: textarea
