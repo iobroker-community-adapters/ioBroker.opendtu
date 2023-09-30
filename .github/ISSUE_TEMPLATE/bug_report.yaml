@@ -1,48 +1,64 @@
-name: Bug report
-labels: ["bug"]
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug", "triage"]
+projects: ["octo-org/1", "octo-org/44"]
+assignees:
+  - octocat
 body:
   - type: markdown
     attributes:
       value: |
-        **IMPORTANT:** Before submitting:
-        - Is your OpenDTU up to date? [Releases](https://github.com/tbnobody/OpenDTU/releases)  
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
   - type: textarea
-    id: what_happend
+    id: what-happened
     attributes:
       label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
     validations:
       required: true
-  - type: textarea
-    id: expect_to_happen
+  - type: dropdown
+    id: version
     attributes:
-      label: What did you expect to happen?
-      placeholder: I expected that ...
-    validations:
-      required: false
-  - type: textarea
-    id: reproduce
-    attributes:
-      label: How to reproduce it (minimal and precise)
-      placeholder: First do this, than this..
-    validations:
-      required: false
-   - type: input
-    id: opendtu_version
-    attributes:
-      label: OpenDTU version
-      placeholder: 0.0.0
+      label: Version
+      description: What version of our software are you running?
+      options:
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
+      default: 0
     validations:
       required: true
-  - type: input
-    id: adapter_version
+  - type: dropdown
+    id: browsers
     attributes:
-      label: Adapter version
-      placeholder: 0.0.0
-    validations:
-      required: true
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
   - type: textarea
-    id: log
+    id: logs
     attributes:
-      label: Log
-    validations:
-      required: false
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
