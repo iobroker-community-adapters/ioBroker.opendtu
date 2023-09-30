@@ -43,6 +43,7 @@ For more information on the data points, see their description or click [here](h
 
 ### **WORK IN PROGRESS**
 
+- (o0shojo0o) added yieldtotal Protection against incorrect zeroing when the OpenDTU restarts if the inverter is not accessible
 - (o0shojo0o) added option `Set the states to 0 if the inverter is not accessible.` ([#97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97))
 
 ### 0.1.8 (2023-09-22)
