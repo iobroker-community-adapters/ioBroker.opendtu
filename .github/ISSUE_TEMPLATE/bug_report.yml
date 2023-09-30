@@ -1,5 +1,6 @@
 name: Bug report
-labels: ["bug"]
+description: 
+labels: [bug]
 body:
   - type: markdown
     attributes:
@@ -26,7 +27,7 @@ body:
       placeholder: First do this, than this..
     validations:
       required: false
-   - type: input
+  - type: input
     id: opendtu_version
     attributes:
       label: OpenDTU version
