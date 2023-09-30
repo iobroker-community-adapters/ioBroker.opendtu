@@ -1,11 +1,11 @@
 name: Bug report
-labels: [bug]
+labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
         **IMPORTANT:** Before submitting:
-        Is your OpenDTU up to date? [Releases](https://github.com/tbnobody/OpenDTU/releases)  
+        - Is your OpenDTU up to date? [Releases](https://github.com/tbnobody/OpenDTU/releases)  
   - type: textarea
     id: what_happend
     attributes:
