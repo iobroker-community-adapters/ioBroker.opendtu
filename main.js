@@ -178,6 +178,7 @@ class Opendtu extends utils.Adapter {
         }
         catch (err) {
             this.log.error(err);
+            this.log.debug(message);
         }
 
         // Create inverter rootfolder
