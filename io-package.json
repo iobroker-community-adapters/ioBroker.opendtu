@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1": {
+        "en": "fixed `power_control.current_limit_absolute\" has value \"-1\" less than min \"0\"`",
+        "de": "`power_control.current_limit_absolute\" hat wert -1 kleiner als min 0",
+        "ru": "фиксированный `power_control.current_limit_absolute\" имеет значение -1 меньше, чем мин 0`",
+        "pt": "fixo `power_control.current_limit_absolute\" tem valor -1 menos do que min 0",
+        "nl": "_ _",
+        "fr": "fixed `power_control.current_limit_absolute\" has value -1 less than min 0",
+        "it": "fisso `power_control.current_limit_absolute' ha valore -1 meno di min #",
+        "es": "fijo `power_control.current_limit_absolute' tiene valor -1 menos que min 0",
+        "pl": "stacjonarna kontrola (ang. fixed_absolute) ma wartość -1 mniej niż min. 0)",
+        "uk": "фіксована `power_control.current_limit_absolute\" має значення -1 менше, ніж хв 0 товар(ов)",
+        "zh-cn": "固定的`权力':控制. 平行_限性_absolute”数值-1低于分钟 0%"
+      },
       "1.0.0": {
         "en": "Increase to the first major release, as it has now reached a stable level. \nadded yieldtotal Protection against incorrect zeroing when the OpenDTU restarts if the inverter is not accessible\nadded option `Set the states to 0 if the inverter is not accessible.` ([#97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97))",
         "de": "Erhöhen Sie die erste große Freigabe, da sie jetzt ein stabiles Niveau erreicht hat.\nzusatzrendite Schutz vor falschem Nullen beim Neustart der OpenDTU, wenn der Wechselrichter nicht zugänglich ist\nzusatzoption Setzen Sie die Zustände auf 0, wenn der Wechselrichter nicht erreichbar ist.` #[97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97)",
@@ -80,19 +93,6 @@
         "pl": "po naprawie kontroli mocy, odwraca się, restartuje\nwsparcie dla hasła chronionego liveview\ninne drobne rozwiązanie",
         "uk": "фіксувати контроль потужності, вимкнено, перезавантажити\nпідтримка захищеного пароля\nінші маленькі кріплення",
         "zh-cn": "f 剩余电力控制\n支持受保护的密码\n其他小型配件"
-      },
-      "0.1.2": {
-        "en": "fix yield* values",
-        "de": "werte der ausbeute*",
-        "ru": "исправить доходность* значения",
-        "pt": "fixar valores de rendimento*",
-        "nl": "waarden",
-        "fr": "valeurs de rendement fixe*",
-        "it": "correzione dei valori di rendimento*",
-        "es": "valores de rendimiento fijo*",
-        "pl": "poprawka",
-        "uk": "фіксувати значення врожайності*",
-        "zh-cn": "fix 产量*"
       }
     },
     "titleLang": {
