@@ -45,6 +45,7 @@ For more information on the data points, see their description or click [here](h
 ### **WORK IN PROGRESS**
 
 - (o0shojo0o) changes for new websocket structure ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))
+- (o0shojo0o) `Efficiency`, `YieldTotal`, `YieldDay` and `DC Power` moved from the AC section to the INV (old data points must be removed manually)
 
 ### 1.0.1 (2023-10-29)
 
