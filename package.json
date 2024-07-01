@@ -23,7 +23,7 @@
     "@iobroker/adapter-core": "^3.0.4",
     "axios": "^1.6.7",
     "node-schedule": "^2.1.1",
-    "ws": "^8.14.2"
+    "ws": "^8.17.1"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.7.0",
