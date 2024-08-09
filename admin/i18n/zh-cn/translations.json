@@ -1,10 +1,10 @@
 {
-    "Configure your OpenDTU WebUi connection": "配置您的 OpenDTU WebUi 连接",
-    "Scheme": "方案",
-    "WebUi Address": "WebUi地址",
-    "WebUi Port": "WebUi端口",
-    "WebUi Password": "密码",
-    "Other configurations": "其他配置",
-    "Protect self-set names from being overwritten by the adapter.": "保护自设置名称不被适配器覆盖。",
-    "Set the states to 0 if the inverter is not available.": "如果逆变器不可用，则将状态设置为 0。"
+    "Config": "配置您的 OpenDTU WebUI 连接",
+    "Scheme": "安全",
+    "WebAddress": "IP地址",
+    "WebPort": "港口",
+    "WebPassword": "网页密码",
+    "OtherConfig": "其他配置",
+    "ProtNames": "保护自设名称不被适配器覆盖。",
+    "StatesToZero": "如果逆变器不可用，则将状态设置为 0。"
 }
