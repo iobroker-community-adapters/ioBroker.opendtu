@@ -128,15 +128,18 @@
       "OpenDTU",
       "Solar"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "opendtu.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/o0shojo0o/ioBroker.opendtu/main/admin/opendtu.png",
     "readme": "https://github.com/o0shojo0o/ioBroker.opendtu/blob/main/README.md",
     "loglevel": "info",
     "mode": "daemon",
+    "tier": 2,
     "type": "energy",
     "compact": true,
     "connectionType": "local",
@@ -164,7 +167,7 @@
     },
     "dependencies": [
       {
-        "js-controller": ">=3.3.22"
+        "js-controller": ">=4.0.24"
       }
     ],
     "globalDependencies": [
