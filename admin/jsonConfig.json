@@ -4,7 +4,7 @@
 	"items": {
 		"webUIHeader": {
 			"type": "header",
-			"text": "Configure your OpenDTU WebUi connection",
+			"text": "Config",
 			"size": 2,
 			"newLine": true
 		},
@@ -25,34 +25,34 @@
 		},
 		"webUIServer": {
 			"type": "text",
-			"label": "WebUi Address",
+			"label": "WebAddress",
 			"newLine": false
 		},
 		"webUIPort": {
 			"type": "number",
-			"label": "WebUi Port",
+			"label": "WebPort",
 			"newLine": false
 		},
 		"password": {
 			"type": "password",
-			"label": "WebUi Password",
-			"sm": 2,
+			"label": "WebPassword",
+			"sm": 3,
 			"newLine": true
 		},
 		"otherHeader": {
 			"type": "header",
-			"text": "Other configurations",
+			"text": "OtherConfig",
 			"size": 2,
 			"newLine": true
 		},
 		"protectNames": {
 			"type": "checkbox",
-			"label": "Protect self-set names from being overwritten by the adapter.",
+			"label": "ProtNames",
 			"newLine": true
 		},
 		"useInvOfflineStatesToZero": {
 			"type": "checkbox",
-			"label": "Set the states to 0 if the inverter is not accessible.",
+			"label": "StatesToZero",
 			"newLine": true
 		}
 	}
