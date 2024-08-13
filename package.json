@@ -9,6 +9,7 @@
   "homepage": "https://github.com/o0shojo0o/ioBroker.opendtu",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "OpenDTU",
     "Solar"
   ],
@@ -17,7 +18,7 @@
     "url": "https://github.com/o0shojo0o/ioBroker.opendtu.git"
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.1.6",
