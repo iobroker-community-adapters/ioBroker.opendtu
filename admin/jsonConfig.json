@@ -6,9 +6,11 @@
 			"type": "header",
 			"text": "Config",
 			"size": 2,
-			"newLine": true
+			"xs": 12,
+			"sm": 12
 		},
 		"webUIScheme": {
+			"newLine": true,
 			"type": "select",
 			"label": "Scheme",
 			"options": [
@@ -21,39 +23,58 @@
 					"value": "https"
 				}
 			],
-			"newLine": true
+			"xs": 12,
+			"sm": 12,
+			"md": 2,
+			"lg": 2
 		},
 		"webUIServer": {
 			"type": "text",
 			"label": "WebAddress",
-			"newLine": false
+			"xs": 12,
+			"sm": 12,
+			"md": 4,
+			"lg": 4
 		},
 		"webUIPort": {
 			"type": "number",
 			"label": "WebPort",
-			"newLine": false
+			"xs": 12,
+			"sm": 12,
+			"md": 2,
+			"lg": 2
 		},
 		"password": {
+			"newLine": true,
 			"type": "password",
 			"label": "WebPassword",
-			"sm": 3,
-			"newLine": true
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 6
+			
 		},
 		"otherHeader": {
+			"newLine": true,
 			"type": "header",
 			"text": "OtherConfig",
 			"size": 2,
-			"newLine": true
+			"xs": 12,
+			"sm": 12			
 		},
 		"protectNames": {
+			"newLine": true,
 			"type": "checkbox",
 			"label": "ProtNames",
-			"newLine": true
+			"xs": 12,
+			"sm": 12			
 		},
 		"useInvOfflineStatesToZero": {
+			"newLine": true,
 			"type": "checkbox",
 			"label": "StatesToZero",
-			"newLine": true
+			"xs": 12,
+			"sm": 12
 		}
 	}
 }
