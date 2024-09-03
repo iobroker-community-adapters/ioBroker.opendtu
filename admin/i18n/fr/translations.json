@@ -1,10 +1,10 @@
 {
-    "Config": "Configurez votre connexion OpenDTU WebUI",
+    "Config": "Configuration de la connexion OpenDTU WebUI",
     "Scheme": "Sécurité",
     "WebAddress": "Adresse IP",
     "WebPort": "Port",
     "WebPassword": "Mot de passe de l'interface utilisateur Web",
     "OtherConfig": "Autres configurations",
-    "ProtNames": "Protégez les noms définis automatiquement contre l'écrasement par l'adaptateur.",
-    "StatesToZero": "Mettre les états à 0 si l'onduleur n'est pas disponible."
+    "ProtNames": "Protéger les noms auto-définis contre l'écrasement par l'adaptateur",
+    "StatesToZero": "Mise des états à 0 si l'onduleur n'est pas disponible"
 }

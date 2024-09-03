@@ -1,10 +1,10 @@
 {
-    "Config": "Konfigurieren Sie Ihre OpenDTU-WebUI-Verbindung",
+    "Config": "Konfigurieren der OpenDTU-WebUI-Verbindung",
     "Scheme": "Sicherheit",
     "WebAddress": "IP-Adresse",
     "WebPort": "Port",
     "WebPassword": "WebUI-Passwort",
     "OtherConfig": "Andere Konfigurationen",
-    "ProtNames": "Schützen Sie selbst festgelegte Namen vor dem Überschreiben durch den Adapter.",
-    "StatesToZero": "Setzen Sie die Zustände auf 0, wenn der Wechselrichter nicht verfügbar ist."
+    "ProtNames": "Schützen von selbst festgelegten Namen vor dem Überschreiben durch den Adapter",
+    "StatesToZero": "Setzen der Zustände auf 0, wenn der Wechselrichter nicht verfügbar ist"
 }
