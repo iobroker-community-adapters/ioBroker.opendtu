@@ -1,10 +1,10 @@
 {
-    "Config": "Configureer uw OpenDTU WebUI-verbinding",
+    "Config": "De OpenDTU WebUI-verbinding configureren",
     "Scheme": "Beveiliging",
     "WebAddress": "IP-adres",
     "WebPort": "Port",
     "WebPassword": "WebUI-wachtwoord",
     "OtherConfig": "Andere configuraties",
-    "ProtNames": "Bescherm zelfingestelde namen tegen overschrijving door de adapter.",
-    "StatesToZero": "Zet de statussen op 0 als de omvormer niet beschikbaar is."
+    "ProtNames": "Bescherm zelfgedefinieerde namen tegen overschrijving door de adapter",
+    "StatesToZero": "De status op 0 zetten als de omvormer niet beschikbaar is"
 }

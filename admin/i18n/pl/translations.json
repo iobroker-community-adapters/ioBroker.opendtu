@@ -1,10 +1,10 @@
 {
-    "Config": "Skonfiguruj połączenie OpenDTU WebUI",
+    "Config": "Konfigurowanie połączenia OpenDTU WebUI",
     "Scheme": "Bezpieczeństwo",
     "WebAddress": "Adres IP",
     "WebPort": "Port",
     "WebPassword": "Hasło WebUI",
     "OtherConfig": "Inne konfiguracje",
-    "ProtNames": "Chroń samodzielnie ustawione nazwy przed nadpisaniem przez adapter.",
-    "StatesToZero": "Ustaw stany na 0, jeśli falownik nie jest dostępny."
+    "ProtNames": "Chroń samodzielnie zdefiniowane nazwy przed nadpisaniem przez adapter",
+    "StatesToZero": "Ustawienie stanów na 0 w przypadku braku falownika"
 }
