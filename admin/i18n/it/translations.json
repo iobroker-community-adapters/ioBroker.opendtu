@@ -1,10 +1,10 @@
 {
-    "Config": "Configura la tua connessione OpenDTU WebUI",
+    "Config": "Configurazione della connessione OpenDTU WebUI",
     "Scheme": "Sicurezza",
     "WebAddress": "Indirizzo IP",
     "WebPort": "Porta",
     "WebPassword": "Password dell'interfaccia utente Web",
     "OtherConfig": "Altre configurazioni",
-    "ProtNames": "Protegge i nomi impostati automaticamente dalla sovrascrittura da parte dell'adattatore.",
-    "StatesToZero": "Impostare gli stati su 0 se l'inverter non è disponibile."
+    "ProtNames": "Proteggi i nomi autodefiniti dalla sovrascrittura da parte dell'adattatore",
+    "StatesToZero": "Impostazione degli stati a 0 se l'inverter non è disponibile"
 }

@@ -1,10 +1,10 @@
 {
-    "Config": "配置您的 OpenDTU WebUI 连接",
+    "Config": "配置 OpenDTU WebUI 連接",
     "Scheme": "安全",
     "WebAddress": "IP地址",
     "WebPort": "港口",
     "WebPassword": "网页密码",
     "OtherConfig": "其他配置",
-    "ProtNames": "保护自设名称不被适配器覆盖。",
-    "StatesToZero": "如果逆变器不可用，则将状态设置为 0。"
+    "ProtNames": "保護自訂名稱不被適配器覆蓋",
+    "StatesToZero": "如果逆變器不可用，則將狀態設為 0"
 }

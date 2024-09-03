@@ -1,10 +1,10 @@
 {
-    "Config": "Configure sua conexão OpenDTU WebUI",
+    "Config": "Configurando a conexão OpenDTU WebUI",
     "Scheme": "Segurança",
     "WebAddress": "Endereço IP",
     "WebPort": "Porta",
     "WebPassword": "Senha da WebUI",
     "OtherConfig": "Outras configurações",
-    "ProtNames": "Proteja que nomes autodefinidos sejam substituídos pelo adaptador.",
-    "StatesToZero": "Defina os estados como 0 se o inversor não estiver disponível."
+    "ProtNames": "Proteja nomes autodefinidos contra substituição pelo adaptador",
+    "StatesToZero": "Definir os estados para 0 se o inversor não estiver disponível"
 }
