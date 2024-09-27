@@ -24,23 +24,35 @@
 				}
 			],
 			"xs": 12,
-			"sm": 12,
+			"sm": 2,
 			"md": 2,
-			"lg": 2
+			"lg": 1
 		},
 		"webUIServer": {
 			"type": "text",
 			"label": "WebAddress",
 			"xs": 12,
-			"sm": 12,
+			"sm": 8,
 			"md": 4,
-			"lg": 4
+			"lg": 3
 		},
 		"webUIPort": {
 			"type": "number",
 			"label": "WebPort",
+			"min": 1,
+			"max": 65535,
 			"xs": 12,
-			"sm": 12,
+			"sm": 2,
+			"md": 2,
+			"lg": 1
+		},
+		"webUIPoll": {
+			"type": "number",
+			"label": "WebPoll",
+			"min": 1,
+			"max": 59,
+			"xs": 12,
+			"sm": 4,
 			"md": 2,
 			"lg": 2
 		},
@@ -49,9 +61,9 @@
 			"type": "password",
 			"label": "WebPassword",
 			"xs": 12,
-			"sm": 12,
+			"sm": 6,
 			"md": 6,
-			"lg": 6
+			"lg": 4
 			
 		},
 		"otherHeader": {

@@ -3,6 +3,7 @@
     "Scheme": "Seguridad",
     "WebAddress": "Dirección IP",
     "WebPort": "Puerto",
+    "WebPoll": "actualizar después de x segundos",
     "WebPassword": "Contraseña de la interfaz de usuario web",
     "OtherConfig": "Otras configuraciones",
     "ProtNames": "Proteger los nombres autodefinidos para que el adaptador no los sobrescriba",
