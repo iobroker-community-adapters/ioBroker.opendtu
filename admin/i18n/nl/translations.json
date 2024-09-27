@@ -3,6 +3,7 @@
     "Scheme": "Beveiliging",
     "WebAddress": "IP-adres",
     "WebPort": "Port",
+    "WebPoll": "vernieuwen na x seconden",
     "WebPassword": "WebUI-wachtwoord",
     "OtherConfig": "Andere configuraties",
     "ProtNames": "Bescherm zelfgedefinieerde namen tegen overschrijving door de adapter",

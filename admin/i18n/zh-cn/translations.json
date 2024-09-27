@@ -3,6 +3,7 @@
     "Scheme": "安全",
     "WebAddress": "IP地址",
     "WebPort": "港口",
+    "WebPoll": "x 秒后刷新",
     "WebPassword": "网页密码",
     "OtherConfig": "其他配置",
     "ProtNames": "保護自訂名稱不被適配器覆蓋",
