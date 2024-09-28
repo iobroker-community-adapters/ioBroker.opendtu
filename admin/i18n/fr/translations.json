@@ -3,6 +3,7 @@
     "Scheme": "Sécurité",
     "WebAddress": "Adresse IP",
     "WebPort": "Port",
+    "WebPoll": "actualiser après x secondes",
     "WebPassword": "Mot de passe de l'interface utilisateur Web",
     "OtherConfig": "Autres configurations",
     "ProtNames": "Protéger les noms auto-définis contre l'écrasement par l'adaptateur",

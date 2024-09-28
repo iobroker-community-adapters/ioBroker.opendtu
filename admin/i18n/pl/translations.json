@@ -3,6 +3,7 @@
     "Scheme": "Bezpieczeństwo",
     "WebAddress": "Adres IP",
     "WebPort": "Port",
+    "WebPoll": "odśwież po x sekundach",
     "WebPassword": "Hasło WebUI",
     "OtherConfig": "Inne konfiguracje",
     "ProtNames": "Chroń samodzielnie zdefiniowane nazwy przed nadpisaniem przez adapter",
