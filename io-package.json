@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "news": {
+      "2.1.0": {
+        "en": "update dependencies\nsupport small screens\nupdate translations\nupdate object names\nadd variable polling intervall [1-59s]",
+        "de": "aktualisierung der abhängigkeiten\nkleine bildschirme unterstützen\nübersetzungen aktualisieren\nänderung der objektnamen\nvariable abfrageintervall hinzufügen [1-59s]",
+        "ru": "обновление зависимостей\nподдержка небольших экранов\nобновление переводов\nобновления имен объектов\nдобавить переменный интервал опроса [1-59]",
+        "pt": "dependências\nsuporte telas pequenas\ntraduções de atualização\natualizar nomes de objetos\nadicionar intervalo de votação variável [1-59s]",
+        "nl": "afhankelijkheden bijwerken\nkleine schermen ondersteunen\nvertalingen bijwerken\nobjectnamen bijwerken\nvariabele polling intervall [1-59s] toevoegen",
+        "fr": "mettre à jour les dépendances\nsoutenir les petits écrans\nmettre à jour les traductions\nmettre à jour les noms des objets\najouter intervalle de scrutin variablel [1-59s]",
+        "it": "aggiornamento dipendenze\nsupporto piccoli schermi\naggiornare le traduzioni\naggiornare i nomi degli oggetti\naggiungere intervallo di polling variabile [1-59s]",
+        "es": "dependencias de actualización\nsoporte pantallas pequeñas\ntraducción actualizada\nactualizar nombres de objetos\nañadir intervalo de votación variable [1-59s]",
+        "pl": "aktualizacji zależności\nwsparcie dla małych ekranów\naktualizacja tłumaczeń\naktualizacja nazw obiektów\ndodać zmienną polling intervall [1-59s]",
+        "uk": "оновлення залежності\nпідтримка невеликих екранів\nоновлення перекладів\nоновлення назв об'єктів\nдодати змінний інтервал опитування [1-59s]",
+        "zh-cn": "更新依赖关系\n支持小屏幕\n更新翻译\n更新对象名称\n添加可变投票间隔l [1-59s]"
+      },
       "2.0.0": {
         "en": "changes for new websocket structure ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` and `DC Power` moved from the AC section to the INV (old data points must be removed manually)",
         "de": "änderungen für neue Websocket-Struktur ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` und `DC Power` von der AC-Sektion zum INV bewegt (alte Datenpunkte müssen manuell entfernt werden)",
@@ -80,19 +93,6 @@
         "pl": "regulacja kontroli mocy (pol.)",
         "uk": "фіксувати контроль потужності (power_off)",
         "zh-cn": "fix 权力控制(力量/力量)"
-      },
-      "0.1.5": {
-        "en": "code optimizations",
-        "de": "codeoptimierungen",
-        "ru": "оптимизация кода",
-        "pt": "otimizações de código",
-        "nl": "vertaling:",
-        "fr": "optimisation des codes",
-        "it": "ottimizzazioni del codice",
-        "es": "optimizaciones de código",
-        "pl": "optymalizacja kodu",
-        "uk": "оптимізація коду",
-        "zh-cn": "准则的优化"
       }
     },
     "titleLang": {

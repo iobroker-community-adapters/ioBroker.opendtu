@@ -42,6 +42,14 @@ For more information on the data points, see their description or click [here](h
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 2.1.0 (2024-10-11)
+
+- (o0shojo0o) update dependencies
+- (mattreim) support small screens
+- (mattreim) update translations
+- (mattreim) update object names
+- (mattreim) add variable polling intervall [1-59s]
+
 ### 2.0.0 (2024-08-13)
 
 - (o0shojo0o) changes for new websocket structure ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))
