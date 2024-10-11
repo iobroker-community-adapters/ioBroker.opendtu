@@ -18,5 +18,3 @@ updates:
       time: "04:00"
       timezone: Europe/Berlin
     open-pull-requests-limit: 20
-    assignees:
-      - o0shojo0o
