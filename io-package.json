@@ -180,7 +180,6 @@
     "webUIScheme": "http",
     "webUIServer": "",
     "webUIPort": 80,
-    "webUIPoll": 30,
     "userName": "admin",
     "password": "",
     "protectNames": false,

@@ -46,16 +46,6 @@
 			"md": 2,
 			"lg": 1
 		},
-		"webUIPoll": {
-			"type": "number",
-			"label": "WebPoll",
-			"min": 1,
-			"max": 59,
-			"xs": 12,
-			"sm": 4,
-			"md": 2,
-			"lg": 2
-		},
 		"password": {
 			"newLine": true,
 			"type": "password",
