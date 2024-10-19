@@ -13,7 +13,6 @@ let limitApiURL;
 let powerApiURL;
 let websocketController;
 let dataController;
-let Poll;
 
 class Opendtu extends utils.Adapter {
     constructor(options) {
@@ -52,12 +51,10 @@ class Opendtu extends utils.Adapter {
         // Start the websocket connection and initiate data retrieval from DTU
         this.startWebsocket();
         this.getDTUData();
-        Poll = this.config.webUIPoll;
-        this.log.info(`Polling every ${this.config.webUIPoll} seconds...`);
 
         // Schedule jobs to run at specified intervals using Cron-style syntax
         schedule.scheduleJob('rewriteYildTotal', '0 1 0 * * *', () => this.rewriteYildTotal());
-        schedule.scheduleJob('getDTUData', '*/' + Poll + ' * * * * *', () => this.getDTUData());
+        schedule.scheduleJob('getDTUData', '*/1 * * * *', () => this.getDTUData());
     }
 
     // This function gets called whenever there's a state change in the system.
