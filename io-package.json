@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "2.1.0",
+    "version": "3.0.0",
     "news": {
+      "3.0.0": {
+        "en": "Adapter has been moved to iobroker-community-adapter organisation.\nAdapter requires js-controller 5, admin 6 and node.js 20 now.\nDependencies have been updated.",
+        "de": "Adapter wurde in die iobroker-community-Adapter-Organisation verschoben.\nAdapter benötigt jetzt js-controller 5, admin 6 und node.js 20.\nAbhängigkeiten wurden aktualisiert.",
+        "ru": "Адаптер был перемещен в организацию iobroker-community-adapter.\nAdapter requires js-controller 5, admin 6 and node.js 20 now.\nЗависимость была обновлена.",
+        "pt": "Adapter foi transferido para a organização iobroker-community-adapter.\nAdaptador requer js-controller 5, admin 6 e node.js 20 agora.\nAs dependências foram atualizadas.",
+        "nl": "Adapter is verplaatst naar iobroker-community-adapter organisatie.\nAdapter vereist js-controller 5, admin 6 en node.js 20 nu.\nAfhankelijkheden zijn bijgewerkt.",
+        "fr": "L'adaptateur a été transféré à l'organisation iobroker-community-adaptateur.\nAdaptateur nécessite js-controller 5, admin 6 et node.js 20 maintenant.\nLes dépendances ont été actualisées.",
+        "it": "L'adattatore è stato spostato nell'organizzazione di iobroker-community-adapter.\nAdattatore richiede js-controller 5, admin 6 e node.js 20 ora.\nLe dipendenze sono state aggiornate.",
+        "es": "El adaptador ha sido trasladado a la organización yobroker-community-adapter.\nAdaptador requiere js-controller 5, admin 6 y node.js 20 ahora.\nSe han actualizado las dependencias.",
+        "pl": "Adapter został przeniesiony do organizacji iobroker- community- adapter.\nAdapter wymaga sterownika js- controller 5, admin 6 i node.js 20.\nZaktualizowano zależność.",
+        "uk": "Переміщено перехід на iobroker-community-adapter.\nАдаптер вимагає js-controller 5, admin 6 і node.js 20 тепер.\nОновлено залежність.",
+        "zh-cn": "适应者已经转移到了职业经纪人-社区适应者组织.\n适配器现在需要js控制器5,admin 6和节点20.js.\n附属关系已经更新."
+      },
       "2.1.0": {
         "en": "update dependencies\nsupport small screens\nupdate translations\nupdate object names\nadd variable polling intervall [1-59s]",
         "de": "aktualisierung der abhängigkeiten\nkleine bildschirme unterstützen\nübersetzungen aktualisieren\nänderung der objektnamen\nvariable abfrageintervall hinzufügen [1-59s]",
@@ -17,17 +30,17 @@
         "zh-cn": "更新依赖关系\n支持小屏幕\n更新翻译\n更新对象名称\n添加可变投票间隔l [1-59s]"
       },
       "2.0.0": {
-        "en": "changes for new websocket structure ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` and `DC Power` moved from the AC section to the INV (old data points must be removed manually)",
-        "de": "änderungen für neue Websocket-Struktur ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` und `DC Power` von der AC-Sektion zum INV bewegt (alte Datenpunkte müssen manuell entfernt werden)",
-        "ru": "изменения для новой структуры веб-сокета ([#129] (https://github.com/o0shojo0o/ioBroker.opendtu/issues/129)\n`Efficiency \" , `YieldTotal \" , `YieldDay \" и `DC Power \" перенесены из раздела AC в ИНВ (старые точки данных должны быть удалены вручную)",
-        "pt": "alterações para nova estrutura websocket ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Eficiência`, `YieldTotal`, `YieldDay` e `DC Power` movido da seção AC para a INV (velhos pontos de dados devem ser removidos manualmente)",
-        "nl": "wijzigingen voor nieuwe websocketstructuur ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` and `DC Power` moved from the AC section to the INV (old data points must be removed manually)",
-        "fr": "changements pour la nouvelle structure de la poche web ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Efficacité`, `YieldTotal`, `YieldDay` et `DC Power` déplacés de la section AC à l'INV (les anciens points de données doivent être supprimés manuellement)",
-        "it": "modifiche per la nuova struttura websocket ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n`Efficienza`, `YieldTotal`, `YieldDay` e `DC Power` spostati dalla sezione AC al INV (i vecchi punti di dati devono essere rimossi manualmente)",
-        "es": "(https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n\" Eficiencia \" , `YieldTotal ' , `YieldDay ' y `DC Power ' se trasladaron de la sección AC al INV (los antiguos puntos de datos deben eliminarse manualmente)",
-        "pl": "zmiany w strukturze nowego gniazda sieciowego ([# 129] (https: / / github.com / o0shojo0o / ioBroker.opendtu / issues / 129)\n\"Efektywność\", \"YieldTotal\", \"YieldDay\" i \"DC Power\" przeniesione z sekcji AC do INV (stare punkty danych muszą być usunięte ręcznie)",
-        "uk": "[#129](https://github.com/o0shojo0o/ioBroker.opendtu/languages/129))\n`Efficiency`, `YieldTotal`, `YieldDay` і `DC Power` перемістили з розділу змінного струму до INV (старі дані повинні бути видалені вручну)",
-        "zh-cn": "新的websocket结构的变化([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))\n\" 效率 \" 、 \" YieldTotal \" 、 \" YieldDay \" 和 \" DC Power \" 从AC区移至INV区(旧数据点必须手工删除)"
+        "en": "changes for new websocket structure ([#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` and `DC Power` moved from the AC section to the INV (old data points must be removed manually)",
+        "de": "änderungen für neue Websocket-Struktur ([#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` und `DC Power` von der AC-Sektion zum INV bewegt (alte Datenpunkte müssen manuell entfernt werden)",
+        "ru": "изменения для новой структуры веб-сокета ([#129] (https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129)\n`Efficiency \" , `YieldTotal \" , `YieldDay \" и `DC Power \" перенесены из раздела AC в ИНВ (старые точки данных должны быть удалены вручную)",
+        "pt": "alterações para nova estrutura websocket ([#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n`Eficiência`, `YieldTotal`, `YieldDay` e `DC Power` movido da seção AC para a INV (velhos pontos de dados devem ser removidos manualmente)",
+        "nl": "wijzigingen voor nieuwe websocketstructuur ([#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n`Efficiency`, `YieldTotal`, `YieldDay` and `DC Power` moved from the AC section to the INV (old data points must be removed manually)",
+        "fr": "changements pour la nouvelle structure de la poche web ([#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n`Efficacité`, `YieldTotal`, `YieldDay` et `DC Power` déplacés de la section AC à l'INV (les anciens points de données doivent être supprimés manuellement)",
+        "it": "modifiche per la nuova struttura websocket ([#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n`Efficienza`, `YieldTotal`, `YieldDay` e `DC Power` spostati dalla sezione AC al INV (i vecchi punti di dati devono essere rimossi manualmente)",
+        "es": "(https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n\" Eficiencia \" , `YieldTotal ' , `YieldDay ' y `DC Power ' se trasladaron de la sección AC al INV (los antiguos puntos de datos deben eliminarse manualmente)",
+        "pl": "zmiany w strukturze nowego gniazda sieciowego ([# 129] (https: / / github.com / iobroker-community-adapters / ioBroker.opendtu / issues / 129)\n\"Efektywność\", \"YieldTotal\", \"YieldDay\" i \"DC Power\" przeniesione z sekcji AC do INV (stare punkty danych muszą być usunięte ręcznie)",
+        "uk": "[#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/languages/129))\n`Efficiency`, `YieldTotal`, `YieldDay` і `DC Power` перемістили з розділу змінного струму до INV (старі дані повинні бути видалені вручну)",
+        "zh-cn": "新的websocket结构的变化([#129](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/129))\n\" 效率 \" 、 \" YieldTotal \" 、 \" YieldDay \" 和 \" DC Power \" 从AC区移至INV区(旧数据点必须手工删除)"
       },
       "1.0.1": {
         "en": "fixed `power_control.current_limit_absolute\" has value \"-1\" less than min \"0\"`",
@@ -43,56 +56,30 @@
         "zh-cn": "固定的`权力':控制. 平行_限性_absolute”数值-1低于分钟 0%"
       },
       "1.0.0": {
-        "en": "Increase to the first major release, as it has now reached a stable level. \nadded yieldtotal Protection against incorrect zeroing when the OpenDTU restarts if the inverter is not accessible\nadded option `Set the states to 0 if the inverter is not accessible.` ([#97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97))",
-        "de": "Erhöhen Sie die erste große Freigabe, da sie jetzt ein stabiles Niveau erreicht hat.\nzusatzrendite Schutz vor falschem Nullen beim Neustart der OpenDTU, wenn der Wechselrichter nicht zugänglich ist\nzusatzoption Setzen Sie die Zustände auf 0, wenn der Wechselrichter nicht erreichbar ist.` #[97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97)",
-        "ru": "Повысьте первый крупный выпуск, так как он теперь достиг стабильного уровня.\nдобавлена доходность Защита от неправильного нуля при возобновлении OpenDTU, если инвертор недоступен\nдобавлена опция `Смотри состояния на 0, если инвертор недоступен.` #[97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97)",
-        "pt": "Aumento ao primeiro grande lançamento, já que agora atingiu um nível estável.\nadicionados de rendimento Proteção contra zeros incorretos quando o OpenDTU reinicia se o inversor não é acessível\nopção adicionada `Configurar os estados para 0 se o inversor não estiver acessível.`#[97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97)",
+        "en": "Increase to the first major release, as it has now reached a stable level. \nadded yieldtotal Protection against incorrect zeroing when the OpenDTU restarts if the inverter is not accessible\nadded option `Set the states to 0 if the inverter is not accessible.` ([#97](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97))",
+        "de": "Erhöhen Sie die erste große Freigabe, da sie jetzt ein stabiles Niveau erreicht hat.\nzusatzrendite Schutz vor falschem Nullen beim Neustart der OpenDTU, wenn der Wechselrichter nicht zugänglich ist\nzusatzoption Setzen Sie die Zustände auf 0, wenn der Wechselrichter nicht erreichbar ist.` #[97](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97)",
+        "ru": "Повысьте первый крупный выпуск, так как он теперь достиг стабильного уровня.\nдобавлена доходность Защита от неправильного нуля при возобновлении OpenDTU, если инвертор недоступен\nдобавлена опция `Смотри состояния на 0, если инвертор недоступен.` #[97](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97)",
+        "pt": "Aumento ao primeiro grande lançamento, já que agora atingiu um nível estável.\nadicionados de rendimento Proteção contra zeros incorretos quando o OpenDTU reinicia se o inversor não é acessível\nopção adicionada `Configurar os estados para 0 se o inversor não estiver acessível.`#[97](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97)",
         "nl": "Verhoog de eerste grote vrijlating, zoals het nu een stabiel niveau bereikt heeft.\nvertaling: Bescherming tegen onjuiste nulling als de OpenDTU herstart als de inverter niet toegankelijk is\noptie toegevoegd Zet de staten tot 0 als de inverter niet toegankelijk is",
-        "fr": "Accroître à la première version majeure, car elle a maintenant atteint un niveau stable.\nrendement ajouté Protection contre le zéro incorrect lorsque l'OpenDTU redémarre si l'onduleur n'est pas accessible\noption ajoutée `Set the states to 0 if the inverter is not accessible.` #[97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97)",
+        "fr": "Accroître à la première version majeure, car elle a maintenant atteint un niveau stable.\nrendement ajouté Protection contre le zéro incorrect lorsque l'OpenDTU redémarre si l'onduleur n'est pas accessible\noption ajoutée `Set the states to 0 if the inverter is not accessible.` #[97](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97)",
         "it": "Aumento del primo rilascio importante, come ora ha raggiunto un livello stabile.\nrendimento aggiunto Protezione contro lo zero non corretto quando l'OpenDTU riavvia se l'inverter non è accessibile\nopzione aggiunta «Settare gli stati a 0 se l'inverter non è accessibile»",
-        "es": "Incremento a la primera liberación importante, ya que ahora ha alcanzado un nivel estable.\nrendimiento añadido Protección contra cero incorrecto cuando el OpenDTU reinicia si el inversor no es accesible\nopción `Contar los estados a 0 si el inversor no es accesible.` #[97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97)",
-        "pl": "Wstęp do pierwszego większego wydania, jak się teraz osiągnął stabilny poziom.\ndodać Ochrona przed nieprawidłowym zerwaniem, gdy restartuje OpenDTU, jeśli inwerter nie jest dostępny\ndodać `Set the State to 0 if the inverter is not available.' #97(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/97) (ang.)",
-        "uk": "Підвищити перший великий реліз, оскільки він досяг стабільного рівня.\nдоданий врожай Захист від неправильного нулювання при перезавантаженні OpenDTU, якщо інвертор не доступний\nдодано параметр `Set стани до 0, якщо інвертор не доступний.` #[97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97)",
+        "es": "Incremento a la primera liberación importante, ya que ahora ha alcanzado un nivel estable.\nrendimiento añadido Protección contra cero incorrecto cuando el OpenDTU reinicia si el inversor no es accesible\nopción `Contar los estados a 0 si el inversor no es accesible.` #[97](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97)",
+        "pl": "Wstęp do pierwszego większego wydania, jak się teraz osiągnął stabilny poziom.\ndodać Ochrona przed nieprawidłowym zerwaniem, gdy restartuje OpenDTU, jeśli inwerter nie jest dostępny\ndodać `Set the State to 0 if the inverter is not available.' #97(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97) (ang.)",
+        "uk": "Підвищити перший великий реліз, оскільки він досяг стабільного рівня.\nдоданий врожай Захист від неправильного нулювання при перезавантаженні OpenDTU, якщо інвертор не доступний\nдодано параметр `Set стани до 0, якщо інвертор не доступний.` #[97](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/97)",
         "zh-cn": "增加第一批主要释放,因为现在已达到稳定水平。.\n增产 如果不易懂的话,保护不纠正零碎的现象。\n备选案文 “国家如果不能获得多样性,即为0.。”"
       },
       "0.1.8": {
-        "en": "added option `Protect self-set names from being overwritten by the adapter` ([#76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76))\nallow multiple AdminTabs for multiple instances ([#88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88))\nfixed password with special characters ([#35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35))\nfixed incorrect handling of zeroing of `yield*` data points by OpenDTU ([#96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96))\nremove zeroing of `yield*` data points by this adapter ([#96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96))",
-        "de": "`Protect self-set names from being overwritten by the adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nmehrere AdminTabs für mehrere Instanzen #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nfestes Passwort mit Sonderzeichen #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nunrichtige Handhabung des Nullens von Ertrag*-Datenpunkten durch OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nlöschen von Ertrags-*-Datenpunkten durch diesen Adapter #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "ru": "добавлена опция `Protect self-set имена от overwritten by the Adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nразрешить несколько AdminTabs для нескольких экземпляров #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nфиксированный пароль со специальными символами #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nнекорректная обработка нуля доходности* пунктов данных OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nудалить нулевую доходность* точки данных этого адаптера #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "pt": "opção adicionada `Protect auto-ajustar nomes de ser substituído pelo adaptador` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npermitir múltiplos AdminTabs para múltiplas instâncias #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nsenha fixa com caracteres especiais #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nmanuseio incorreto fixo de zero dos pontos de dados do rendimento* pela OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nremover zero de pontos de dados de rendimento* por este adaptador #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
+        "en": "added option `Protect self-set names from being overwritten by the adapter` ([#76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76))\nallow multiple AdminTabs for multiple instances ([#88](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88))\nfixed password with special characters ([#35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35))\nfixed incorrect handling of zeroing of `yield*` data points by OpenDTU ([#96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96))\nremove zeroing of `yield*` data points by this adapter ([#96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96))",
+        "de": "`Protect self-set names from being overwritten by the adapter` #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\nmehrere AdminTabs für mehrere Instanzen #[88](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nfestes Passwort mit Sonderzeichen #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nunrichtige Handhabung des Nullens von Ertrag*-Datenpunkten durch OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\nlöschen von Ertrags-*-Datenpunkten durch diesen Adapter #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
+        "ru": "добавлена опция `Protect self-set имена от overwritten by the Adapter` #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\nразрешить несколько AdminTabs для нескольких экземпляров #[88](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nфиксированный пароль со специальными символами #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nнекорректная обработка нуля доходности* пунктов данных OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\nудалить нулевую доходность* точки данных этого адаптера #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
+        "pt": "opção adicionada `Protect auto-ajustar nomes de ser substituído pelo adaptador` #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\npermitir múltiplos AdminTabs para múltiplas instâncias #[88](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nsenha fixa com caracteres especiais #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nmanuseio incorreto fixo de zero dos pontos de dados do rendimento* pela OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\nremover zero de pontos de dados de rendimento* por este adaptador #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
         "nl": "voegde optie 'Protect zelfverzekerde namen toe van overschreven worden door de adapter' technieken\nquality over Quantity (QoQ) Releases Vertaling:\ngerepareerd wachtwoord met speciale personages £35, htub.com/oshojoo/ioBroker\ngecorrecteerd met nuling of yield - data punten door OpenDTU nr.6\nverwijder de gegevens van de adapter _96:",
-        "fr": "option ajoutée `Protect self-set names from being overwritten by the adapt` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nautoriser plusieurs AdminTabs pour plusieurs instances #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nmot de passe fixe avec caractères spéciaux #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nmanipulation incorrecte fixe des points de données de rendement* par OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nsupprimer zéro des points de données de rendement* par cet adaptateur #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "it": "opzione aggiunta `Proteggere i nomi di auto-set da essere sovrascritti dall'adattatore` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nconsentire più AdminTabs per più istanze #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\npassword fissa con caratteri speciali #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\ngestione errata fissa dei punti di dati di rendimento* da parte di OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nrimuovere lo zero dei dati di rendimento* da questo adattatore #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "es": "añadido opción `Protect self-set names from being overwritten by the adapter` #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npermitir múltiples AdminTabs para múltiples instancias #[88](https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\ncontraseña fija con caracteres especiales #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nsolucion incorrect handling of ceroing of yield* data points by OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\neliminar cero puntos de datos de rendimiento* por este adaptador #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "pl": "dodał opcję 'Protect', która została napisana przez adapter' #76(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/76)\npozwala na wiele instancji #88(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nstałe hasło z specjalnymi znakami #35 (https:/github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nnieprawidłowa obsługa zerowych punktów danych przez OpenDTU #96(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/96)\n( usuwanie zużytych punktów danych poprzez ten adapter #96(https:/github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "uk": "додано опцію `Захистити імена з перезапису адаптера #[76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)\nможливість використання декількох додатків AdminTabs для декількох екземплярів #[88] (https://github.com/o0shojo0o/ioBroker.opendtu/issues/88)\nфіксований пароль з особливими героями #[35](https://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\nвиправлено неправильне поводження з нульовим рівнем врожайності* точок даних OpenDTU #[96](https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\nвидаліть нульовий приріст даних * за допомогою цього адаптера #[96] (https://github.com/o0shojo0o/ioBroker.opendtu/issues/96)",
-        "zh-cn": "备选案文:“适应者`第[76]号(https://github.com/o0shojo0o/ioBroker.opendtu/issues/76)误用自发名称。\n允许许多 Admin Tabs采取多种行动[88](http://github.com/oshojo0o/ioBroker)。\n具有特殊特点的固定密码(http://github.com/o0shojo0o/ioBroker.opendtu/issues/35)\n固定不正确地处理生产的零散情况* 数据点:开放的DTU #[96](http://github.com/o0shojo0o/ioBroker.opendtu/issues/96)\n(http://github.com/oshojo0o/ioBroker.opendtu/issues/96)"
-      },
-      "0.1.7": {
-        "en": "workaround for incorrectly used button data point",
-        "de": "workaround für falsch genutzte tastendatenpunkt",
-        "ru": "workaround для неправильно использованного пункта данных кнопки",
-        "pt": "solução alternativa para o ponto de dados do botão incorretamente usado",
-        "nl": "werken voor onjuist gebruikt knopgegevens",
-        "fr": "workaround for incorrectly used button data point",
-        "it": "workaround per il punto di dati del pulsante non corretto",
-        "es": "workaround for incorrectly used botón data point",
-        "pl": "wokół pracy nieprawidłowo używany punkt danych przycisków",
-        "uk": "робота для неправильного використання точки даних",
-        "zh-cn": "使用不当但顿数据点的工作"
-      },
-      "0.1.6": {
-        "en": "fix power control (power_off)",
-        "de": "festnetzsteuerung (power_off)",
-        "ru": "управление властью (power_off)",
-        "pt": "corrigir o controle de energia (power_off)",
-        "nl": "vertaling:",
-        "fr": "commande de puissance (power_off)",
-        "it": "correzione del controllo di potenza (power_off)",
-        "es": "fijar control de potencia (power_off)",
-        "pl": "regulacja kontroli mocy (pol.)",
-        "uk": "фіксувати контроль потужності (power_off)",
-        "zh-cn": "fix 权力控制(力量/力量)"
+        "fr": "option ajoutée `Protect self-set names from being overwritten by the adapt` #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\nautoriser plusieurs AdminTabs pour plusieurs instances #[88](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nmot de passe fixe avec caractères spéciaux #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nmanipulation incorrecte fixe des points de données de rendement* par OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\nsupprimer zéro des points de données de rendement* par cet adaptateur #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
+        "it": "opzione aggiunta `Proteggere i nomi di auto-set da essere sovrascritti dall'adattatore` #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\nconsentire più AdminTabs per più istanze #[88](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\npassword fissa con caratteri speciali #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\ngestione errata fissa dei punti di dati di rendimento* da parte di OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\nrimuovere lo zero dei dati di rendimento* da questo adattatore #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
+        "es": "añadido opción `Protect self-set names from being overwritten by the adapter` #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\npermitir múltiples AdminTabs para múltiples instancias #[88](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\ncontraseña fija con caracteres especiales #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nsolucion incorrect handling of ceroing of yield* data points by OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\neliminar cero puntos de datos de rendimiento* por este adaptador #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
+        "pl": "dodał opcję 'Protect', która została napisana przez adapter' #76(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\npozwala na wiele instancji #88(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nstałe hasło z specjalnymi znakami #35 (https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nnieprawidłowa obsługa zerowych punktów danych przez OpenDTU #96(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\n( usuwanie zużytych punktów danych poprzez ten adapter #96(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
+        "uk": "додано опцію `Захистити імена з перезапису адаптера #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\nможливість використання декількох додатків AdminTabs для декількох екземплярів #[88] (https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nфіксований пароль з особливими героями #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nвиправлено неправильне поводження з нульовим рівнем врожайності* точок даних OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\nвидаліть нульовий приріст даних * за допомогою цього адаптера #[96] (https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
+        "zh-cn": "备选案文:“适应者`第[76]号(https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)误用自发名称。\n允许许多 Admin Tabs采取多种行动[88](http://github.com/oshojo0o/ioBroker)。\n具有特殊特点的固定密码(http://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\n固定不正确地处理生产的零散情况* 数据点:开放的DTU #[96](http://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\n(http://github.com/oshojo0o/ioBroker.opendtu/issues/96)"
       }
     },
     "titleLang": {
@@ -122,7 +109,8 @@
       "uk": "Адаптер для проекту OpenDTU"
     },
     "authors": [
-      "Dennis Rathjen <dennis.rathjen@outlook.de>"
+      "Dennis Rathjen <dennis.rathjen@outlook.de>",
+      "Iobroker Community<iobroker-community-adapters@gmx.de>"
     ],
     "keywords": [
       "OpenDTU",
@@ -135,8 +123,8 @@
     "platform": "Javascript/Node.js",
     "icon": "opendtu.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/o0shojo0o/ioBroker.opendtu/main/admin/opendtu.png",
-    "readme": "https://github.com/o0shojo0o/ioBroker.opendtu/blob/main/README.md",
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.opendtu/main/admin/opendtu.png",
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.opendtu/blob/main/README.md",
     "loglevel": "info",
     "mode": "daemon",
     "tier": 2,
@@ -172,7 +160,7 @@
     ],
     "globalDependencies": [
       {
-        "admin": ">=5.1.13"
+        "admin": ">=6.17.14"
       }
     ]
   },
