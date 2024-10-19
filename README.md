@@ -43,7 +43,7 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### 3.0.0-alpha.0 (2024-10-19)
+### **WORK IN PROGRESS**
 - (mcm1957) Adapter has been moved to iobroker-community-adapter organisation.
 - (mcm1957) Adapter requires js-controller 5, admin 6 and node.js 20 now.
 - (mcm1957) Dependencies have been updated.
