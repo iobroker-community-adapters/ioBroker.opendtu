@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "3.0.0-alpha.0",
+    "version": "3.0.0",
     "news": {
-      "3.0.0-alpha.0": {
+      "3.0.0": {
         "en": "Adapter has been moved to iobroker-community-adapter organisation.\nAdapter requires js-controller 5, admin 6 and node.js 20 now.\nDependencies have been updated.",
         "de": "Adapter wurde in die iobroker-community-Adapter-Organisation verschoben.\nAdapter benötigt jetzt js-controller 5, admin 6 und node.js 20.\nAbhängigkeiten wurden aktualisiert.",
         "ru": "Адаптер был перемещен в организацию iobroker-community-adapter.\nAdapter requires js-controller 5, admin 6 and node.js 20 now.\nЗависимость была обновлена.",
@@ -80,19 +80,6 @@
         "pl": "dodał opcję 'Protect', która została napisana przez adapter' #76(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\npozwala na wiele instancji #88(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nstałe hasło z specjalnymi znakami #35 (https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nnieprawidłowa obsługa zerowych punktów danych przez OpenDTU #96(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\n( usuwanie zużytych punktów danych poprzez ten adapter #96(https:/github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
         "uk": "додано опцію `Захистити імена з перезапису адаптера #[76](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)\nможливість використання декількох додатків AdminTabs для декількох екземплярів #[88] (https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/88)\nфіксований пароль з особливими героями #[35](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\nвиправлено неправильне поводження з нульовим рівнем врожайності* точок даних OpenDTU #[96](https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\nвидаліть нульовий приріст даних * за допомогою цього адаптера #[96] (https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)",
         "zh-cn": "备选案文:“适应者`第[76]号(https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/76)误用自发名称。\n允许许多 Admin Tabs采取多种行动[88](http://github.com/oshojo0o/ioBroker)。\n具有特殊特点的固定密码(http://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/35)\n固定不正确地处理生产的零散情况* 数据点:开放的DTU #[96](http://github.com/iobroker-community-adapters/ioBroker.opendtu/issues/96)\n(http://github.com/oshojo0o/ioBroker.opendtu/issues/96)"
-      },
-      "0.1.7": {
-        "en": "workaround for incorrectly used button data point",
-        "de": "workaround für falsch genutzte tastendatenpunkt",
-        "ru": "workaround для неправильно использованного пункта данных кнопки",
-        "pt": "solução alternativa para o ponto de dados do botão incorretamente usado",
-        "nl": "werken voor onjuist gebruikt knopgegevens",
-        "fr": "workaround for incorrectly used button data point",
-        "it": "workaround per il punto di dati del pulsante non corretto",
-        "es": "workaround for incorrectly used botón data point",
-        "pl": "wokół pracy nieprawidłowo używany punkt danych przycisków",
-        "uk": "робота для неправильного використання точки даних",
-        "zh-cn": "使用不当但顿数据点的工作"
       }
     },
     "titleLang": {

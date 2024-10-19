@@ -1,6 +1,6 @@
 {
   "name": "iobroker.opendtu",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0",
   "description": "Adapter for the OpenDTU project",
   "author": {
     "name": "Dennis Rathjen",
