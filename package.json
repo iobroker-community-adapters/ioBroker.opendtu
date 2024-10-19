@@ -6,7 +6,13 @@
     "name": "Dennis Rathjen",
     "email": "dennis.rathjen@outlook.de"
   },
-  "homepage": "https://github.com/o0shojo0o/ioBroker.opendtu",
+  "contributors": [
+    {
+      "name": "iobroker-community-adapters",
+      "email": "iobroker-community-adapters@gmx.de"
+    }
+  ],
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.opendtu",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -15,10 +21,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/o0shojo0o/ioBroker.opendtu.git"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.opendtu.git"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.2.1",
