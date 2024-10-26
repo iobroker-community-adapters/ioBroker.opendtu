@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "opendtu",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "news": {
+      "3.0.1": {
+        "en": "Admin-UI has been adapted for small displays.\nDependencies have been updated.",
+        "de": "Admin-UI wurde für kleine Displays angepasst.\nAbhängigkeiten wurden aktualisiert.",
+        "ru": "Admin-UI был адаптирован для небольших дисплеев.\nЗависимость была обновлена.",
+        "pt": "Admin-UI foi adaptado para pequenos monitores.\nAs dependências foram atualizadas.",
+        "nl": "Beheerder-UI is aangepast voor kleine displays.\nAfhankelijkheden zijn bijgewerkt.",
+        "fr": "Admin-UI a été adapté pour les petits affichages.\nLes dépendances ont été actualisées.",
+        "it": "Admin-UI è stato adattato per piccoli display.\nLe dipendenze sono state aggiornate.",
+        "es": "Admin-UI ha sido adaptado para pequeñas pantallas.\nSe han actualizado las dependencias.",
+        "pl": "Admin- UI został dostosowany do małych wyświetlaczy.\nZaktualizowano zależność.",
+        "uk": "Адмін-УІ адаптований для малих дисплеїв.\nОновлено залежність.",
+        "zh-cn": "Admin-UI已经适应了小型显示功能.\n附属关系已经更新."
+      },
       "3.0.0": {
         "en": "Adapter has been moved to iobroker-community-adapter organisation.\nAdapter requires js-controller 5, admin 6 and node.js 20 now.\nDependencies have been updated.",
         "de": "Adapter wurde in die iobroker-community-Adapter-Organisation verschoben.\nAdapter benötigt jetzt js-controller 5, admin 6 und node.js 20.\nAbhängigkeiten wurden aktualisiert.",
