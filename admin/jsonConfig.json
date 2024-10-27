@@ -26,11 +26,11 @@
 					"value": "https"
 				}
 			],
-			"xs": 12,
-			"sm": 12,
-			"md": 6,
-			"lg": 3,
-			"xl": 3
+			"xs": 6,
+			"sm": 6,
+			"md": 2,
+			"lg": 2,
+			"xl": 1
 		},
 		"webUIServer": {
 			"type": "text",
@@ -46,22 +46,22 @@
 			"label": "WebPort",
 			"min": 1,
 			"max": 65535,
-			"xs": 12,
-			"sm": 12,
-			"md": 6,
-			"lg": 3,
-			"xl": 3
+			"xs": 6,
+			"sm": 6,
+			"md": 2,
+			"lg": 2,
+			"xl": 1
 		},
 		"webUIPoll": {
 			"type": "number",
 			"label": "WebPoll",
 			"min": 1,
 			"max": 59,
-			"xs": 12,
-			"sm": 12,
-			"md": 6,
-			"lg": 3,
-			"xl": 3
+			"xs": 6,
+			"sm": 6,
+			"md": 2,
+			"lg": 2,
+			"xl": 1
 		},
 		"password": {
 			"newLine": true,
