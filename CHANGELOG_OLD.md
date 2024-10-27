@@ -1,4 +1,10 @@
 # Older changes
+## 1.0.0 (2023-10-01)
+
+- (o0shojo0o) Increase to the first major release, as it has now reached a stable level. 
+- (o0shojo0o) added yieldtotal Protection against incorrect zeroing when the OpenDTU restarts if the inverter is not accessible
+- (o0shojo0o) added option `Set the states to 0 if the inverter is not accessible.` ([#97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97))
+
 ## 0.1.8 (2023-09-22)
 
 - (o0shojo0o) added option `Protect self-set names from being overwritten by the adapter` ([#76](https://github.com/o0shojo0o/ioBroker.opendtu/issues/76))

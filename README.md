@@ -43,6 +43,10 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 3.0.1 (2024-10-26)
+- (simatec) Admin-UI has been adapted for small displays.
+- (mcm1957) Dependencies have been updated.
+
 ### 3.0.0 (2024-10-19)
 - (mcm1957) Adapter has been moved to iobroker-community-adapter organisation.
 - (mcm1957) Adapter requires js-controller 5, admin 6 and node.js 20 now.
@@ -67,12 +71,6 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 ### 1.0.1 (2023-10-29)
 
 - (o0shojo0o) fixed `power_control.current_limit_absolute" has value "-1" less than min "0"`
-
-### 1.0.0 (2023-10-01)
-
-- (o0shojo0o) Increase to the first major release, as it has now reached a stable level. 
-- (o0shojo0o) added yieldtotal Protection against incorrect zeroing when the OpenDTU restarts if the inverter is not accessible
-- (o0shojo0o) added option `Set the states to 0 if the inverter is not accessible.` ([#97](https://github.com/o0shojo0o/ioBroker.opendtu/issues/97))
 
 ## License
 MIT License
