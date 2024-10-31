@@ -44,6 +44,7 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+- (mattreim) Description has benn translated into supported languages.
 - (mattreim) Admin-UI has been adapted for some display sizes.
 
 ### 3.0.1 (2024-10-26)
