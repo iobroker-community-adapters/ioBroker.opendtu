@@ -110,16 +110,16 @@
     },
     "desc": {
       "en": "Adapter for the OpenDTU project",
-      "de": "Adapter for the OpenDTU project",
-      "ru": "Adapter for the OpenDTU project",
-      "pt": "Adapter for the OpenDTU project",
-      "nl": "Adapter for the OpenDTU project",
-      "fr": "Adapter for the OpenDTU project",
-      "it": "Adapter for the OpenDTU project",
-      "es": "Adapter for the OpenDTU project",
-      "pl": "Adapter for the OpenDTU project",
-      "zh-cn": "Adapter for the OpenDTU project",
-      "uk": "Адаптер для проекту OpenDTU"
+      "de": "Adapter für das OpenDTU-Projekt",
+      "ru": "Адаптер для проекта OpenDTU",
+      "pt": "Adaptador para o projeto OpenDTU",
+      "nl": "Adapter voor het OpenDTU project",
+      "fr": "Adaptateur pour le projet OpenDTU",
+      "it": "Adattatore per il progetto OpenDTU",
+      "es": "Adaptador para el proyecto OpenDTU",
+      "pl": "Adapter dla projektu OpenDTU",
+      "uk": "Адаптер для проекту OpenDTU",
+      "zh-cn": "OpenDTU 项目的适配器"
     },
     "authors": [
       "Dennis Rathjen <dennis.rathjen@outlook.de>",

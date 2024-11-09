@@ -43,6 +43,10 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (mattreim) Description has benn translated into supported languages.
+- (mattreim) Admin-UI has been adapted for some display sizes.
+
 ### 3.0.1 (2024-10-26)
 - (simatec) Admin-UI has been adapted for small displays.
 - (mcm1957) Dependencies have been updated.
