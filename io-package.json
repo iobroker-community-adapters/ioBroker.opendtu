@@ -161,6 +161,7 @@
         "it": "OpenDTU",
         "es": "OpenDTU",
         "pl": "OpenDTU",
+        "uk": "OpenDTU",
         "zh-cn": "OpenDTU"
       },
       "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
