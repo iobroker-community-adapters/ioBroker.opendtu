@@ -1,9 +1,7 @@
 'use strict';
 const utils = require('@iobroker/adapter-core');
 const { default: axios } = require('axios');
-// @ts-ignore
 const schedule = require('node-schedule');
-// @ts-ignore
 const WebsocketController = require('./lib/websocketController').WebsocketController;
 const DataController = require('./lib/dataController').DataController;
 
@@ -26,7 +24,6 @@ class Opendtu extends utils.Adapter {
     }
 
     async onReady() {
-
         // Check if webUIServer is configured, log warning message and return if not
         if (!this.config.webUIServer) {
             this.log.warn('Please configure the Websoket connection!');
@@ -160,7 +157,7 @@ class Opendtu extends utils.Adapter {
             this.log.info('Connect to OpenDTU over websocket connection.');
         });
 
-        wsClient.on('message', (message) => {
+        wsClient.on('message', message => {
             this.processMessage(message);
         });
 
@@ -169,14 +166,12 @@ class Opendtu extends utils.Adapter {
         });
     }
 
-    // @ts-ignore
     async processMessage(message, isObject) {
         try {
             if (!isObject) {
                 message = JSON.parse(message);
             }
-        }
-        catch (err) {
+        } catch (err) {
             this.log.error(err);
             this.log.debug(message);
         }
@@ -255,7 +250,9 @@ class Opendtu extends utils.Adapter {
 
     async allAvailableToFalse() {
         // Get all available StateIDs
-        const allAvailableStates = Object.keys(await this.getAdapterObjectsAsync()).filter(x => x.endsWith('.available'));
+        const allAvailableStates = Object.keys(await this.getAdapterObjectsAsync()).filter(x =>
+            x.endsWith('.available'),
+        );
 
         // Set all available StateIDs to false
         for (const id of allAvailableStates) {
@@ -267,9 +264,9 @@ class Opendtu extends utils.Adapter {
 if (require.main !== module) {
     // Export the constructor in compact mode
     /**
-     * @param {Partial<utils.AdapterOptions>} [options={}]
+     * @param [options]
      */
-    module.exports = (options) => new Opendtu(options);
+    module.exports = options => new Opendtu(options);
 } else {
     // otherwise start the instance directly
     new Opendtu();
