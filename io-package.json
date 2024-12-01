@@ -161,6 +161,7 @@
         "it": "OpenDTU",
         "es": "OpenDTU",
         "pl": "OpenDTU",
+        "uk": "OpenDTU",
         "zh-cn": "OpenDTU"
       },
       "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
@@ -181,7 +182,6 @@
     "webUIScheme": "http",
     "webUIServer": "",
     "webUIPort": 80,
-    "webUIPoll": 30,
     "userName": "admin",
     "password": "",
     "protectNames": false,
