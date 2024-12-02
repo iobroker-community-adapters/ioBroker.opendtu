@@ -44,8 +44,10 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (mattreim) Description has benn translated into supported languages.
+- (mattreim) Variable polling interval has been removed and polling intervals hev been increased.
+- (mattreim) Description has been translated into supported languages.
 - (mattreim) Admin-UI has been adapted for some display sizes.
+- (mcm1957) Dependencies have been updated.
 
 ### 3.0.1 (2024-10-26)
 - (simatec) Admin-UI has been adapted for small displays.
@@ -79,6 +81,7 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 ## License
 MIT License
 
+Copyright (c) 2024 ioBroker Community Developers <iobroker-community-adapters@gmx.de>  
 Copyright (c) 2024 Dennis Rathjen <dennis.rathjen@outlook.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
