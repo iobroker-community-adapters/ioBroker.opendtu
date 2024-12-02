@@ -1,4 +1,8 @@
 # Older changes
+## 1.0.1 (2023-10-29)
+
+- (o0shojo0o) fixed `power_control.current_limit_absolute" has value "-1" less than min "0"`
+
 ## 1.0.0 (2023-10-01)
 
 - (o0shojo0o) Increase to the first major release, as it has now reached a stable level. 

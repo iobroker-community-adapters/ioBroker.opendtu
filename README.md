@@ -43,7 +43,7 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 3.1.0 (2024-12-02)
 - (mattreim) Variable polling interval has been removed and polling intervals hev been increased.
 - (mattreim) Description has been translated into supported languages.
 - (mattreim) Admin-UI has been adapted for some display sizes.
@@ -73,10 +73,6 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 - (mattreim) update to current OpenDTU logo ([#156](https://github.com/o0shojo0o/ioBroker.opendtu/issues/156))
 - (mattreim) update dependencies ([#162](https://github.com/o0shojo0o/ioBroker.opendtu/issues/162)), ([#179](https://github.com/o0shojo0o/ioBroker.opendtu/issues/179))
 - (mattreim) fix GUI translation ([#163](https://github.com/o0shojo0o/ioBroker.opendtu/issues/163))
-
-### 1.0.1 (2023-10-29)
-
-- (o0shojo0o) fixed `power_control.current_limit_absolute" has value "-1" less than min "0"`
 
 ## License
 MIT License
