@@ -2,15 +2,9 @@
   "name": "iobroker.opendtu",
   "version": "3.1.0",
   "description": "Adapter for the OpenDTU project",
-  "author": {
-    "name": "Dennis Rathjen",
-    "email": "dennis.rathjen@outlook.de"
-  },
+  "author": "Dennis Rathjen <dennis.rathjen@outlook.de>",
   "contributors": [
-    {
-      "name": "iobroker-community-adapters",
-      "email": "iobroker-community-adapters@gmx.de"
-    }
+    "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
   ],
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.opendtu",
   "license": "MIT",
