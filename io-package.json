@@ -164,8 +164,7 @@
         "uk": "OpenDTU",
         "zh-cn": "OpenDTU"
       },
-      "link": "%webUIScheme%://%webUIServer%:%webUIPort%",
-      "fa-icon": "info"
+      "link": "%webUIScheme%://%webUIServer%:%webUIPort%"
     },
     "dependencies": [
       {
