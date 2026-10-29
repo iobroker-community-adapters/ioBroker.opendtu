@@ -2,269 +2,276 @@
 const utils = require('@iobroker/adapter-core');
 const { default: axios } = require('axios');
 const schedule = require('node-schedule');
-const WebsocketController = require('./lib/websocketController').WebsocketController;
-const DataController = require('./lib/dataController').DataController;
+const { WebsocketController } = require('./lib/websocketController');
+const { DataController } = require('./lib/dataController');
 
-let dtuApiURL;
-let dtuNetworkApiURL;
-let limitApiURL;
-let powerApiURL;
-let websocketController;
-let dataController;
+const AUTH_USERNAME = 'admin';
+const DTU_POLL_INTERVAL = 60000;
+const HTTP_TIMEOUT = 10000;
+
+/** limit_type values of the OpenDTU API per writable state */
+const LIMIT_TYPES = {
+    limit_nonpersistent_absolute: 0,
+    limit_nonpersistent_relative: 1,
+    limit_persistent_absolute: 256,
+    limit_persistent_relative: 257,
+};
 
 class Opendtu extends utils.Adapter {
+    /**
+     * @param [options] adapter options
+     */
     constructor(options) {
         super({
             ...options,
             name: 'opendtu',
         });
+        this.api = null;
+        this.websocketController = null;
+        this.dataController = null;
+        this.yieldTotalJob = null;
+        this.dtuPollTimer = null;
+        this.messageQueue = Promise.resolve();
+        this.unloading = false;
+
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
     async onReady() {
-        // Check if webUIServer is configured, log warning message and return if not
-        if (!this.config.webUIServer) {
-            this.log.warn('Please configure the Websoket connection!');
+        await this.setState('info.connection', false, true);
+
+        // Accept input like "http://192.168.1.10/" in the address field
+        const server = String(this.config.webUIServer || '')
+            .trim()
+            .replace(/^[a-z]+:\/\//i, '')
+            .replace(/\/.*$/, '');
+        if (!server) {
+            this.log.warn('Please enter the address of your OpenDTU in the adapter settings.');
+            return;
+        }
+        this.config.webUIServer = server;
+        this.config.webUIScheme = this.config.webUIScheme === 'https' ? 'https' : 'http';
+        this.config.webUIPort = Number(this.config.webUIPort) || (this.config.webUIScheme === 'https' ? 443 : 80);
+
+        // @KI_HINWEIS: own axios instance instead of axios.defaults - in compact mode axios is shared with other adapters
+        this.api = axios.create({
+            baseURL: `${this.config.webUIScheme}://${server}:${this.config.webUIPort}/api`,
+            timeout: HTTP_TIMEOUT,
+            auth: this.config.password ? { username: AUTH_USERNAME, password: this.config.password } : undefined,
+            // Prevents OpenDTU from asking for browser authentication
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        });
+
+        this.dataController = new DataController(this);
+        this.websocketController = new WebsocketController(this, {
+            onMessage: data => this.queueMessage(data),
+            onConnectionChange: connected => this.onConnectionChange(connected),
+        });
+        this.websocketController.connect();
+
+        await this.getDTUData();
+        this.dtuPollTimer = this.setInterval(() => this.getDTUData(), DTU_POLL_INTERVAL);
+        this.yieldTotalJob = schedule.scheduleJob('0 1 0 * * *', () => this.rewriteYieldTotal());
+    }
+
+    /**
+     * @param id state ID
+     * @param state new state
+     */
+    async onStateChange(id, state) {
+        if (!state || state.ack || !this.api) {
+            return;
+        }
+        const idParts = id.split('.');
+        const serial = idParts[2];
+        const stateID = idParts[4];
+
+        let ok = false;
+        if (stateID in LIMIT_TYPES) {
+            ok = await this.setInverterLimit(serial, state.val, LIMIT_TYPES[stateID]);
+        } else if (stateID === 'power_on' || stateID === 'power_off' || stateID === 'restart') {
+            if (!state.val) {
+                return;
+            }
+            const payload =
+                stateID === 'restart' ? { serial, restart: true } : { serial, power: stateID === 'power_on' };
+            ok = await this.postCommand('/power/config', payload);
+        } else {
             return;
         }
 
-        // Construct the base URL for API calls using configuration variables
-        const baseURL = `${this.config.webUIScheme}://${this.config.webUIServer}:${this.config.webUIPort}/api`;
-
-        // Construct URLs for various API endpoints using the base URL
-        dtuApiURL = `${baseURL}/system/status`;
-        dtuNetworkApiURL = `${baseURL}/network/status`;
-        limitApiURL = `${baseURL}/limit/config`;
-        powerApiURL = `${baseURL}/power/config`;
-
-        // Set default authentication credentials for Axios requests
-        axios.defaults.auth = { username: this.config.userName, password: this.config.password };
-
-        // Instantiate a new DataController object with necessary arguments
-        dataController = new DataController(this);
-
-        // Start the websocket connection and initiate data retrieval from DTU
-        this.startWebsocket();
-        this.getDTUData();
-
-        // Schedule jobs to run at specified intervals using Cron-style syntax
-        schedule.scheduleJob('rewriteYildTotal', '0 1 0 * * *', () => this.rewriteYildTotal());
-        schedule.scheduleJob('getDTUData', '*/1 * * * *', () => this.getDTUData());
-    }
-
-    // This function gets called whenever there's a state change in the system.
-    async onStateChange(id, state) {
-        // Check that the new state is not an acknowledgement of a previous command.
-        if (state && state.ack == false) {
-            // Split the ID into parts to get the serial number and state identifier.
-            const idParts = id.split('.');
-            const serial = idParts[2];
-            const stateID = idParts[4];
-
-            // Use a switch statement to handle different types of state changes.
-            switch (stateID) {
-                case 'limit_persistent_relative':
-                    // Set the inverter limit based on the new value and a fixed parameter.
-                    this.setInverterLimit(serial, state.val, 257);
-                    break;
-                case 'limit_persistent_absolute':
-                    this.setInverterLimit(serial, state.val, 256);
-                    break;
-                case 'limit_nonpersistent_relative':
-                    this.setInverterLimit(serial, state.val, 1);
-                    break;
-                case 'limit_nonpersistent_absolute':
-                    this.setInverterLimit(serial, state.val, 0);
-                    break;
-                case 'power_on':
-                    // Switch the inverter power status based on the new value.
-                    if (state.val == true) {
-                        this.setInverterPower(serial, true);
-                    }
-                    break;
-                case 'power_off':
-                    // Switch the inverter power status based on the new value.
-                    if (state.val == true) {
-                        this.setInverterPower(serial, false);
-                    }
-                    break;
-                case 'restart':
-                    // Restart the inverter based on the new value.
-                    if (state.val == true) {
-                        this.setInverterRestart(serial, true);
-                    }
-                    break;
-                default:
-                    // If the state change isn't recognized, do nothing.
-                    return;
-            }
-
-            // Update the state with the new values and acknowledge the change.
-            this.setStateAsync(id, state, true);
+        // Confirm the command only if OpenDTU accepted it
+        if (ok) {
+            await this.setState(id, state.val, true);
         }
     }
 
+    async onConnectionChange(connected) {
+        if (this.unloading) {
+            return;
+        }
+        await this.setState('info.connection', connected, true);
+        if (!connected) {
+            await this.allAvailableToFalse();
+        }
+    }
+
+    /**
+     * @param callback callback
+     */
     async onUnload(callback) {
+        this.unloading = true;
         try {
-            this.allAvailableToFalse();
-        } catch (e) {
-            this.log.error(e);
-        }
-        // Websocket
-        try {
-            if (websocketController) {
-                websocketController.closeConnection();
+            if (this.websocketController) {
+                this.websocketController.stop();
             }
-        } catch (e) {
-            this.log.error(e);
-        }
-        // Clear all websocket timers
-        try {
-            if (websocketController) {
-                await websocketController.allTimerClear();
+            this.clearInterval(this.dtuPollTimer);
+            if (this.yieldTotalJob) {
+                this.yieldTotalJob.cancel();
             }
+            await this.setState('info.connection', false, true);
+            await this.allAvailableToFalse();
         } catch (e) {
-            this.log.error(e);
+            this.log.error(`Error during unload: ${e}`);
+        } finally {
+            callback();
         }
-
-        try {
-            schedule.cancelJob('dayEndJob');
-        } catch (e) {
-            this.log.error(e);
-        }
-
-        try {
-            schedule.cancelJob('rewriteYildTotal');
-        } catch (e) {
-            this.log.error(e);
-        }
-
-        try {
-            schedule.cancelJob('getDTUData');
-        } catch (e) {
-            this.log.error(e);
-        }
-        callback();
     }
 
-    startWebsocket() {
-        websocketController = new WebsocketController(this);
-        const wsClient = websocketController.initWsClient();
-
-        wsClient.on('open', () => {
-            this.log.info('Connect to OpenDTU over websocket connection.');
-        });
-
-        wsClient.on('message', message => {
-            this.processMessage(message);
-        });
-
-        wsClient.on('close', async () => {
-            this.allAvailableToFalse();
-        });
+    /**
+     * Processes websocket messages one after another, so objects are not created twice.
+     *
+     * @param data raw message or already parsed data
+     */
+    queueMessage(data) {
+        this.messageQueue = this.messageQueue
+            .then(() => this.processMessage(data))
+            .catch(err => this.log.error(`Error while processing data from OpenDTU: ${err}`));
     }
 
-    async processMessage(message, isObject) {
-        try {
-            if (!isObject) {
+    /**
+     * @param message message from OpenDTU
+     */
+    async processMessage(message) {
+        if (this.unloading || !this.dataController) {
+            return;
+        }
+        if (typeof message === 'string') {
+            try {
                 message = JSON.parse(message);
+            } catch (err) {
+                this.log.warn(`Invalid data from OpenDTU: ${err}`);
+                this.log.debug(message);
+                return;
             }
-        } catch (err) {
-            this.log.error(err);
-            this.log.debug(message);
+        }
+        if (!message || typeof message !== 'object') {
+            return;
         }
 
-        // Create inverter rootfolder
-        if (message.inverters) {
-            dataController.processInverterData(message.inverters);
+        if (Array.isArray(message.inverters)) {
+            await this.dataController.processInverterData(message.inverters);
         }
-
-        // Total
         if (message.total) {
-            dataController.processTotalData(message.total);
+            await this.dataController.processTotalData(message.total);
         }
-
-        // DTU
         if (message.dtu) {
-            dataController.processDTUData(message.dtu);
+            await this.dataController.processDTUData(message.dtu);
         }
     }
 
     async getDTUData() {
+        if (!this.api) {
+            return;
+        }
+        let dtu;
         try {
-            const res = await axios.all([axios.get(dtuNetworkApiURL), axios.get(dtuApiURL)]);
-
-            const dtuData = res[0].data;
-            dtuData.uptime = res[1].data.uptime;
-            dtuData.reachable = true;
-
-            this.processMessage({ dtu: dtuData }, true);
+            const [network, system] = await Promise.all([
+                this.api.get('/network/status'),
+                this.api.get('/system/status'),
+            ]);
+            dtu = { ...network.data, uptime: system.data.uptime, reachable: true };
         } catch (err) {
-            this.log.debug(`getDTUData axios error: ${err}`);
-            this.processMessage({ dtu: { reachable: false } }, true);
+            this.log.debug(`Cannot read DTU status: ${err}`);
+            dtu = { reachable: false };
+        }
+        this.queueMessage({ dtu });
+    }
+
+    /**
+     * Sends a command to the OpenDTU API.
+     *
+     * @param path API path
+     * @param payload data to send
+     * @returns true if OpenDTU accepted the command
+     */
+    async postCommand(path, payload) {
+        if (!this.api) {
+            return false;
+        }
+        try {
+            const res = await this.api.post(path, `data=${JSON.stringify(payload)}`);
+            if (res.data && res.data.type && res.data.type !== 'success') {
+                this.log.warn(`OpenDTU rejected the command: ${res.data.message || res.data.type}`);
+                return false;
+            }
+            return true;
+        } catch (err) {
+            if (err.response && err.response.status === 401) {
+                this.log.error(
+                    'OpenDTU rejected the password. Commands need the password of the OpenDTU web interface.',
+                );
+            } else {
+                this.log.warn(`Cannot send command to OpenDTU: ${err.message}`);
+            }
+            return false;
         }
     }
 
-    async setInverterLimit(serial, limit_value, limit_type) {
-        try {
-            const payload = `data=${JSON.stringify({ serial, limit_type, limit_value })}`;
-            await axios.post(limitApiURL, payload);
-        } catch (err) {
-            this.log.warn(`setInverterLimit axios error: ${err}`);
+    /**
+     * @param serial inverter serial
+     * @param value limit value
+     * @param limitType OpenDTU limit_type
+     * @returns true on success
+     */
+    async setInverterLimit(serial, value, limitType) {
+        const limit = Number(value);
+        if (value === null || value === '' || !Number.isFinite(limit) || limit < 0) {
+            this.log.warn(`Invalid limit "${value}" for inverter ${serial} - please use a number >= 0.`);
+            return false;
         }
+        if ((limitType === 1 || limitType === 257) && limit > 100) {
+            this.log.warn(`Invalid limit ${limit} % for inverter ${serial} - please use 0 ... 100.`);
+            return false;
+        }
+        return this.postCommand('/limit/config', { serial, limit_type: limitType, limit_value: limit });
     }
 
-    async setInverterPower(serial, power) {
-        try {
-            const payload = `data=${JSON.stringify({ serial, power })}`;
-            await axios.post(powerApiURL, payload);
-        } catch (err) {
-            this.log.warn(`setInverterPower axios error: ${err}`);
-        }
-    }
-
-    async setInverterRestart(serial, restart) {
-        try {
-            const payload = `data=${JSON.stringify({ serial, restart })}`;
-            await axios.post(powerApiURL, payload);
-        } catch (err) {
-            this.log.warn(`setInverterRestart axios error: ${err}`);
-        }
-    }
-
-    async rewriteYildTotal() {
-        // Get all StateIDs
-        const allStateIDs = Object.keys(await this.getAdapterObjectsAsync());
-
-        // Get all yieldtotal StateIDs to reset for eg. sourceanalytix
-        const idsSetToReset = allStateIDs.filter(x => x.endsWith('yieldtotal'));
-        for (const id of idsSetToReset) {
+    /**
+     * Rewrites yield total once per day (helps e.g. sourceanalytix to detect the new day).
+     */
+    async rewriteYieldTotal() {
+        const ids = Object.keys(await this.getAdapterObjectsAsync()).filter(x => x.endsWith('yieldtotal'));
+        for (const id of ids) {
             const currentState = await this.getStateAsync(id);
-            if (currentState) {
-                this.setStateAsync(id, currentState.val, true);
+            if (currentState && currentState.val !== null) {
+                await this.setState(id, currentState.val, true);
             }
         }
     }
 
     async allAvailableToFalse() {
-        // Get all available StateIDs
-        const allAvailableStates = Object.keys(await this.getAdapterObjectsAsync()).filter(x =>
-            x.endsWith('.available'),
-        );
-
-        // Set all available StateIDs to false
-        for (const id of allAvailableStates) {
-            this.setStateChangedAsync(id, false, true);
-        }
+        const ids = Object.keys(await this.getAdapterObjectsAsync()).filter(x => x.endsWith('.available'));
+        await Promise.all(ids.map(id => this.setStateChangedAsync(id, false, true)));
     }
 }
 
 if (require.main !== module) {
     // Export the constructor in compact mode
     /**
-     * @param [options]
+     * @param [options] adapter options
      */
     module.exports = options => new Opendtu(options);
 } else {
