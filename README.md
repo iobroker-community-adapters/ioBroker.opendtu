@@ -154,6 +154,7 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 -->
 
 ### **WORK IN PROGRESS**
+- (iobroker-bot) Adapter requires node.js >= 22 now.
 - (Schimi1983) README rewritten for beginners, German guide added (docs/de/README.md)
 - (Schimi1983) Settings page: short guide, help texts in simple words, protocol and port only in expert mode, address is checked before saving
 - (copilot) Adapter requires admin >= 7.7.22 now
