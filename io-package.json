@@ -194,5 +194,51 @@
     "password"
   ],
   "objects": [],
-  "instanceObjects": []
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": {
+          "en": "Information",
+          "de": "Informationen",
+          "ru": "Информация",
+          "pt": "Informações",
+          "nl": "Informatie",
+          "fr": "Informations",
+          "it": "Informazioni",
+          "es": "Información",
+          "pl": "Informacje",
+          "uk": "Інформація",
+          "zh-cn": "信息"
+        }
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": {
+          "en": "Connected to OpenDTU",
+          "de": "Mit OpenDTU verbunden",
+          "ru": "Подключено к OpenDTU",
+          "pt": "Conectado ao OpenDTU",
+          "nl": "Verbonden met OpenDTU",
+          "fr": "Connecté à OpenDTU",
+          "it": "Connesso a OpenDTU",
+          "es": "Conectado a OpenDTU",
+          "pl": "Połączono z OpenDTU",
+          "uk": "Підключено до OpenDTU",
+          "zh-cn": "已连接到 OpenDTU"
+        },
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }
