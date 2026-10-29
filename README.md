@@ -45,9 +45,9 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 -->
 
 ### **WORK IN PROGRESS**
-- (Schimi1983) Connection works again with OpenDTU v26.4 and newer when "read-only access" is disabled (Digest authentication)
 - (Schimi1983) New state `info.connection`, the instance shows green/yellow again
 - (Schimi1983) Clear log messages for wrong or missing password, connection problems are logged only once
+- (Schimi1983) Password is no longer part of the websocket URL
 - (Schimi1983) Reconnect waits longer while OpenDTU is offline (2 s up to 60 s), fewer DNS queries [#192]
 - (Schimi1983) Fixed: adapter reconnected after it was stopped
 - (Schimi1983) Fixed: several adapter instances in compact mode influenced each other
