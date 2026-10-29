@@ -45,6 +45,7 @@ Ideally, please use GitHub issues for this, with the best method achieved by set
 -->
 
 ### **WORK IN PROGRESS**
+- (iobroker-bot) Adapter requires node.js >= 22 now.
 - (Schimi1983) New state `info.connection`, the instance shows green/yellow again
 - (Schimi1983) Clear log messages for wrong or missing password, connection problems are logged only once
 - (Schimi1983) Password is no longer part of the websocket URL
