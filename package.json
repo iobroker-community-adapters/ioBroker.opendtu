@@ -71,7 +71,7 @@
     "release": "release-script"
   },
   "bugs": {
-    "url": "https://github.com/o0shojo0o/ioBroker.opendtu/issues"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.opendtu/issues"
   },
   "readmeFilename": "README.md"
 }
