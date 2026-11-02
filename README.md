@@ -154,9 +154,19 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 -->
 
 ### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22.19.0 now
 - (iobroker-bot) Adapter requires node.js >= 22 now.
 - (Schimi1983) README rewritten for beginners, German guide added (docs/de/README.md)
 - (Schimi1983) Settings page: short guide, help texts in simple words, protocol and port only in expert mode, address is checked before saving
+- (Schimi1983) New state `info.connection`, the instance shows green/yellow again
+- (Schimi1983) Clear log messages for wrong or missing password, connection problems are logged only once
+- (Schimi1983) Password is no longer part of the websocket URL
+- (Schimi1983) Reconnect waits longer while OpenDTU is offline (2 s up to 60 s), fewer DNS queries [#192]
+- (Schimi1983) Fixed: adapter reconnected after it was stopped
+- (Schimi1983) Fixed: several adapter instances in compact mode influenced each other
+- (Schimi1983) Fixed: with several inverters an offline inverter could show old values again
+- (Schimi1983) Commands are confirmed (ack) only after OpenDTU accepted them, invalid limits are rejected
+- (Schimi1983) Address field accepts input like `http://192.168.1.10/`
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (copilot) Adapter requires js-controller >= 6.0.11 now
 - (copilot) Adapter requires admin >= 7.6.17 now
