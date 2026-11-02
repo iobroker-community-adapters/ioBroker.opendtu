@@ -2,20 +2,78 @@
 	"i18n": true,
 	"type": "panel",
 	"items": {
-		"webUIHeader": {
-			"type": "header",
-			"text": "Config",
-			"size": 2,
+		"howtoInfo": {
+			"type": "infoBox",
+			"closeable": true,
+			"title": "howtoTitle",
+			"text": "howtoText",
+			"style": {
+				"whiteSpace": "pre-line"
+			},
 			"xs": 12,
 			"sm": 12,
 			"md": 12,
 			"lg": 12,
 			"xl": 12
 		},
+		"howtoLink": {
+			"newLine": true,
+			"type": "staticLink",
+			"label": "howtoLink",
+			"href": "https://github.com/iobroker-community-adapters/ioBroker.opendtu/blob/main/README.md",
+			"target": "_blank",
+			"button": true,
+			"icon": "info",
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 3
+		},
+		"connectionHeader": {
+			"newLine": true,
+			"type": "header",
+			"text": "connectionHeader",
+			"size": 3,
+			"xs": 12,
+			"sm": 12,
+			"md": 12,
+			"lg": 12,
+			"xl": 12
+		},
+		"webUIServer": {
+			"newLine": true,
+			"type": "text",
+			"label": "webUIServer",
+			"help": "webUIServerHelp",
+			"placeholder": "192.168.1.50",
+			"trim": true,
+			"validator": "!!data.webUIServer && data.webUIServer.trim().length > 0",
+			"validatorErrorText": "webUIServerMissing",
+			"validatorNoSaveOnError": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		},
+		"password": {
+			"type": "password",
+			"label": "password",
+			"help": "passwordHelp",
+			"visible": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		},
 		"webUIScheme": {
 			"newLine": true,
 			"type": "select",
-			"label": "Scheme",
+			"label": "webUIScheme",
+			"help": "webUISchemeHelp",
+			"expertMode": true,
 			"options": [
 				{
 					"label": "HTTP",
@@ -27,57 +85,29 @@
 				}
 			],
 			"xs": 12,
-			"sm": 12,
-			"md": 2,
+			"sm": 6,
+			"md": 3,
 			"lg": 2,
-			"xl": 1
-		},
-		"webUIServer": {
-			"type": "text",
-			"label": "WebAddress",
-			"xs": 12,
-			"sm": 12,
-			"md": 6,
-			"lg": 3,
-			"xl": 3
+			"xl": 2
 		},
 		"webUIPort": {
-			"type": "number",
-			"label": "WebPort",
+			"type": "port",
+			"label": "webUIPort",
+			"help": "webUIPortHelp",
+			"expertMode": true,
 			"min": 1,
 			"max": 65535,
 			"xs": 12,
-			"sm": 12,
-			"md": 2,
+			"sm": 6,
+			"md": 3,
 			"lg": 2,
-			"xl": 1
+			"xl": 2
 		},
-		"password": {
-			"newLine": true,
-			"type": "password",
-			"label": "WebPassword",
-			"visible": true,
-			"xs": 12,
-			"sm": 12,
-			"md": 6,
-			"lg": 3,
-			"xl": 3
-		},
-		"otherHeader": {
+		"optionsHeader": {
 			"newLine": true,
 			"type": "header",
-			"text": "OtherConfig",
-			"size": 2,
-			"xs": 12,
-			"sm": 12,
-			"md": 12,
-			"lg": 12,
-			"xl": 12
-		},
-		"protectNames": {
-			"newLine": true,
-			"type": "checkbox",
-			"label": "ProtNames",
+			"text": "optionsHeader",
+			"size": 3,
 			"xs": 12,
 			"sm": 12,
 			"md": 12,
@@ -87,7 +117,19 @@
 		"useInvOfflineStatesToZero": {
 			"newLine": true,
 			"type": "checkbox",
-			"label": "StatesToZero",
+			"label": "useInvOfflineStatesToZero",
+			"help": "useInvOfflineStatesToZeroHelp",
+			"xs": 12,
+			"sm": 12,
+			"md": 12,
+			"lg": 12,
+			"xl": 12
+		},
+		"protectNames": {
+			"newLine": true,
+			"type": "checkbox",
+			"label": "protectNames",
+			"help": "protectNamesHelp",
 			"xs": 12,
 			"sm": 12,
 			"md": 12,
