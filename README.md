@@ -168,6 +168,7 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 - (Schimi1983) Fixed: with several inverters an offline inverter could show old values again
 - (Schimi1983) Commands are confirmed (ack) only after OpenDTU accepted them, invalid limits are rejected
 - (Schimi1983) Address field accepts input like `http://192.168.1.10/`
+- (Schimi1983) Fixed: `total.yieldtotal` and `total.yieldday` dropped after midnight or an OpenDTU restart until all inverters answered; counters such as SourceAnalytix saw this as a meter reset
 - (mcm1957) Dependencies have been updated.
 
 ### 3.1.0 (2024-12-02)
