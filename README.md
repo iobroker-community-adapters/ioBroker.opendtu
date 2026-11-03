@@ -163,6 +163,19 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (Schimi1983) Status of the last limit and on/off command, maximum power of the inverter [#226]
+- (Schimi1983) Event log of each inverter (number, last event, list) [#261]
+- (Schimi1983) Radio statistics per inverter and hints of OpenDTU (time not synchronized, radio problem, default password)
+- (Schimi1983) Temperature, memory and firmware of the OpenDTU; model and firmware of each inverter
+- (Schimi1983) Daily maximum power and temperature (OpenDTU v26.9 and newer)
+- (Schimi1983) Fixed: host name of the OpenDTU was never shown
+- (Schimi1983) Fixed: after a restart of the OpenDTU the current limit showed 0 % for some minutes
+- (Schimi1983) Total DC power over all inverters, message ID of the last event (for notifications)
+- (Schimi1983) Event log is also updated when it is full (OpenDTU keeps 15 events per inverter)
+- (Schimi1983) Clearer object names (e.g. current limit in % and W, persistent / non-persistent limits)
+- (Schimi1983) Roles of all objects corrected according to the ioBroker state roles (e.g. yield `value.energy.produced`, availability `indicator.reachable`, limits `level`, buttons write-only)
+
 ### 4.0.0 (2026-11-03)
 - (copilot) Adapter requires node.js >= 22.19.0 now
 - (copilot) Adapter requires admin >= 7.7.22 now
@@ -179,17 +192,6 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 - (Schimi1983) Commands are confirmed (ack) only after OpenDTU accepted them, invalid limits are rejected
 - (Schimi1983) Address field accepts input like `http://192.168.1.10/`
 - (Schimi1983) Fixed: `total.yieldtotal` and `total.yieldday` dropped after midnight or an OpenDTU restart until all inverters answered; counters such as SourceAnalytix saw this as a meter reset
-- (Schimi1983) Status of the last limit and on/off command, maximum power of the inverter [#226]
-- (Schimi1983) Event log of each inverter (number, last event, list) [#261]
-- (Schimi1983) Radio statistics per inverter and hints of OpenDTU (time not synchronized, radio problem, default password)
-- (Schimi1983) Temperature, memory and firmware of the OpenDTU; model and firmware of each inverter
-- (Schimi1983) Daily maximum power and temperature (OpenDTU v26.9 and newer)
-- (Schimi1983) Fixed: host name of the OpenDTU was never shown
-- (Schimi1983) Fixed: after a restart of the OpenDTU the current limit showed 0 % for some minutes
-- (Schimi1983) Total DC power over all inverters, message ID of the last event (for notifications)
-- (Schimi1983) Event log is also updated when it is full (OpenDTU keeps 15 events per inverter)
-- (Schimi1983) Clearer object names (e.g. current limit in % and W, persistent / non-persistent limits)
-- (Schimi1983) Roles of all objects corrected according to the ioBroker state roles (e.g. yield `value.energy.produced`, availability `indicator.reachable`, limits `level`, buttons write-only)
 - (mcm1957) Dependencies have been updated.
 
 ### 3.1.0 (2024-12-02)
