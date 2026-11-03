@@ -163,8 +163,7 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 4.0.0 (2026-11-03)
 - (copilot) Adapter requires node.js >= 22.19.0 now
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (copilot) Adapter requires js-controller >= 6.0.11 now
@@ -215,14 +214,6 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 - (mattreim) update translations
 - (mattreim) update object names
 - (mattreim) add variable polling intervall [1-59s]
-
-### 2.0.0 (2024-08-13)
-
-- (o0shojo0o) changes for new websocket structure ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))
-- (o0shojo0o) `Efficiency`, `YieldTotal`, `YieldDay` and `DC Power` moved from the AC section to the INV (old data points must be removed manually)
-- (mattreim) update to current OpenDTU logo ([#156](https://github.com/o0shojo0o/ioBroker.opendtu/issues/156))
-- (mattreim) update dependencies ([#162](https://github.com/o0shojo0o/ioBroker.opendtu/issues/162)), ([#179](https://github.com/o0shojo0o/ioBroker.opendtu/issues/179))
-- (mattreim) fix GUI translation ([#163](https://github.com/o0shojo0o/ioBroker.opendtu/issues/163))
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
