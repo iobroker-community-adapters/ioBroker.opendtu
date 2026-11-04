@@ -163,6 +163,9 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (GermanBluefox) Fixed: a limit of 0 % that was not set by the adapter (e.g. in the OpenDTU web UI or via MQTT) was not shown
+
 ### 4.1.0 (2026-11-04)
 - (Schimi1983) Status of the last limit and on/off command, maximum power of the inverter [#226]
 - (Schimi1983) Event log of each inverter (number, last event, list) [#261]
