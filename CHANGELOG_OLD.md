@@ -1,4 +1,12 @@
 # Older changes
+## 2.1.0 (2024-10-11)
+
+- (o0shojo0o) update dependencies
+- (mattreim) support small screens
+- (mattreim) update translations
+- (mattreim) update object names
+- (mattreim) add variable polling intervall [1-59s]
+
 ## 2.0.0 (2024-08-13)
 
 - (o0shojo0o) changes for new websocket structure ([#129](https://github.com/o0shojo0o/ioBroker.opendtu/issues/129))

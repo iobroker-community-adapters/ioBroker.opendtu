@@ -163,7 +163,7 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 4.1.0 (2026-11-04)
 - (Schimi1983) Status of the last limit and on/off command, maximum power of the inverter [#226]
 - (Schimi1983) Event log of each inverter (number, last event, list) [#261]
 - (Schimi1983) Radio statistics per inverter and hints of OpenDTU (time not synchronized, radio problem, default password)
@@ -208,14 +208,6 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 - (mcm1957) Adapter has been moved to iobroker-community-adapter organisation.
 - (mcm1957) Adapter requires js-controller 5, admin 6 and node.js 20 now.
 - (mcm1957) Dependencies have been updated.
-
-### 2.1.0 (2024-10-11)
-
-- (o0shojo0o) update dependencies
-- (mattreim) support small screens
-- (mattreim) update translations
-- (mattreim) update object names
-- (mattreim) add variable polling intervall [1-59s]
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
