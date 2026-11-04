@@ -7,7 +7,12 @@ const { DataController } = require('./lib/dataController');
 
 const AUTH_USERNAME = 'admin';
 const DTU_POLL_INTERVAL = 60000;
+// OpenDTU keeps at most 15 events per inverter (ALARM_LOG_ENTRY_COUNT); when full the count no longer changes
+const EVENT_LOG_MAX = 15;
+const EVENT_LOG_FULL_INTERVAL = 300000;
 const HTTP_TIMEOUT = 10000;
+const COMMAND_POLL_INTERVAL = 2000;
+const COMMAND_POLL_COUNT = 45;
 
 /** limit_type values of the OpenDTU API per writable state */
 const LIMIT_TYPES = {
@@ -31,7 +36,13 @@ class Opendtu extends utils.Adapter {
         this.dataController = null;
         this.yieldTotalJob = null;
         this.dtuPollTimer = null;
+        this.eventLogTimer = null;
         this.messageQueue = Promise.resolve();
+        this.commandPolls = new Set();
+        this.devInfoDone = new Set();
+        this.devInfoBusy = new Set();
+        this.commandStatusRead = false;
+        this.locale = 'en';
         this.unloading = false;
 
         this.on('ready', this.onReady.bind(this));
@@ -64,7 +75,11 @@ class Opendtu extends utils.Adapter {
             headers: { 'X-Requested-With': 'XMLHttpRequest' },
         });
 
-        this.dataController = new DataController(this);
+        this.locale = await this.getEventLogLocale();
+        this.dataController = new DataController(this, {
+            onEventCount: serial => this.readEventLog(serial),
+            onReachable: serial => this.readDevInfo(serial),
+        });
         this.websocketController = new WebsocketController(this, {
             onMessage: data => this.queueMessage(data),
             onConnectionChange: connected => this.onConnectionChange(connected),
@@ -73,6 +88,7 @@ class Opendtu extends utils.Adapter {
 
         await this.getDTUData();
         this.dtuPollTimer = this.setInterval(() => this.getDTUData(), DTU_POLL_INTERVAL);
+        this.eventLogTimer = this.setInterval(() => this.refreshFullEventLogs(), EVENT_LOG_FULL_INTERVAL);
         this.yieldTotalJob = schedule.scheduleJob('0 1 0 * * *', () => this.rewriteYieldTotal());
     }
 
@@ -105,6 +121,7 @@ class Opendtu extends utils.Adapter {
         // Confirm the command only if OpenDTU accepted it
         if (ok) {
             await this.setState(id, state.val, true);
+            void this.pollCommandStatus(stateID in LIMIT_TYPES ? 'limit' : 'power');
         }
     }
 
@@ -128,6 +145,7 @@ class Opendtu extends utils.Adapter {
                 this.websocketController.stop();
             }
             this.clearInterval(this.dtuPollTimer);
+            this.clearInterval(this.eventLogTimer);
             if (this.yieldTotalJob) {
                 this.yieldTotalJob.cancel();
             }
@@ -146,8 +164,17 @@ class Opendtu extends utils.Adapter {
      * @param data raw message or already parsed data
      */
     queueMessage(data) {
+        this.queueTask(() => this.processMessage(data));
+    }
+
+    /**
+     * Runs a task after all previous tasks (messages, event log) are done.
+     *
+     * @param task async function
+     */
+    queueTask(task) {
         this.messageQueue = this.messageQueue
-            .then(() => this.processMessage(data))
+            .then(task)
             .catch(err => this.log.error(`Error while processing data from OpenDTU: ${err}`));
     }
 
@@ -180,6 +207,15 @@ class Opendtu extends utils.Adapter {
         if (message.dtu) {
             await this.dataController.processDTUData(message.dtu);
         }
+        if (message.hints) {
+            await this.dataController.processHints(message.hints);
+        }
+        // Read the command status once, as soon as the inverters are known
+        if (!this.commandStatusRead && Array.isArray(message.inverters) && message.inverters.length) {
+            this.commandStatusRead = true;
+            void this.readCommandStatus('limit');
+            void this.readCommandStatus('power');
+        }
     }
 
     async getDTUData() {
@@ -192,7 +228,17 @@ class Opendtu extends utils.Adapter {
                 this.api.get('/network/status'),
                 this.api.get('/system/status'),
             ]);
-            dtu = { ...network.data, uptime: system.data.uptime, reachable: true };
+            const sys = system.data || {};
+            dtu = {
+                ...network.data,
+                uptime: sys.uptime,
+                cputemp: sys.cputemp,
+                firmware: sys.git_hash,
+                heap_free: sys.heap_total - sys.heap_used,
+                heap_min_free: sys.heap_min_free,
+                heap_max_block: sys.heap_max_block,
+                reachable: true,
+            };
         } catch (err) {
             this.log.debug(`Cannot read DTU status: ${err}`);
             dtu = { reachable: false };
@@ -246,7 +292,135 @@ class Opendtu extends utils.Adapter {
             this.log.warn(`Invalid limit ${limit} % for inverter ${serial} - please use 0 ... 100.`);
             return false;
         }
+        if (this.dataController) {
+            this.dataController.noteLimitCommand(serial, limit);
+        }
         return this.postCommand('/limit/config', { serial, limit_type: limitType, limit_value: limit });
+    }
+
+    /**
+     * Reads /api/limit/status or /api/power/status.
+     *
+     * @param kind 'limit' or 'power'
+     * @returns true while a command is not finished yet (Pending, or Failure which OpenDTU resends by itself)
+     */
+    async readCommandStatus(kind) {
+        if (!this.api || !this.dataController || this.unloading) {
+            return false;
+        }
+        try {
+            const res = await this.api.get(`/${kind}/status`);
+            await this.dataController.processCommandStatus(res.data);
+            const field = `${kind}_set_status`;
+            // @KI_HINWEIS: OpenDTU resends a failed limit/power command in its next poll cycle (Hoymiles.cpp),
+            // so 'Failure' is only an intermediate state - keep following it until 'Ok'.
+            return Object.values(res.data || {}).some(x => x && (x[field] === 'Pending' || x[field] === 'Failure'));
+        } catch (err) {
+            this.log.debug(`Cannot read ${kind} status: ${err}`);
+            return false;
+        }
+    }
+
+    /**
+     * After a command: follow its status until OpenDTU reports Ok (max. 90 s).
+     *
+     * @param kind 'limit' or 'power'
+     */
+    async pollCommandStatus(kind) {
+        if (this.commandPolls.has(kind)) {
+            return; // already running
+        }
+        this.commandPolls.add(kind);
+        try {
+            for (let i = 0; i < COMMAND_POLL_COUNT && !this.unloading; i++) {
+                await this.delay(COMMAND_POLL_INTERVAL);
+                if (!(await this.readCommandStatus(kind))) {
+                    break;
+                }
+            }
+        } finally {
+            this.commandPolls.delete(kind);
+        }
+    }
+
+    /**
+     * Reads the event log of an inverter. Called only when the number of entries changed.
+     *
+     * @param serial inverter serial
+     */
+    async readEventLog(serial) {
+        if (!this.api || !this.dataController || this.unloading) {
+            return;
+        }
+        try {
+            const res = await this.api.get('/eventlog/status', { params: { inv: serial, locale: this.locale } });
+            this.queueTask(
+                () => this.dataController && this.dataController.processEventLog(serial, res.data && res.data.events),
+            );
+        } catch (err) {
+            this.log.debug(`Cannot read event log of ${serial}: ${err}`);
+        }
+    }
+
+    /**
+     * Reads the device info (firmware, hardware) of an inverter once per run.
+     * OpenDTU knows it only after the inverter answered once, so it is requested when the inverter is reachable.
+     *
+     * @param serial inverter serial
+     */
+    async readDevInfo(serial) {
+        if (
+            !this.api ||
+            !this.dataController ||
+            this.unloading ||
+            this.devInfoDone.has(serial) ||
+            this.devInfoBusy.has(serial)
+        ) {
+            return;
+        }
+        this.devInfoBusy.add(serial);
+        try {
+            const res = await this.api.get('/devinfo/status', { params: { inv: serial } });
+            const info = res.data || {};
+            if (info.valid_data) {
+                this.devInfoDone.add(serial);
+                this.queueTask(() => this.dataController && this.dataController.processDevInfo(serial, info));
+            }
+        } catch (err) {
+            this.log.debug(`Cannot read device info of ${serial}: ${err}`);
+        } finally {
+            this.devInfoBusy.delete(serial);
+        }
+    }
+
+    /**
+     * Re-reads the event log of reachable inverters whose log is full (15 entries).
+     * A full log no longer changes its count, so new events would be missed otherwise.
+     */
+    refreshFullEventLogs() {
+        if (!this.dataController || this.unloading) {
+            return;
+        }
+        for (const [serial, count] of this.dataController.eventCounts) {
+            if (count >= EVENT_LOG_MAX && this.dataController.reachable.get(serial) === true) {
+                void this.readEventLog(serial);
+            }
+        }
+    }
+
+    /**
+     * OpenDTU knows the event texts in English, German and French.
+     *
+     * @returns locale for the event log
+     */
+    async getEventLogLocale() {
+        try {
+            const sysConfig = await this.getForeignObjectAsync('system.config');
+            const lang = sysConfig && sysConfig.common && sysConfig.common.language;
+            return lang === 'de' || lang === 'fr' ? lang : 'en';
+        } catch {
+            return 'en';
+        }
     }
 
     /**

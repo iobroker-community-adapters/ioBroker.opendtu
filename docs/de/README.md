@@ -74,6 +74,7 @@ Im Ordner `opendtu.0.<Seriennummer>.power_control` lässt sich die Leistung eine
 - Für eine **automatische Regelung** (z. B. Nulleinspeisung, Änderungen alle paar Sekunden oder Minuten) immer die **nonpersistent**-Objekte verwenden.
 - ⚠️ Die **persistent**-Grenzen werden im Speicher des Wechselrichters abgelegt, der nur begrenzt oft beschrieben werden kann. Nur **selten** ändern, z. B. einmal bei der Einrichtung.
 - Die aktuell gültige Grenze steht in `current_limit_relative` und `current_limit_absolute`. Nach einer Grenze in Watt kann es bis zu etwa 4 Minuten dauern, bis dieser Wert aktualisiert ist.
+- `limit_set_status` zeigt, ob der Wechselrichter die letzte Grenze übernommen hat: `Pending` = gesendet, `Ok` = übernommen, `Failure` = noch nicht angekommen (die OpenDTU versucht es selbst erneut).
 
 Beispiel in einem JavaScript-Skript – Wechselrichter auf 300 W begrenzen:
 
@@ -82,6 +83,10 @@ setState('opendtu.0.116100000001.power_control.limit_nonpersistent_absolute', 30
 ```
 
 Die Knöpfe `power_on`, `power_off` und `restart` schalten den Wechselrichter ein, aus oder starten ihn neu.
+
+## Meldungen des Wechselrichters
+
+`opendtu.0.<Seriennummer>.events.last` zeigt die letzte Meldung des Wechselrichters, z. B. `07:55:16 Netz: Netzaufschaltung fehlgeschlagen`. `events.count` ist die Anzahl der gespeicherten Meldungen (der Wechselrichter löscht sie beim Start am Morgen), `events.json` die ganze Liste. Damit lassen sich Benachrichtigungen bauen, z. B. per Skript oder mit dem *Notification Manager*.
 
 ## Fragen und Probleme
 
@@ -95,6 +100,9 @@ Die Knöpfe `power_on`, `power_off` und `restart` schalten den Wechselrichter ei
 
 **Nachts sind alle Werte 0 / die Wechselrichter „nicht erreichbar“**
 - Das ist normal: Hoymiles-Wechselrichter werden von den Solarmodulen versorgt und schalten bei Dunkelheit ab.
+
+**Ein Wechselrichter ist tagsüber oft „nicht erreichbar“**
+- Wahrscheinlich ist die Funkverbindung schwach. `opendtu.0.<Seriennummer>.radio.rssi` (unter etwa −80 dBm ist schwach) und `opendtu.0.dtu.hints.radio_problem` ansehen. Die OpenDTU näher an die Wechselrichter stellen oder die Antenne drehen.
 
 **Mein Netzwerk zeigt viele DNS-Anfragen vom ioBroker**
 - Die IP-Adresse (z. B. `192.168.1.50`) statt eines Namens wie `opendtu.local` eintragen.
