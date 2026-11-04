@@ -163,7 +163,7 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 4.1.1 (2026-11-04)
 - (GermanBluefox) Fixed: a limit of 0 % that was not set by the adapter (e.g. in the OpenDTU web UI or via MQTT) was not shown
 
 ### 4.1.0 (2026-11-04)
@@ -205,11 +205,6 @@ Please use [GitHub issues](https://github.com/iobroker-community-adapters/ioBrok
 
 ### 3.0.1 (2024-10-26)
 - (simatec) Admin-UI has been adapted for small displays.
-- (mcm1957) Dependencies have been updated.
-
-### 3.0.0 (2024-10-19)
-- (mcm1957) Adapter has been moved to iobroker-community-adapter organisation.
-- (mcm1957) Adapter requires js-controller 5, admin 6 and node.js 20 now.
 - (mcm1957) Dependencies have been updated.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
