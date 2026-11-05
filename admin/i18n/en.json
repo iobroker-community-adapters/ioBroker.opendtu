@@ -1,0 +1,20 @@
+{
+    "connectionHeader": "Connection to OpenDTU",
+    "howtoLink": "Open the guide",
+    "howtoText": "1. Enter the address of your OpenDTU – the same one you open in your browser (e.g. 192.168.1.50).\n2. Enter the password of the OpenDTU web interface. It is needed to limit the power and, if read-only access is switched off in OpenDTU, also to read the values.\n3. Save. After a few seconds the values appear under Objects → opendtu.0.",
+    "howtoTitle": "How to get started",
+    "optionsHeader": "Options",
+    "password": "Password",
+    "passwordHelp": "Same password as for the OpenDTU web interface (user admin)",
+    "protectNames": "Keep my own names of the objects",
+    "protectNamesHelp": "Switch on if you renamed objects in ioBroker. The adapter then no longer overwrites the names.",
+    "useInvOfflineStatesToZero": "Set values to 0 when an inverter is not reachable (e.g. at night)",
+    "useInvOfflineStatesToZeroHelp": "Recommended. Otherwise the last values of the evening remain visible all night. Yield values are kept.",
+    "webUIPort": "Port",
+    "webUIPortHelp": "Usually 80",
+    "webUIScheme": "Protocol",
+    "webUISchemeHelp": "Usually HTTP",
+    "webUIServer": "Address of the OpenDTU",
+    "webUIServerHelp": "IP address or name, e.g. 192.168.1.50",
+    "webUIServerMissing": "Please enter the address"
+}

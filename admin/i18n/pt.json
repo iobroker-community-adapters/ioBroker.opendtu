@@ -1,0 +1,20 @@
+{
+    "connectionHeader": "Ligação ao OpenDTU",
+    "howtoLink": "Abrir o guia",
+    "howtoText": "1. Introduza o endereço do seu OpenDTU – o mesmo que abre no navegador (p. ex. 192.168.1.50).\n2. Introduza a palavra-passe da interface web do OpenDTU. É necessária para limitar a potência e, se o acesso só de leitura estiver desligado no OpenDTU, também para ler os valores.\n3. Guarde. Após alguns segundos, os valores aparecem em Objetos → opendtu.0.",
+    "howtoTitle": "Como começar",
+    "optionsHeader": "Opções",
+    "password": "Palavra-passe",
+    "passwordHelp": "A mesma palavra-passe da interface web do OpenDTU (utilizador admin)",
+    "protectNames": "Manter os meus próprios nomes dos objetos",
+    "protectNamesHelp": "Ative se mudou o nome de objetos no ioBroker. O adaptador deixa de substituir os nomes.",
+    "useInvOfflineStatesToZero": "Definir os valores como 0 quando um inversor não está acessível (p. ex. à noite)",
+    "useInvOfflineStatesToZeroHelp": "Recomendado. Caso contrário, os últimos valores da noite ficam visíveis toda a noite. Os valores de produção mantêm-se.",
+    "webUIPort": "Porta",
+    "webUIPortHelp": "Normalmente 80",
+    "webUIScheme": "Protocolo",
+    "webUISchemeHelp": "Normalmente HTTP",
+    "webUIServer": "Endereço do OpenDTU",
+    "webUIServerHelp": "Endereço IP ou nome, p. ex. 192.168.1.50",
+    "webUIServerMissing": "Introduza o endereço"
+}
